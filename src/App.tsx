@@ -16,8 +16,8 @@ import { ServicesPage } from './pages/ServicesPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
-import { AdminPage } from './pages/AdminPage';
 import { MinimalFooter } from './components/MinimalFooter';
+import { supabase, isSupabaseConfigured } from './lib/supabase';
 
 function MainAppContent() {
   const { currentPage } = useNavigation();
@@ -78,6 +78,15 @@ function MainAppContent() {
     };
   }, []);
 
+  // Verify Supabase Auth initialization silently on startup
+  useEffect(() => {
+    if (isSupabaseConfigured) {
+      supabase.auth.getSession().catch((err) => {
+        console.warn('Supabase auth session initialization:', err);
+      });
+    }
+  }, []);
+
   const isGradientPage =
     currentPage === 'home' ||
     currentPage === 'about' ||
@@ -86,11 +95,6 @@ function MainAppContent() {
     currentPage === 'services' ||
     currentPage === 'contact';
   const isLegalPage = currentPage === 'privacy-policy' || currentPage === 'terms';
-
-  // Protected /admin route handled by Supabase Auth
-  if (currentPage === 'admin') {
-    return <AdminPage />;
-  }
 
   return (
     <main
