@@ -520,6 +520,11 @@ a[href*="wa.me"] {
   .cards-stage {
     height: 350px !important;
     perspective: 600px !important;
+    touch-action: pan-y !important;
+  }
+
+  .dashboard-card-wrapper {
+    pointer-events: none !important;
   }
 
   /* Disable heavy continuous 3D keyframe transforms on mobile viewports to prevent scrolling hangs */

@@ -496,45 +496,15 @@ export const DashboardCards: React.FC = () => {
       });
 
       // MOBILE (< 768px):
-      // Resolves mobile hanging with lightweight 2D entrance
+      // Fix mobile hanging: Render cards immediately with native touch-scroll passthrough
       mm.add('(max-width: 767.98px)', () => {
         gsap.set(container, { perspective: 600 });
-
         gsap.set([centerCard, leftCard, rightCard], {
-          opacity: 0,
-          y: 18,
-          scale: 0.96,
-        });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 95%',
-            once: true,
-          },
-          onComplete: () => {
-            gsap.set([centerCard, leftCard, rightCard], { willChange: 'auto' });
-          },
-        });
-
-        tl.to(centerCard, {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.65,
-          ease: 'power2.out',
-        }).to(
-          [leftCard, rightCard],
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.65,
-            stagger: 0.08,
-            ease: 'power2.out',
-          },
-          '-=0.45'
-        );
+          willChange: 'auto',
+        });
       });
 
       return () => {

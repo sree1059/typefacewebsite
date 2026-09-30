@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type PageRoute = 'home' | 'about' | 'services' | 'work' | 'projects' | 'contact' | 'privacy-policy' | 'terms';
+export type PageRoute = 'home' | 'about' | 'services' | 'work' | 'projects' | 'contact' | 'privacy-policy' | 'terms' | 'admin';
 
 interface NavigationContextType {
   currentPage: PageRoute;
@@ -11,8 +11,9 @@ interface NavigationContextType {
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
 
 function resolveRouteFromUrl(): PageRoute {
-  // Check pathname first (e.g. /privacy-policy, /terms)
+  // Check pathname first (e.g. /admin, /privacy-policy, /terms)
   const pathname = window.location.pathname.replace(/^\//, '').toLowerCase();
+  if (pathname === 'admin') return 'admin';
   if (pathname === 'privacy-policy' || pathname === 'privacy') return 'privacy-policy';
   if (pathname === 'terms' || pathname === 'terms-and-conditions') return 'terms';
   if (pathname === 'about') return 'about';
@@ -20,8 +21,9 @@ function resolveRouteFromUrl(): PageRoute {
   if (pathname === 'work' || pathname === 'projects') return 'work';
   if (pathname === 'contact') return 'contact';
 
-  // Check hash (e.g. #/privacy-policy, #privacy-policy, #about)
+  // Check hash (e.g. #admin, #/admin, #/privacy-policy)
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+  if (hash === 'admin') return 'admin';
   if (hash === 'privacy-policy' || hash === 'privacy') return 'privacy-policy';
   if (hash === 'terms' || hash === 'terms-and-conditions') return 'terms';
   if (hash === 'about') return 'about';
