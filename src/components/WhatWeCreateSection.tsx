@@ -172,7 +172,7 @@ const ServiceCardContent: React.FC<{
             fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             fontWeight: 300,
           }}
-          className={`text-xs xs:text-sm sm:text-base md:text-lg font-light leading-snug ${
+          className={`text-[24px] xs:text-[28px] sm:text-[34px] md:text-[44px] font-light leading-[1.14] tracking-tight ${
             isLightText ? 'text-white/95' : 'text-[#111111]'
           }`}
         >
