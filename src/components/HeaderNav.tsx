@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation, PageRoute } from '../context/NavigationContext';
-import { ChevronDown, ArrowUpRight, Sparkles, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface HeaderNavProps {
   headingFontSize?: number;
@@ -10,7 +10,6 @@ interface HeaderNavProps {
 export const HeaderNav: React.FC<HeaderNavProps> = () => {
   const { currentPage, navigate } = useNavigation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
 
   // Lock body scroll when fullscreen mobile menu is open
   useEffect(() => {
@@ -37,7 +36,6 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
   const handleNavClick = (page: PageRoute) => {
     navigate(page);
     setMobileMenuOpen(false);
-    setPagesDropdownOpen(false);
   };
 
   return (
@@ -91,72 +89,6 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
               </button>
             );
           })}
-
-          {/* Explore Dropdown */}
-          <div className="relative hidden lg:block">
-            <button
-              onClick={() => setPagesDropdownOpen(!pagesDropdownOpen)}
-              className="flex items-center gap-1 text-[#666] hover:text-black transition-colors duration-150 py-1 text-[15px] lg:text-[16px] font-normal focus:outline-none cursor-pointer"
-            >
-              <span>Explore</span>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform duration-200 ${
-                  pagesDropdownOpen ? 'rotate-180 text-black' : 'text-[#666]'
-                }`}
-              />
-            </button>
-
-            {pagesDropdownOpen && (
-              <div
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-white border border-black/10 rounded-2xl p-2 shadow-xl flex flex-col gap-1 z-50 animate-in fade-in zoom-in-95 duration-150"
-                onMouseLeave={() => setPagesDropdownOpen(false)}
-              >
-                <button
-                  onClick={() => {
-                    handleNavClick('home');
-                    setTimeout(() => {
-                      document.getElementById('idea-to-interface')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
-                  }}
-                  className="px-3 py-2 text-sm text-left text-[#444] hover:text-black hover:bg-black/5 rounded-xl transition-colors cursor-pointer flex items-center justify-between"
-                >
-                  <span className="flex items-center gap-1.5 font-medium text-black">
-                    <Sparkles className="w-3.5 h-3.5 text-[#E0343F]" />
-                    <span>Idea to Interface</span>
-                  </span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
-                </button>
-                <button
-                  onClick={() => handleNavClick('work')}
-                  className="px-3 py-2 text-sm text-left text-[#444] hover:text-black hover:bg-black/5 rounded-xl transition-colors cursor-pointer flex items-center justify-between"
-                >
-                  <span>Featured Case Studies</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
-                </button>
-                <button
-                  onClick={() => handleNavClick('services')}
-                  className="px-3 py-2 text-sm text-left text-[#444] hover:text-black hover:bg-black/5 rounded-xl transition-colors cursor-pointer flex items-center justify-between"
-                >
-                  <span>Full Capabilities</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
-                </button>
-                <button
-                  onClick={() => handleNavClick('about')}
-                  className="px-3 py-2 text-sm text-left text-[#444] hover:text-black hover:bg-black/5 rounded-xl transition-colors cursor-pointer flex items-center justify-between"
-                >
-                  <span>Our Methodology & Team</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
-                </button>
-                <button
-                  onClick={() => handleNavClick('contact')}
-                  className="px-3 py-2 text-sm text-left text-[#444] hover:text-black hover:bg-black/5 rounded-xl transition-colors cursor-pointer flex items-center justify-between"
-                >
-                  <span>Get in Touch</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
-                </button>
-              </div>
-            )}
-          </div>
         </nav>
 
         {/* CTA "Get Started" (Tablet & Desktop) */}
@@ -252,13 +184,13 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
                 +91 93474 52611
               </a>
               <a
-                href="mailto:xyz@gmail.com"
+                href="mailto:infotypeface1411@gmail.com"
                 className="flex items-center gap-2 text-sm sm:text-base text-[#111111] hover:underline font-manrope font-medium"
               >
                 <span className="w-4.5 h-4.5 rounded-full border border-black/40 flex items-center justify-center text-[11px] leading-none select-none">
                   +
                 </span>
-                <span>xyz@gmail.com</span>
+                <span>infotypeface1411@gmail.com</span>
               </a>
             </div>
 

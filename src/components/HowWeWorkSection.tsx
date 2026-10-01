@@ -481,7 +481,7 @@ export const HowWeWorkSection: React.FC = () => {
 
               {/* Interactive Mail Us Box */}
               <a
-                href="mailto:xyz@gmail.com"
+                href="mailto:infotypeface1411@gmail.com"
                 style={{ fontFamily: MANROPE_FONT }}
                 className="flex items-center justify-between w-full bg-[#F4F5F7] hover:bg-[#ECEEF2] text-[#111111] px-2.5 py-1.5 rounded-lg border border-black/5 transition-colors cursor-pointer group/mail shadow-[0_1px_2px_rgba(0,0,0,0.02)] font-manrope allow-copy"
               >

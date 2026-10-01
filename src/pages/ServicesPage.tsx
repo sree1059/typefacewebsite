@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import shortFormEditingImg from '../assets/images/short_form_editing_1790434742662.jpg';
-import { ArrowRight, Check, X, Send, Sparkles, MessageSquare } from 'lucide-react';
+import { ArrowRight, Check, X, Send, Sparkles, MessageSquare, AlertCircle } from 'lucide-react';
 
 interface ServiceItem {
   number: string;
@@ -112,6 +112,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const fontStyle: React.CSSProperties = {
     fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
@@ -143,17 +144,52 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
     );
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
-    setTimeout(() => {
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/infotypeface1411@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: 'New Typeface Project Enquiry',
+          _template: 'table',
+          _captcha: 'false',
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          budget: formData.budget,
+          services: selectedServices.join(', '),
+          message: formData.message.trim(),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && (result.success === 'true' || result.success === true || (result.message && result.message.toLowerCase().includes('activation')))) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', budget: '₹25,000 – ₹50,000', message: '' });
+      } else {
+        setErrorMessage(result.message || 'Something went wrong while submitting your enquiry. Please try again.');
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Network error. Please try again later.';
+      setErrorMessage(msg);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 700);
+    }
   };
 
   const resetForm = () => {
     setIsSubmitted(false);
+    setErrorMessage(null);
     setFormData({ name: '', email: '', phone: '', budget: '₹25,000 – ₹50,000', message: '' });
   };
 
@@ -301,7 +337,17 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
               </button>
 
               {!isSubmitted ? (
-                <form onSubmit={handleFormSubmit} className="space-y-6 sm:space-y-7">
+                <form
+                  action="https://formsubmit.co/infotypeface1411@gmail.com"
+                  method="POST"
+                  onSubmit={handleFormSubmit}
+                  className="space-y-6 sm:space-y-7"
+                >
+                  {/* FormSubmit Configuration Options */}
+                  <input type="hidden" name="_subject" value="New Typeface Project Enquiry" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="hidden" name="_captcha" value="false" />
+
                   <div className="text-left pr-8">
                     <h3
                       style={{
@@ -323,6 +369,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                       Share your details and project goals. We will reply within 24 hours.
                     </p>
                   </div>
+
+                  {/* Submission Error Alert */}
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-900 text-xs sm:text-sm flex items-center gap-2.5">
+                      <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
 
                   {/* Name field */}
                   <div className="space-y-1.5 text-left">
