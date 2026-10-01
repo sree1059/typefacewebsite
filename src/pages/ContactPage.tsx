@@ -116,6 +116,11 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                 <input type="hidden" name="_subject" value="New Typeface Project Enquiry" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_captcha" value="false" />
+                <input
+                  type="hidden"
+                  name="_next"
+                  value="https://typefacecreativestudio.com/thank-you"
+                />
 
                 <h2 className="text-xl sm:text-2xl font-bold text-[#111111] tracking-tight">
                   Tell us about your project

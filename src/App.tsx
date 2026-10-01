@@ -16,6 +16,9 @@ import { ServicesPage } from './pages/ServicesPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
+import { ThankYouPage } from './pages/ThankYouPage';
+import { WorkingWithUsPage } from './pages/WorkingWithUsPage';
+import { ResultsStatement } from './components/ResultsStatement';
 import { MinimalFooter } from './components/MinimalFooter';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
 
@@ -93,7 +96,9 @@ function MainAppContent() {
     currentPage === 'work' ||
     currentPage === 'projects' ||
     currentPage === 'services' ||
-    currentPage === 'contact';
+    currentPage === 'contact' ||
+    currentPage === 'thank-you' ||
+    currentPage === 'working-with-us';
   const isLegalPage = currentPage === 'privacy-policy' || currentPage === 'terms';
 
   return (
@@ -172,12 +177,12 @@ function MainAppContent() {
       {currentPage !== 'home' && (
         <div
           className={`w-full px-0 sm:px-4 md:px-6 pt-0 sm:pt-4 pb-0 relative z-40 ${
-            currentPage === 'about' || currentPage === 'services' || currentPage === 'work' || currentPage === 'projects' || currentPage === 'contact' || isLegalPage
+            currentPage === 'about' || currentPage === 'services' || currentPage === 'work' || currentPage === 'projects' || currentPage === 'contact' || currentPage === 'thank-you' || currentPage === 'working-with-us' || isLegalPage
               ? ''
               : 'bg-[#050505]'
           }`}
           style={
-            currentPage === 'about' || currentPage === 'services' || currentPage === 'work' || currentPage === 'projects' || currentPage === 'contact' || isLegalPage
+            currentPage === 'about' || currentPage === 'services' || currentPage === 'work' || currentPage === 'projects' || currentPage === 'contact' || currentPage === 'thank-you' || currentPage === 'working-with-us' || isLegalPage
               ? { background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)' }
               : undefined
           }
@@ -207,12 +212,25 @@ function MainAppContent() {
         <ContactPage useCaslonFont={useCaslonFont} />
       )}
 
+      {currentPage === 'thank-you' && (
+        <ThankYouPage />
+      )}
+
+      {currentPage === 'working-with-us' && (
+        <WorkingWithUsPage />
+      )}
+
       {currentPage === 'privacy-policy' && (
         <PrivacyPolicyPage />
       )}
 
       {currentPage === 'terms' && (
         <TermsPage />
+      )}
+
+      {/* "No spam. Just results." banner above footer in about page and home page */}
+      {(currentPage === 'home' || currentPage === 'about') && (
+        <ResultsStatement />
       )}
 
       {/* Minimalist Brand Footer */}
