@@ -83,34 +83,29 @@ export const MinimalFooter: React.FC = () => {
               </span>
             </div>
 
-            {/* WORK WITH US section */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm font-manrope">
-              <span className="text-[11px] uppercase tracking-widest font-bold text-black/60 font-manrope">
-                Work With Us
-              </span>
-              <div className="flex items-center gap-3 sm:gap-4 font-medium">
-                <button
-                  onClick={() => {
-                    navigate('working-with-us');
-                    window.history.pushState({}, '', '/working-with-us');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="text-[#111111] hover:text-black hover:underline underline-offset-2 transition-colors cursor-pointer"
-                >
-                  Working With Typeface
-                </button>
-                <span className="text-black/30">·</span>
-                <button
-                  onClick={() => {
-                    navigate('contact');
-                    window.history.pushState({}, '', '/contact');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="text-[#111111] hover:text-black hover:underline underline-offset-2 transition-colors cursor-pointer"
-                >
-                  Contact
-                </button>
-              </div>
+            {/* Footer Navigation: Working With Typeface (Guidelines/Info) and Contact */}
+            <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm font-manrope font-medium">
+              <button
+                onClick={() => {
+                  navigate('working-with-us');
+                  window.history.pushState({}, '', '/working-with-us');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="text-[#111111] hover:text-black hover:underline underline-offset-2 transition-colors cursor-pointer"
+              >
+                Working With Typeface
+              </button>
+              <span className="text-black/30">·</span>
+              <button
+                onClick={() => {
+                  navigate('contact');
+                  window.history.pushState({}, '', '/contact');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="text-[#111111] hover:text-black hover:underline underline-offset-2 transition-colors cursor-pointer"
+              >
+                Contact
+              </button>
             </div>
 
             {/* Social Media Links */}

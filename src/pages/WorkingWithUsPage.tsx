@@ -1,46 +1,131 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { useNavigation } from '../context/NavigationContext';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ==========================================
+// Static Module Constants (Zero-Allocation on Re-renders)
+// ==========================================
+const PAGE_FONT_STYLE: React.CSSProperties = Object.freeze({
+  fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+  fontWeight: 300,
+});
+
+const HEADING_STYLE: React.CSSProperties = Object.freeze({
+  fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+  fontWeight: 300,
+  letterSpacing: '-0.03em',
+});
+
+const SUBHEADING_STYLE: React.CSSProperties = Object.freeze({
+  fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+  fontWeight: 500,
+});
+
+const TYPEFACE_DUTIES = Object.freeze([
+  'Strategy',
+  'Design',
+  'Development',
+  'Testing',
+  'Communication',
+  'Delivery',
+]);
+
+const CLIENT_DUTIES = Object.freeze([
+  'Information',
+  'Content',
+  'Feedback',
+  'Approvals',
+  'Access',
+  'Timely payments',
+]);
+
+const PROCESS_STEPS = Object.freeze([
+  { num: '01', title: 'Proposal' },
+  { num: '02', title: 'Project Agreement' },
+  { num: '03', title: 'Acceptance / Signature' },
+  { num: '04', title: 'Initial Payment' },
+  { num: '05', title: 'Project Begins' },
+]);
 
 export const WorkingWithUsPage: React.FC = () => {
   const { navigate } = useNavigation();
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleStartProject = () => {
+  // Memoized navigation handler (prevents inline function churn)
+  const handleStartProject = useCallback(() => {
     navigate('contact');
     window.history.pushState({}, '', '/contact');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, [navigate]);
 
-  const fontStyle: React.CSSProperties = {
-    fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    fontWeight: 300,
-  };
+  // ==========================================
+  // Optimized GSAP Animation (respects prefers-reduced-motion)
+  // ==========================================
+  useGSAP(
+    () => {
+      const container = containerRef.current;
+      if (!container) return;
 
-  const headingStyle: React.CSSProperties = {
-    fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    fontWeight: 300,
-    letterSpacing: '-0.03em',
-  };
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      const cards = gsap.utils.toArray<HTMLElement>('.reveal-card', container);
+
+      // If user prefers reduced motion, set final state instantly without attaching listeners
+      if (prefersReducedMotion) {
+        gsap.set(cards, { opacity: 1, y: 0, clearProps: 'all' });
+        return;
+      }
+
+      // Smooth, hardware-accelerated entrance with immediate cleanup
+      cards.forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 88%',
+              once: true, // Auto-kill ScrollTrigger once played to save resources
+            },
+            clearProps: 'transform,will-change', // Prevent subpixel blurriness & free GPU memory
+          }
+        );
+      });
+    },
+    { scope: containerRef }
+  );
 
   return (
     <div
+      ref={containerRef}
       className="w-full text-[#111111] min-h-screen py-16 sm:py-24 md:py-28 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white flex flex-col justify-start font-manrope"
       style={{
         background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
-        ...fontStyle,
+        ...PAGE_FONT_STYLE,
       }}
     >
       <div className="max-w-4xl mx-auto w-full space-y-12 sm:space-y-16">
         {/* ==================================================
             HERO
             ================================================== */}
-        <section className="space-y-6">
+        <section className="reveal-card space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 border border-white/60 text-[#111111] text-[11px] uppercase tracking-widest font-medium">
             <span>WORKING WITH TYPEFACE</span>
           </div>
 
           <h1
-            style={headingStyle}
+            style={HEADING_STYLE}
             className="text-[34px] xs:text-[44px] sm:text-[56px] md:text-[66px] text-[#111111] tracking-tight leading-[1.08]"
           >
             Clear expectations make better projects<span className="text-[#E0343F]">.</span>
@@ -64,10 +149,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             01 — WHO WE WORK WITH
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">01</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               Who we work with
             </h2>
           </div>
@@ -86,10 +171,7 @@ export const WorkingWithUsPage: React.FC = () => {
 
           <div className="p-4 sm:p-5 rounded-2xl bg-black/5 border border-black/5">
             <p
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 500,
-              }}
+              style={SUBHEADING_STYLE}
               className="text-xs sm:text-sm md:text-[15px] uppercase tracking-wider text-[#111111]"
             >
               WE'D RATHER BE HONEST THAN SELL YOU SOMETHING YOU DON'T NEED.
@@ -100,10 +182,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             02 — SCOPE
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">02</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               What's included
             </h2>
           </div>
@@ -131,10 +213,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             03 — PRICING
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">03</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               Clear pricing
             </h2>
           </div>
@@ -155,10 +237,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             04 — PAYMENTS
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">04</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               Payments keep projects moving
             </h2>
           </div>
@@ -182,10 +264,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             05 — CLIENT RESPONSIBILITIES
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-8">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-8">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">05</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               We need your side too
             </h2>
           </div>
@@ -210,9 +292,9 @@ export const WorkingWithUsPage: React.FC = () => {
                 TYPEFACE
               </span>
               <ul className="space-y-2 text-sm text-[#111111] font-normal">
-                {['Strategy', 'Design', 'Development', 'Testing', 'Communication', 'Delivery'].map((item) => (
+                {TYPEFACE_DUTIES.map((item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#4E89FF]" />
+                    <Check className="w-3.5 h-3.5 text-[#4E89FF] shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -225,9 +307,9 @@ export const WorkingWithUsPage: React.FC = () => {
                 CLIENT
               </span>
               <ul className="space-y-2 text-sm text-[#111111] font-normal">
-                {['Information', 'Content', 'Feedback', 'Approvals', 'Access', 'Timely payments'].map((item) => (
+                {CLIENT_DUTIES.map((item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#111111]" />
+                    <Check className="w-3.5 h-3.5 text-[#111111] shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -237,10 +319,7 @@ export const WorkingWithUsPage: React.FC = () => {
 
           <div className="text-center pt-2">
             <p
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 500,
-              }}
+              style={SUBHEADING_STYLE}
               className="text-xs sm:text-sm uppercase tracking-wider text-[#111111]"
             >
               A GOOD PROJECT IS A TWO-WAY COMMITMENT.
@@ -251,10 +330,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             06 — REVISIONS
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">06</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               Revisions, not endless changes
             </h2>
           </div>
@@ -275,10 +354,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             07 — TIMELINES
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">07</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               Timelines matter
             </h2>
           </div>
@@ -299,10 +378,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             08 — CANCELLATION
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">08</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               If you choose to stop
             </h2>
           </div>
@@ -320,10 +399,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             09 — MAINTENANCE
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">09</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               After launch
             </h2>
           </div>
@@ -341,10 +420,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             10 — OWNERSHIP & HANDOVER
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">10</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               When the project is complete
             </h2>
           </div>
@@ -362,10 +441,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             11 — COMMUNICATION & CONDUCT
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">11</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               Respect goes both ways
             </h2>
           </div>
@@ -387,10 +466,7 @@ export const WorkingWithUsPage: React.FC = () => {
 
           <div className="p-4 sm:p-5 rounded-2xl bg-black/5 border border-black/5">
             <p
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 500,
-              }}
+              style={SUBHEADING_STYLE}
               className="text-xs sm:text-sm uppercase tracking-wider text-[#111111]"
             >
               YOUR TIME MATTERS. SO DOES OURS.
@@ -401,23 +477,17 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             12 — BEFORE WE BEGIN
             ================================================== */}
-        <section className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-8">
+        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-8">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">12</span>
-            <h2 style={headingStyle} className="text-2xl sm:text-3xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
               Before we begin
             </h2>
           </div>
 
           {/* Visual Sequence */}
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-            {[
-              { num: '01', title: 'Proposal' },
-              { num: '02', title: 'Project Agreement' },
-              { num: '03', title: 'Acceptance / Signature' },
-              { num: '04', title: 'Initial Payment' },
-              { num: '05', title: 'Project Begins' },
-            ].map((step) => (
+            {PROCESS_STEPS.map((step) => (
               <div
                 key={step.num}
                 className="p-4 rounded-2xl bg-white border border-black/10 shadow-xs flex flex-col justify-between min-h-[90px]"
@@ -448,10 +518,10 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             13 — IMPORTANT NOTICE
             ================================================== */}
-        <section className="bg-white rounded-3xl p-7 sm:p-10 border border-black/15 shadow-sm space-y-4">
+        <section className="reveal-card bg-white rounded-3xl p-7 sm:p-10 border border-black/15 shadow-sm space-y-4">
           <div className="flex items-center gap-2.5">
             <div className="w-2 h-2 rounded-full bg-[#E0343F]" />
-            <h2 style={headingStyle} className="text-xl sm:text-2xl text-[#111111]">
+            <h2 style={HEADING_STYLE} className="text-xl sm:text-2xl text-[#111111]">
               One important thing
             </h2>
           </div>
@@ -472,9 +542,9 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             FINAL CTA
             ================================================== */}
-        <section className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-black/10 text-center space-y-6">
+        <section className="reveal-card bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-black/10 text-center space-y-6">
           <h2
-            style={headingStyle}
+            style={HEADING_STYLE}
             className="text-2xl sm:text-3xl md:text-4xl text-[#111111]"
           >
             Think we're a good fit?

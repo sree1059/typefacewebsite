@@ -23,6 +23,16 @@ const PROJECTS: ProjectItem[] = [
     name: 'mr pottel',
     url: 'https://mrpottel.com/',
   },
+  {
+    id: 'emitminds',
+    name: 'emitminds',
+    url: 'https://www.emitminds.com/',
+  },
+  {
+    id: 'aranyam-amogham',
+    name: 'aranyam amogham',
+    url: 'https://www.aranyam-amogham.com/',
+  },
 ];
 
 interface ProjectsPageProps {
