@@ -12,19 +12,15 @@ export const SiteFooter: React.FC = () => {
 
   return (
     <div
-      className="w-full mt-auto"
+      className="w-full mt-auto bg-white"
       style={{
-        background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+        background: '#ffffff',
       }}
     >
       <footer
-        className="w-full text-[#111111] pt-16 pb-12 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white rounded-t-[32px] border-t border-black/10 shadow-sm"
+        className="w-full text-[#111111] pt-16 pb-12 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white border-t border-black/10 shadow-sm bg-white"
         style={{
-          background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
-          borderTopLeftRadius: '32px',
-          borderTopRightRadius: '32px',
-          borderBottomLeftRadius: '0px',
-          borderBottomRightRadius: '0px',
+          background: '#ffffff',
         }}
       >
         <div className="max-w-6xl mx-auto">

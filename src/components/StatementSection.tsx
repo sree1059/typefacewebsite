@@ -150,7 +150,7 @@ export const StatementSection: React.FC<StatementSectionProps> = ({
     <section
       ref={containerRef}
       aria-label="Brand Statement"
-      className="w-full text-[#111111] py-16 sm:py-24 md:py-32 px-4 sm:px-8 md:px-12 relative select-none overflow-hidden"
+      className="w-full bg-white text-[#111111] py-16 sm:py-24 md:py-32 px-4 sm:px-8 md:px-12 relative select-none overflow-hidden"
     >
       <div className="max-w-5xl mx-auto text-center">
         {/* Statement text container */}

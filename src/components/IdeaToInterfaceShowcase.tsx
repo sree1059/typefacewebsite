@@ -44,7 +44,7 @@ export const IdeaToInterfaceShowcase: React.FC<IdeaToInterfaceShowcaseProps> = (
     fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     fontSize: 'clamp(38px, 6.5vw, 76px)',
     fontWeight: 300,
-    color: '#ffffff',
+    color: '#111111',
   };
 
   const projectTitleStyle: React.CSSProperties = {
@@ -57,12 +57,10 @@ export const IdeaToInterfaceShowcase: React.FC<IdeaToInterfaceShowcaseProps> = (
     <section
       id="idea-to-interface"
       aria-label="From Idea to Interface"
-      className="w-full text-zinc-950 py-16 sm:py-24 relative overflow-hidden"
+      className="w-full bg-white text-zinc-950 py-16 sm:py-24 relative overflow-hidden"
     >
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-b from-[#E0343F]/5 via-[#1C51E5]/3 to-transparent blur-[140px] pointer-events-none" />
       <div 
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(#000 1px, transparent 1px)`,
           backgroundSize: '28px 28px'
@@ -74,7 +72,7 @@ export const IdeaToInterfaceShowcase: React.FC<IdeaToInterfaceShowcaseProps> = (
         <div className="max-w-3xl mb-8 sm:mb-14 no-copy">
           <h2
             style={headingStyle}
-            className="leading-[1.05] tracking-tight text-white font-light drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+            className="leading-[1.05] tracking-tight text-[#111111] font-light"
           >
             From Idea to Interface<span className="text-[#E0343F]">.</span>
           </h2>

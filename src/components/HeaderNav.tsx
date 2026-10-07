@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation, PageRoute } from '../context/NavigationContext';
-import { X } from 'lucide-react';
+import { X, Calendar } from 'lucide-react';
+import { openCalendlyPopup, CALENDLY_URL } from '../utils/calendly';
+import { CalendlyModal } from './CalendlyModal';
 
 interface HeaderNavProps {
   headingFontSize?: number;
   useCaslonFont?: boolean;
+  onBookConsultation?: () => void;
+  calendlyUrl?: string;
 }
 
-export const HeaderNav: React.FC<HeaderNavProps> = () => {
+export const HeaderNav: React.FC<HeaderNavProps> = ({
+  onBookConsultation,
+  calendlyUrl = CALENDLY_URL,
+}) => {
   const { currentPage, navigate } = useNavigation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -36,6 +43,28 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
   const handleNavClick = (page: PageRoute) => {
     navigate(page);
     setMobileMenuOpen(false);
+  };
+
+  /**
+   * Invokes the Calendly scheduling popup without interfering with existing navigation logic.
+   */
+  const handleBookConsultation = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    // Close mobile menu if open
+    setMobileMenuOpen(false);
+
+    // Call custom callback if provided
+    if (onBookConsultation) {
+      onBookConsultation();
+      return;
+    }
+
+    // Trigger Calendly popup widget or fallback modal
+    openCalendlyPopup(calendlyUrl);
   };
 
   return (
@@ -91,12 +120,14 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
           })}
         </nav>
 
-        {/* CTA "Get Started" (Tablet & Desktop) */}
+        {/* CTA "Book a Consultation" (Tablet & Desktop) */}
         <button
-          onClick={() => handleNavClick('contact')}
+          type="button"
+          onClick={handleBookConsultation}
           className="navbar-cta cursor-pointer"
+          aria-label="Book a Consultation"
         >
-          Get Started
+          Book a Consultation
         </button>
 
         {/* MOBILE ONLY Hamburger Button */}
@@ -118,7 +149,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
       {mobileMenuOpen && (
         <div
           data-lenis-prevent
-          className="md:hidden fixed inset-0 z-[999] w-screen h-screen bg-[#F6F7F9] text-[#111111] flex flex-col justify-between p-8 xs:p-10 sm:p-12 select-none overflow-y-auto animate-in fade-in duration-200"
+          className="md:hidden fixed inset-0 z-[999] w-screen h-screen bg-white text-[#111111] flex flex-col justify-between p-8 xs:p-10 sm:p-12 select-none overflow-y-auto animate-in fade-in duration-200"
         >
           {/* Top Bar: Brand Logo & Close 'X' Button */}
           <div className="flex items-center justify-between w-full">
@@ -152,7 +183,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
           </div>
 
           {/* Center Navigation Links: Large Centered Bold Sans-Serif Typography */}
-          <nav className="my-auto py-10 flex flex-col items-center justify-center space-y-4 sm:space-y-6 text-center">
+          <nav className="my-auto py-8 flex flex-col items-center justify-center space-y-4 sm:space-y-6 text-center">
             {navItems.map((item) => {
               const isActive =
                 currentPage === item.page ||
@@ -161,7 +192,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
                 <button
                   key={item.page}
                   onClick={() => handleNavClick(item.page)}
-                  className={`block text-[48px] xs:text-[56px] sm:text-[68px] font-extrabold tracking-tight transition-all duration-200 cursor-pointer font-manrope leading-[1.12] ${
+                  className={`block text-[44px] xs:text-[52px] sm:text-[64px] font-extrabold tracking-tight transition-all duration-200 cursor-pointer font-manrope leading-[1.12] ${
                     isActive
                       ? 'text-[#111111] underline decoration-[#B5E61D] underline-offset-8'
                       : 'text-[#111111] hover:text-[#4E89FF] active:scale-95'
@@ -171,6 +202,19 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
                 </button>
               );
             })}
+
+            {/* Mobile "Book a Consultation" CTA Button */}
+            <div className="pt-4 w-full max-w-xs px-2">
+              <button
+                type="button"
+                onClick={handleBookConsultation}
+                className="w-full py-3.5 px-6 rounded-full bg-[#111111] hover:bg-black text-white text-[15px] sm:text-base font-semibold tracking-tight shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+                aria-label="Book a Consultation"
+              >
+                <Calendar className="w-4 h-4 text-white/90" />
+                <span>Book a Consultation</span>
+              </button>
+            </div>
           </nav>
 
           {/* Bottom Bar: Contact Info (Bottom Left), Legal Links & Copyright */}
@@ -218,6 +262,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = () => {
           </div>
         </div>
       )}
+
+      {/* In-app fallback scheduler modal if external widget script is blocked */}
+      <CalendlyModal />
     </>
   );
 };
+

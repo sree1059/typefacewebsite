@@ -109,9 +109,9 @@ export const WorkingWithUsPage: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full text-[#111111] min-h-screen py-16 sm:py-24 md:py-28 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white flex flex-col justify-start font-manrope"
+      className="w-full text-[#111111] min-h-screen py-16 sm:py-24 md:py-28 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white flex flex-col justify-start font-manrope bg-white"
       style={{
-        background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+        background: '#ffffff',
         ...PAGE_FONT_STYLE,
       }}
     >
@@ -120,7 +120,7 @@ export const WorkingWithUsPage: React.FC = () => {
             HERO
             ================================================== */}
         <section className="reveal-card space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 border border-white/60 text-[#111111] text-[11px] uppercase tracking-widest font-medium">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F3F4F6] border border-black/10 text-[#111111] text-[11px] uppercase tracking-widest font-medium">
             <span>WORKING WITH TYPEFACE</span>
           </div>
 
@@ -141,7 +141,7 @@ export const WorkingWithUsPage: React.FC = () => {
           </div>
 
           {/* Small Notice */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-white/50 border border-white/70 text-xs sm:text-sm text-[#111111]/75 leading-relaxed">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#F9FAFB] border border-black/10 text-xs sm:text-sm text-[#111111]/75 leading-relaxed">
             These guidelines explain how Typeface generally works with clients. The specific terms applicable to each project are set out in the Project Agreement provided before work begins.
           </div>
         </section>
@@ -149,7 +149,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             01 — WHO WE WORK WITH
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">01</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -182,7 +182,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             02 — SCOPE
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">02</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -202,7 +202,7 @@ export const WorkingWithUsPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-4 sm:p-5 rounded-2xl bg-white/70 border border-white/80">
+          <div className="p-4 sm:p-5 rounded-2xl bg-black/5 border border-black/5">
             <p className="text-sm sm:text-base font-normal text-[#111111] flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-[#4E89FF] shrink-0" />
               <span>If it's not included in the agreed scope, we'll discuss it before doing the work.</span>
@@ -213,7 +213,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             03 — PRICING
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">03</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -237,7 +237,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             04 — PAYMENTS
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">04</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -264,7 +264,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             05 — CLIENT RESPONSIBILITIES
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-8">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-8">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">05</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -330,7 +330,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             06 — REVISIONS
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">06</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -354,7 +354,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             07 — TIMELINES
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">07</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -378,7 +378,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             08 — CANCELLATION
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">08</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -399,7 +399,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             09 — MAINTENANCE
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">09</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -420,7 +420,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             10 — OWNERSHIP & HANDOVER
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">10</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -441,7 +441,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             11 — COMMUNICATION & CONDUCT
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">11</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">
@@ -477,7 +477,7 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             12 — BEFORE WE BEGIN
             ================================================== */}
-        <section className="reveal-card bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-8">
+        <section className="reveal-card bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-8">
           <div className="flex items-center gap-3">
             <span className="text-xs font-mono font-medium text-[#4E89FF]">12</span>
             <h2 style={HEADING_STYLE} className="text-2xl sm:text-3xl text-[#111111]">

@@ -76,14 +76,14 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
 
   return (
     <div
-      className="w-full text-[#111111] min-h-screen selection:bg-black selection:text-white"
+      className="w-full text-[#111111] min-h-screen selection:bg-black selection:text-white bg-white"
       style={{
-        background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+        background: '#ffffff',
         ...manropeFont,
       }}
     >
       {/* Top Breadcrumb & Switcher Navigation Bar */}
-      <div className="border-b border-black/10 bg-white/40 backdrop-blur-md sticky top-0 z-30">
+      <div className="border-b border-black/10 bg-white/90 backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4 text-xs">
           <button
             onClick={() => navigate('home')}
@@ -95,13 +95,13 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
           </button>
 
           {/* Quick tab switcher between legal pages */}
-          <div className="flex items-center gap-1 sm:gap-2 bg-white/50 border border-white/60 p-1 rounded-xl">
+          <div className="flex items-center gap-1 sm:gap-2 bg-black/[0.04] border border-black/10 p-1 rounded-xl">
             <button
               onClick={() => navigate('privacy-policy')}
               style={manropeFont}
               className={`px-3 py-1.5 rounded-lg text-xs transition-all cursor-pointer flex items-center gap-1.5 ${
                 currentLegalRoute === 'privacy-policy'
-                  ? 'bg-white text-black font-normal shadow-xs'
+                  ? 'bg-white text-black font-normal shadow-xs border border-black/10'
                   : 'text-black/60 hover:text-black'
               }`}
             >
@@ -113,7 +113,7 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
               style={manropeFont}
               className={`px-3 py-1.5 rounded-lg text-xs transition-all cursor-pointer flex items-center gap-1.5 ${
                 currentLegalRoute === 'terms'
-                  ? 'bg-white text-black font-normal shadow-xs'
+                  ? 'bg-white text-black font-normal shadow-xs border border-black/10'
                   : 'text-black/60 hover:text-black'
               }`}
             >
@@ -140,9 +140,9 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
             style={{
               fontFamily: "'Manrope', sans-serif",
               fontWeight: 300,
-              color: '#ffffff',
+              color: '#111111',
             }}
-            className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl tracking-tight text-white leading-[1.05] drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] mb-6"
+            className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl tracking-tight text-[#111111] leading-[1.05] mb-6"
           >
             {title}<span className="text-[#E0343F]">.</span>
           </h1>
@@ -163,7 +163,7 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Left Column: Sticky Table of Contents (Desktop) */}
           <aside className="hidden lg:block lg:col-span-4">
-            <div className="sticky top-24 space-y-4 pr-4 bg-white/50 backdrop-blur-md rounded-2xl border border-white/70 p-5 shadow-xs">
+            <div className="sticky top-24 space-y-4 pr-4 bg-[#F9FAFB] rounded-2xl border border-black/10 p-5 shadow-xs">
               <div
                 style={manropeFont}
                 className="text-xs uppercase tracking-widest text-black/60"
@@ -180,8 +180,8 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
                       style={manropeFont}
                       className={`w-full text-left py-1.5 px-2.5 rounded-lg transition-colors text-xs flex items-baseline gap-2 cursor-pointer ${
                         isActive
-                          ? 'bg-white text-black font-normal shadow-xs'
-                          : 'text-black/65 hover:text-black hover:bg-white/40'
+                          ? 'bg-white text-black font-normal shadow-xs border border-black/10'
+                          : 'text-black/65 hover:text-black hover:bg-black/5'
                       }`}
                     >
                       <span className="text-[11px] text-black/45 shrink-0">{item.number}</span>
@@ -193,15 +193,15 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
             </div>
           </aside>
 
-          {/* Right Column: Legal Clauses Content wrapped in Frosted Glass Card */}
+          {/* Right Column: Legal Clauses Content */}
           <main className="lg:col-span-8 max-w-3xl">
-            <div className="bg-white/70 backdrop-blur-md rounded-[28px] border border-white/80 p-6 sm:p-10 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.06)] space-y-12 sm:space-y-16">
+            <div className="bg-[#FAFAFA] rounded-[28px] border border-black/10 p-6 sm:p-10 md:p-12 shadow-sm space-y-12 sm:space-y-16">
               {children}
             </div>
 
             {/* Bottom Cross Link & Agency Details */}
             <div className="mt-12 pt-8 border-t border-black/15 space-y-6">
-              <div className="bg-white/60 backdrop-blur-md rounded-2xl border border-white/80 p-6 sm:p-8 space-y-4 shadow-xs">
+              <div className="bg-[#F9FAFB] rounded-2xl border border-black/10 p-6 sm:p-8 space-y-4 shadow-xs">
                 <div style={manropeFont} className="text-xs uppercase tracking-wider text-black/60">
                   Related Legal Document
                 </div>

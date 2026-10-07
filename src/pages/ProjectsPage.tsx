@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { HERO_GRADIENT_STYLE } from '../utils/theme';
 
 interface ProjectItem {
   id: string;
@@ -53,26 +54,32 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = () => {
 
   return (
     <div
-      className="w-full text-[#111111] min-h-screen py-16 sm:py-24 md:py-28 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white"
+      className="w-full bg-white text-[#111111] min-h-screen py-10 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 selection:bg-black selection:text-white"
       style={{
-        background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+        background: '#ffffff',
         ...fontStyle,
       }}
     >
-      <div className="max-w-5xl mx-auto space-y-12 sm:space-y-16">
-        {/* Page Heading */}
-        <div className="no-copy">
+      <div className="max-w-5xl mx-auto space-y-10 sm:space-y-14">
+        {/* Work Page Hero Header with Exact Hero Gradient */}
+        <div
+          className="w-full rounded-3xl sm:rounded-[40px] p-8 sm:p-12 md:p-16 border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)] text-black relative overflow-hidden select-none no-copy"
+          style={HERO_GRADIENT_STYLE}
+        >
+          <span className="text-[12px] uppercase tracking-widest font-semibold text-black/70 block mb-3 font-mono">
+            Portfolio & Case Studies
+          </span>
           <h1
             style={{
               fontFamily: "'Manrope', sans-serif",
-              fontWeight: 300,
-              color: '#ffffff',
+              fontWeight: 400,
+              color: '#000000',
             }}
-            className="text-[34px] xs:text-[44px] sm:text-[56px] md:text-[68px] text-white tracking-tight leading-[1.08] drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] mb-3"
+            className="text-[34px] xs:text-[44px] sm:text-[56px] md:text-[68px] text-black tracking-tight leading-[1.08] mb-3"
           >
             Work<span className="text-[#E0343F]">.</span>
           </h1>
-          <p className="text-[17px] sm:text-[20px] text-[#111111]/75 leading-relaxed max-w-2xl font-light">
+          <p className="text-[17px] sm:text-[21px] text-black/85 leading-relaxed max-w-2xl font-light">
             Selected client flagships, digital products, and web platforms.
           </p>
         </div>

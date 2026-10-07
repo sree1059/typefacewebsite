@@ -71,47 +71,47 @@ export const HowWeWorkSection: React.FC = () => {
       ].filter(Boolean) as HTMLDivElement[];
 
       if (prefersReducedMotion) {
-        cards.forEach((card) => gsap.set(card, { opacity: 1, y: 0 }));
+        cards.forEach((card) => gsap.set(card, { opacity: 1, y: 0, clearProps: 'all' }));
         if (lineProgressRef.current) gsap.set(lineProgressRef.current, { scaleY: 1 });
         return;
       }
 
-      // Initial state
-      gsap.set(cards, { opacity: 0, y: 20 });
-      if (lineProgressRef.current) {
-        gsap.set(lineProgressRef.current, { scaleY: 0, transformOrigin: 'top center' });
-      }
-      checkIconsRef.current.forEach((icon) => {
-        if (icon) gsap.set(icon, { scale: 0.2, opacity: 0 });
-      });
-
-      // Master ScrollTrigger Timeline
+      // Hardware-accelerated entrance timeline with no layout freezing
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
-          start: 'top 82%',
+          start: 'top 88%',
           once: true,
+          invalidateOnRefresh: true,
+        },
+        defaults: {
+          ease: 'power2.out',
+          force3D: true,
         },
       });
 
-      // Staggered reveal of all 5 bento cards
-      tl.to(cards, {
-        opacity: 1,
-        y: 0,
-        duration: 0.65,
-        stagger: 0.08,
-        ease: 'power3.out',
-      });
+      // Smooth staggered entrance for all 5 bento cards
+      tl.fromTo(
+        cards,
+        {
+          opacity: 0,
+          y: 24,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.05,
+          clearProps: 'transform,opacity',
+        }
+      );
 
-      // Process card line & step animation
+      // Concurrent process card line & step animation
       if (lineProgressRef.current) {
-        tl.to(
+        tl.fromTo(
           lineProgressRef.current,
-          {
-            scaleY: 1,
-            duration: 0.75,
-            ease: 'power2.out',
-          },
+          { scaleY: 0, transformOrigin: 'top center' },
+          { scaleY: 1, duration: 0.6, ease: 'power2.out' },
           '-=0.3'
         );
       }
@@ -120,17 +120,13 @@ export const HowWeWorkSection: React.FC = () => {
         const check = checkIconsRef.current[idx];
         const titleEl = processTitlesRef.current[idx];
         const numEl = processNumbersRef.current[idx];
-        const stepTime = `<+${0.06 + idx * 0.15}`;
+        const stepTime = `<+${0.05 + idx * 0.1}`;
 
         if (check) {
-          tl.to(
+          tl.fromTo(
             check,
-            {
-              scale: 1,
-              opacity: 1,
-              duration: 0.3,
-              ease: 'back.out(2)',
-            },
+            { scale: 0.3, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.25, ease: 'back.out(1.7)' },
             stepTime
           );
         }
@@ -138,9 +134,9 @@ export const HowWeWorkSection: React.FC = () => {
         if (titleEl) {
           tl.fromTo(
             titleEl,
-            { opacity: 0, x: -6 },
-            { opacity: 1, x: 0, duration: 0.3, ease: 'power2.out' },
-            `${stepTime}+=0.03`
+            { opacity: 0, x: -4 },
+            { opacity: 1, x: 0, duration: 0.25 },
+            `${stepTime}+=0.02`
           );
         }
 
@@ -148,11 +144,44 @@ export const HowWeWorkSection: React.FC = () => {
           tl.fromTo(
             numEl,
             { opacity: 0 },
-            { opacity: 1, duration: 0.3, ease: 'power2.out' },
-            `${stepTime}+=0.05`
+            { opacity: 1, duration: 0.25 },
+            `${stepTime}+=0.03`
           );
         }
       });
+
+      // Optimized, non-blocking hover micro-interactions via GSAP (avoids CSS/GSAP transform contention)
+      const cleanups: (() => void)[] = [];
+      cards.forEach((card) => {
+        const onEnter = () => {
+          gsap.to(card, {
+            y: -3,
+            duration: 0.2,
+            ease: 'power2.out',
+            overwrite: 'auto',
+            force3D: true,
+          });
+        };
+        const onLeave = () => {
+          gsap.to(card, {
+            y: 0,
+            duration: 0.25,
+            ease: 'power2.out',
+            overwrite: 'auto',
+            force3D: true,
+          });
+        };
+        card.addEventListener('mouseenter', onEnter);
+        card.addEventListener('mouseleave', onLeave);
+        cleanups.push(() => {
+          card.removeEventListener('mouseenter', onEnter);
+          card.removeEventListener('mouseleave', onLeave);
+        });
+      });
+
+      return () => {
+        cleanups.forEach((fn) => fn());
+      };
     },
     { scope: sectionRef }
   );
@@ -165,7 +194,7 @@ export const HowWeWorkSection: React.FC = () => {
       style={{
         fontFamily: MANROPE_FONT,
       }}
-      className="w-full py-8 sm:py-10 lg:py-6 px-4 sm:px-6 md:px-8 lg:px-10 relative flex justify-center items-center lg:min-h-screen lg:max-h-[88vh] font-manrope"
+      className="w-full bg-white py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-10 relative flex justify-center items-center font-manrope"
     >
       <div
         ref={containerRef}
@@ -174,7 +203,6 @@ export const HowWeWorkSection: React.FC = () => {
       >
         {/* ========================================================================= */}
         {/* ROW 1: 2-COLUMN BENTO GRID (Dark Services Card + Process 3-Step Card)     */}
-        {/* Height reduced 20-30% (~235px) for compact, single-screen desktop fit     */}
         {/* ========================================================================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-3 xl:gap-3.5 items-stretch lg:h-[235px] xl:h-[245px]">
           {/* 1. DARK SERVICES CARD */}
@@ -184,7 +212,7 @@ export const HowWeWorkSection: React.FC = () => {
               borderRadius: '30px',
               fontFamily: MANROPE_FONT,
             }}
-            className="lg:col-span-6 bg-[#18181B] text-white p-4 sm:p-5 lg:p-4.5 xl:p-5 border border-white/10 shadow-[0_16px_40px_-15px_rgba(0,0,0,0.25)] flex flex-col justify-between relative overflow-hidden select-none transition-transform duration-300 hover:translate-y-[-2px] font-manrope no-copy"
+            className="lg:col-span-6 bg-[#18181B] text-white p-4 sm:p-5 lg:p-4.5 xl:p-5 border border-white/10 shadow-[0_16px_40px_-15px_rgba(0,0,0,0.25)] flex flex-col justify-between relative overflow-hidden select-none font-manrope no-copy"
           >
             {/* Top Brand Logo & Vertical Services List */}
             <div>
@@ -250,7 +278,7 @@ export const HowWeWorkSection: React.FC = () => {
               borderRadius: '30px',
               fontFamily: MANROPE_FONT,
             }}
-            className="lg:col-span-6 bg-white border border-black/10 shadow-[0_16px_40px_-15px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] p-4 sm:p-5 lg:p-4.5 xl:p-5 relative flex flex-col justify-between overflow-hidden select-none transition-transform duration-300 hover:translate-y-[-2px] font-manrope no-copy"
+            className="lg:col-span-6 bg-white border border-black/10 shadow-[0_16px_40px_-15px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] p-4 sm:p-5 lg:p-4.5 xl:p-5 relative flex flex-col justify-between overflow-hidden select-none font-manrope no-copy"
           >
             {/* 4 Corner Hardware Rivets */}
             <span
@@ -367,7 +395,7 @@ export const HowWeWorkSection: React.FC = () => {
               borderRadius: '30px',
               fontFamily: MANROPE_FONT,
             }}
-            className="md:col-span-2 lg:col-span-5 bg-white border border-black/10 shadow-[0_16px_40px_-15px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] p-4 sm:p-5 lg:p-4.5 xl:p-5 flex flex-col justify-between select-none transition-transform duration-300 hover:translate-y-[-2px] font-manrope no-copy"
+            className="md:col-span-2 lg:col-span-5 bg-white border border-black/10 shadow-[0_16px_40px_-15px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] p-4 sm:p-5 lg:p-4.5 xl:p-5 flex flex-col justify-between select-none font-manrope no-copy"
           >
             <div>
               {/* Header row: // Pricing & Pill badge */}
@@ -450,7 +478,7 @@ export const HowWeWorkSection: React.FC = () => {
               borderRadius: '30px',
               fontFamily: MANROPE_FONT,
             }}
-            className="md:col-span-1 lg:col-span-3 bg-white border border-black/10 shadow-[0_16px_40px_-15px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] p-4 sm:p-5 lg:p-4.5 xl:p-5 flex flex-col justify-between select-none transition-transform duration-300 hover:translate-y-[-2px] font-manrope no-copy"
+            className="md:col-span-1 lg:col-span-3 bg-white border border-black/10 shadow-[0_16px_40px_-15px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] p-4 sm:p-5 lg:p-4.5 xl:p-5 flex flex-col justify-between select-none font-manrope no-copy"
           >
             {/* Header: // Support */}
             <div>
@@ -519,7 +547,7 @@ export const HowWeWorkSection: React.FC = () => {
               borderRadius: '30px',
               fontFamily: MANROPE_FONT,
             }}
-            className="md:col-span-1 lg:col-span-4 bg-[#548DFF] text-white p-4 sm:p-5 lg:p-4.5 xl:p-5 flex flex-col justify-between relative overflow-hidden select-none shadow-[0_16px_40px_-15px_rgba(78,137,255,0.4)] transition-transform duration-300 hover:translate-y-[-2px] font-manrope no-copy"
+            className="md:col-span-1 lg:col-span-4 bg-[#548DFF] text-white p-4 sm:p-5 lg:p-4.5 xl:p-5 flex flex-col justify-between relative overflow-hidden select-none shadow-[0_16px_40px_-15px_rgba(78,137,255,0.4)] font-manrope no-copy"
           >
             {/* Decorative Subtle Background X Watermark */}
             <div

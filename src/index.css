@@ -80,82 +80,18 @@ html.lenis, html.lenis body {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: transparent;
+  background-color: #FFF000;
+  background-image:
+    radial-gradient(circle at 14% 88%, rgba(85, 220, 255, 0.95) 0%, rgba(105, 230, 255, 0.82) 20%, rgba(195, 248, 80, 0.65) 42%, transparent 68%),
+    radial-gradient(circle at 88% 92%, rgba(115, 230, 255, 0.88) 0%, rgba(145, 240, 255, 0.70) 24%, rgba(205, 250, 110, 0.45) 48%, transparent 72%),
+    radial-gradient(circle at 24% 65%, rgba(90, 225, 255, 0.82) 0%, rgba(165, 245, 95, 0.55) 30%, transparent 62%),
+    radial-gradient(circle at 6% 96%, rgba(185, 175, 255, 0.75) 0%, rgba(120, 215, 255, 0.55) 26%, transparent 58%),
+    radial-gradient(circle at 94% 6%, rgba(160, 252, 210, 0.55) 0%, rgba(220, 255, 130, 0.35) 25%, transparent 52%),
+    radial-gradient(circle at 55% 38%, #FFF200 0%, #FFE600 48%, #FFDD00 100%);
 }
 
 .hero::before {
-  content: "";
-  position: absolute;
-  inset: -25%;
-  width: 150%;
-  height: 150%;
-  opacity: 0.35;
-  background:
-    /* 1. LEFT SIDE: Vivid electric cyan / turquoise */
-    radial-gradient(
-      ellipse 65% 55% at 5% 45%,
-      rgba(0, 225, 255, 0.95) 0%,
-      rgba(0, 210, 250, 0.72) 28%,
-      rgba(0, 200, 245, 0.35) 50%,
-      transparent 72%
-    ),
-    /* 2. CENTER-LEFT: Cyan blending smoothly into soft lavender */
-    radial-gradient(
-      ellipse 60% 50% at 32% 46%,
-      rgba(155, 125, 255, 0.75) 0%,
-      rgba(175, 150, 255, 0.5) 30%,
-      rgba(120, 195, 255, 0.25) 55%,
-      transparent 75%
-    ),
-    /* 3. CENTER: Strong soft purple + vibrant pink / magenta glow */
-    radial-gradient(
-      ellipse 60% 58% at 50% 48%,
-      rgba(255, 85, 205, 0.78) 0%,
-      rgba(215, 75, 245, 0.7) 24%,
-      rgba(180, 80, 250, 0.45) 48%,
-      transparent 70%
-    ),
-    /* 4. LOWER CENTER: Coral / peach transition */
-    radial-gradient(
-      ellipse 65% 45% at 48% 78%,
-      rgba(255, 125, 105, 0.8) 0%,
-      rgba(255, 155, 120, 0.55) 28%,
-      transparent 60%
-    ),
-    /* 5. LOWER RIGHT: Warm pale yellow */
-    radial-gradient(
-      ellipse 55% 45% at 76% 84%,
-      rgba(255, 222, 90, 0.82) 0%,
-      rgba(255, 235, 130, 0.5) 25%,
-      transparent 55%
-    ),
-    /* 6. RIGHT SIDE: Bright cyan / sky blue */
-    radial-gradient(
-      ellipse 65% 55% at 95% 42%,
-      rgba(0, 215, 255, 0.92) 0%,
-      rgba(20, 175, 255, 0.7) 30%,
-      rgba(70, 150, 255, 0.35) 55%,
-      transparent 72%
-    );
-
-  filter: blur(120px);
-  transform-origin: 50% 50%;
-  animation: heroLuminousDrift 18s ease-in-out infinite alternate;
-  z-index: 0;
-  pointer-events: none;
-  will-change: transform;
-}
-
-@keyframes heroLuminousDrift {
-  0% {
-    transform: scale(1.05) translate(0%, 0%) rotate(0deg);
-  }
-  50% {
-    transform: scale(1.1) translate(-2.5%, 1.8%) rotate(0.8deg);
-  }
-  100% {
-    transform: scale(1.06) translate(2.2%, -2%) rotate(-0.8deg);
-  }
+  display: none;
 }
 
 .hero-content {
@@ -176,6 +112,9 @@ html.lenis, html.lenis body {
   background: #fff;
 
   border-radius: 0 0 38px 38px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: none;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
 
   display: flex;
   align-items: center;
@@ -217,7 +156,9 @@ html.lenis, html.lenis body {
 }
 
 .navbar-cta {
-  width: 180px;
+  min-width: 180px;
+  width: auto;
+  padding: 0 24px;
   height: 56px;
   flex-shrink: 0;
 
@@ -230,9 +171,10 @@ html.lenis, html.lenis body {
   align-items: center;
   justify-content: center;
 
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
@@ -278,9 +220,11 @@ html.lenis, html.lenis body {
   }
 
   .navbar-cta {
-    width: 150px;
+    min-width: 155px;
+    width: auto;
+    padding: 0 18px;
     height: 50px;
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -564,14 +508,14 @@ a[href*="wa.me"] {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #ffffff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #e4e4e7;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #d4d4d8;
 }

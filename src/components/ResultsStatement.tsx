@@ -8,7 +8,7 @@ export const ResultsStatement: React.FC<ResultsStatementProps> = ({ className = 
   return (
     <section
       aria-label="No spam. Just results."
-      className={`w-full py-16 sm:py-20 md:py-24 px-6 sm:px-12 md:px-20 text-center flex items-center justify-center select-none ${className}`}
+      className={`w-full bg-white py-16 sm:py-20 md:py-24 px-6 sm:px-12 md:px-20 text-center flex items-center justify-center select-none ${className}`}
     >
       <div className="max-w-5xl mx-auto">
         <h2

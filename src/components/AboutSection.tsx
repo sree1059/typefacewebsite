@@ -15,14 +15,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
   };
 
   return (
-    <section id="about" className="w-full bg-black py-16 sm:py-20 px-4 sm:px-8 md:px-12">
+    <section id="about" className="w-full bg-white text-[#111111] py-16 sm:py-20 px-4 sm:px-8 md:px-12">
       <div className="max-w-4xl mx-auto no-copy">
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           {/* Card: 100% Commitment + Testimonial */}
-          <div className="rounded-2xl sm:rounded-3xl bg-zinc-900 border border-white/20 p-5 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[320px] shadow-xl hover:border-white/40 transition-colors">
+          <div className="rounded-2xl sm:rounded-3xl bg-[#18181B] text-white border border-black/10 p-5 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[320px] shadow-lg transition-colors">
             <div>
-              <p className="text-xs uppercase tracking-wider text-white/60 font-semibold">
+              <p className="text-xs uppercase tracking-wider text-white/70 font-semibold">
                 Commitment to measurable
               </p>
               <h3
@@ -65,9 +65,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           </div>
 
           {/* Card: Data Points 520k+ */}
-          <div className="rounded-2xl sm:rounded-3xl bg-lime-400 text-black p-5 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[320px] shadow-xl">
+          <div className="rounded-2xl sm:rounded-3xl bg-[#B5E61D] text-black p-5 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[320px] shadow-lg border border-black/10">
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-black/70">
+              <p className="text-xs font-bold uppercase tracking-wider text-black/75">
                 Data Points
               </p>
               <div

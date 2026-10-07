@@ -8,118 +8,89 @@ interface BannerHeroProps {
 }
 
 export const BannerHero: React.FC<BannerHeroProps> = ({
-  headingFontSize = 42,
+  headingFontSize = 44,
   useCaslonFont = false,
 }) => {
   const { navigate } = useNavigation();
 
-  // Font family and responsive font size calculation centered on 42px
+  // Font family calculation
   const computedFontFamily = useCaslonFont
     ? "'Libre Caslon Condensed', 'Libre Caslon Display', 'Libre Caslon Text', Georgia, serif"
     : "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
 
   const computedFontSize =
-    headingFontSize === 42
-      ? 'clamp(26px, 5.2vw, 42px)'
+    headingFontSize === 44 || headingFontSize === 42
+      ? 'clamp(26px, 4.4vw, 46px)'
       : `${headingFontSize}px`;
 
   return (
-    <div
-      className="relative w-full text-center px-4 pt-[135px] xs:pt-[145px] sm:pt-36 md:pt-40 lg:pt-44 xl:pt-48 pb-4 sm:pb-6 max-w-5xl mx-auto"
-    >
+    <div className="relative w-full text-center px-4 pt-[130px] xs:pt-[140px] sm:pt-36 md:pt-40 lg:pt-44 xl:pt-46 pb-4 sm:pb-6 max-w-5xl mx-auto">
       {/* 1. Hero Eyebrow Badge: Built With Conviction. */}
-      <div className="inline-flex items-center px-3.5 sm:px-4 py-1.5 rounded-full border border-white bg-transparent text-[10.5px] sm:text-xs font-semibold tracking-wider text-[#111111] mb-2.5 sm:mb-4 no-copy">
-        <span>Built With Conviction.</span>
+      <div className="inline-flex items-center px-3.5 sm:px-4 py-1.5 rounded-full border border-black/15 bg-black/[0.04] text-[10.5px] sm:text-xs font-semibold tracking-wider text-black mb-3 sm:mb-4 select-none no-copy shadow-xs">
+        <span className="text-black">Built With Conviction<span className="text-[#E0343F]">.</span></span>
       </div>
 
-      {/* 2. Editorial Headline: Manrope at 42px with 320 font weight */}
+      {/* 2. Editorial Headline */}
       <h1
         style={{
           fontFamily: computedFontFamily,
           fontSize: computedFontSize,
-          fontWeight: 320,
-          letterSpacing: '-0.02em',
-          lineHeight: 1.18,
-          color: '#111111',
+          fontWeight: 400,
+          letterSpacing: '-0.025em',
+          lineHeight: 1.22,
+          color: '#000000',
         }}
-        className="text-[#111111] max-w-4xl mx-auto transition-colors duration-200 select-none no-copy"
+        className="text-black max-w-4xl mx-auto transition-colors duration-200 select-none no-copy"
       >
-        {/* Line 1: Websites that convert. */}
-        <div className="flex items-center justify-center flex-wrap">
-          <span className="text-[#111111] mr-[0.26em]">Websites</span>
-          <span className="text-[#111111] mr-[0.26em]">that</span>
-          <span
-            style={{
-              color: '#ffffff',
-              textShadow: '0 1px 3px rgba(0, 0, 0, 0.28)',
-              fontStyle: 'normal',
-            }}
-            className="text-white transition-all duration-150"
-          >
-            convert.
+        {/* Line 1: You don't need just a page online. */}
+        <div className="flex items-center justify-center flex-wrap gap-y-1.5 my-1">
+          <span className="text-black mr-[0.24em]">You don't need just a page</span>
+          <span className="inline-flex items-center px-2.5 sm:px-3.5 py-0.5 rounded-xl sm:rounded-2xl bg-black text-white font-medium shadow-xs transition-transform duration-150 hover:scale-105">
+            online
           </span>
+          <span className="text-[#E0343F] ml-[0.06em] font-medium">.</span>
         </div>
 
-        {/* Line 2: Brands that stand out. */}
-        <div className="flex items-center justify-center flex-wrap mt-[0.06em]">
-          <span className="text-[#111111] mr-[0.26em]">Brands</span>
-          <span className="text-[#111111] mr-[0.26em]">that</span>
-          <span
-            style={{
-              color: '#ffffff',
-              textShadow: '0 1px 3px rgba(0, 0, 0, 0.28)',
-              fontStyle: 'normal',
-            }}
-            className="text-white transition-all duration-150"
-          >
-            stand out.
+        {/* Line 2: You need a website that sells for your business. */}
+        <div className="flex items-center justify-center flex-wrap gap-y-1.5 my-1 sm:mt-2">
+          <span className="text-black mr-[0.24em]">You need a</span>
+          <span className="inline-flex items-center px-2.5 sm:px-3.5 py-0.5 rounded-xl sm:rounded-2xl bg-black text-white font-medium shadow-xs transition-transform duration-150 hover:scale-105">
+            website
           </span>
-        </div>
-
-        {/* Line 3: Digital experiences that matter. */}
-        <div className="flex items-center justify-center flex-wrap mt-[0.06em]">
-          <span
-            style={{
-              color: '#ffffff',
-              textShadow: '0 1px 3px rgba(0, 0, 0, 0.28)',
-              fontStyle: 'normal',
-            }}
-            className="text-white mr-[0.26em] transition-all duration-150"
-          >
-            Digital experiences
-          </span>
-          <span className="text-[#111111] mr-[0.26em]">that</span>
-          <span className="text-[#111111]">matter.</span>
+          <span className="text-black ml-[0.24em]">that sells for your business</span>
+          <span className="text-[#E0343F] ml-[0.06em] font-medium">.</span>
         </div>
       </h1>
 
-      {/* 3. Subheading */}
+      {/* 3. Subheading: Websites, social media, and reel editing, all under one roof. */}
       <p
         style={{
           fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-          fontWeight: 300,
-          color: '#ffffff',
-          textShadow: '0 1px 3px rgba(0, 0, 0, 0.25)',
+          fontWeight: 400,
+          color: '#000000',
         }}
-        className="mt-3.5 sm:mt-5 text-white text-sm sm:text-base md:text-[17px] max-w-xl sm:max-w-2xl mx-auto font-light leading-relaxed tracking-normal px-2 sm:px-4 no-copy"
+        className="mt-4 sm:mt-5 md:mt-6 text-black text-sm sm:text-base md:text-[18px] max-w-2xl mx-auto leading-relaxed tracking-normal px-2 sm:px-4 no-copy flex items-center justify-center flex-wrap gap-y-1"
       >
-        We build distinctive brands, high-converting websites, and social experiences that get noticed.
+        <span className="text-black">Websites, social media, and&nbsp;</span>
+        <span className="inline-flex items-center px-2.5 sm:px-3 py-0.5 rounded-lg sm:rounded-xl bg-black text-white font-medium text-xs sm:text-sm md:text-base shadow-xs transition-transform duration-150 hover:scale-105">
+          reel editing
+        </span>
+        <span className="text-black">,&nbsp;all under one roof</span>
+        <span className="text-[#E0343F] font-medium">.</span>
       </p>
 
       {/* 4. Action Buttons */}
-      <div
-        className="mt-6 sm:mt-7 flex items-center justify-center gap-3 sm:gap-4 flex-wrap"
-      >
+      <div className="mt-6 sm:mt-7 flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
         {/* See Our Work Button */}
         <button
           onClick={() => navigate('work')}
           style={{
             fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-            fontWeight: 330,
-            fontSize: 'clamp(15px, 1.8vw, 17px)',
+            fontWeight: 400,
+            fontSize: 'clamp(14px, 1.8vw, 16px)',
             lineHeight: 1.25,
           }}
-          className="group px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#111111] hover:bg-[#222222] text-white tracking-normal transition-all duration-200 shadow-[0_4px_14px_rgba(0,0,0,0.15)] active:scale-95 cursor-pointer"
+          className="group px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-black hover:bg-neutral-800 text-white tracking-normal transition-all duration-200 shadow-[0_4px_14px_rgba(0,0,0,0.15)] active:scale-95 cursor-pointer"
         >
           <span>See Our Work</span>
         </button>
@@ -139,11 +110,11 @@ export const BannerHero: React.FC<BannerHeroProps> = ({
           }}
           style={{
             fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-            fontWeight: 330,
-            fontSize: 'clamp(15px, 1.8vw, 17px)',
+            fontWeight: 400,
+            fontSize: 'clamp(14px, 1.8vw, 16px)',
             lineHeight: 1.25,
           }}
-          className="group px-6 sm:px-7 py-2.5 sm:py-3 rounded-full border border-black/15 bg-white/70 hover:bg-white/95 text-[#111111] tracking-normal transition-all duration-200 shadow-sm active:scale-95 backdrop-blur-sm cursor-pointer"
+          className="group px-6 sm:px-7 py-2.5 sm:py-3 rounded-full border border-black/20 bg-white/90 hover:bg-black/5 text-black tracking-normal transition-all duration-200 shadow-xs active:scale-95 cursor-pointer backdrop-blur-xs"
         >
           <span>How We Work</span>
         </button>

@@ -19,9 +19,9 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
 
   return (
     <div
-      className="w-full text-[#111111] min-h-screen py-16 sm:py-24 md:py-28 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white font-manrope"
+      className="w-full bg-white text-[#111111] min-h-screen py-16 sm:py-24 md:py-28 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white font-manrope"
       style={{
-        background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+        background: '#ffffff',
         ...fontStyle,
       }}
     >
@@ -32,9 +32,9 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
             style={{
               fontFamily: "'Manrope', sans-serif",
               fontWeight: 300,
-              color: '#ffffff',
+              color: '#111111',
             }}
-            className="text-[34px] xs:text-[44px] sm:text-[56px] md:text-[68px] text-white tracking-tight leading-[1.08] drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] mb-3"
+            className="text-[34px] xs:text-[44px] sm:text-[56px] md:text-[68px] text-[#111111] tracking-tight leading-[1.08] mb-3"
           >
             Contact<span className="text-[#E0343F]">.</span>
           </h1>
@@ -47,7 +47,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Direct Contact Details */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div className="bg-[#F9FAFB] border border-black/10 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
               <h2 className="text-xl sm:text-2xl font-semibold text-[#111111] tracking-tight">
                 Direct Channels
               </h2>

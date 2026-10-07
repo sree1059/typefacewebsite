@@ -7,14 +7,14 @@ export const ThankYouPage: React.FC = () => {
 
   return (
     <div
-      className="w-full text-[#111111] min-h-[calc(100vh-94px)] flex items-center justify-center py-20 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white"
+      className="w-full bg-white text-[#111111] min-h-[calc(100vh-94px)] flex items-center justify-center py-20 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white"
       style={{
-        background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+        background: '#ffffff',
       }}
     >
       <div className="max-w-2xl w-full mx-auto text-center space-y-8 animate-in fade-in zoom-in-95 duration-500">
         {/* Subtle Checkmark Badge */}
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/70 backdrop-blur-md border border-white/60 shadow-sm text-[#111111] mx-auto">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#F9FAFB] border border-black/10 shadow-xs text-[#111111] mx-auto">
           <CheckCircle2 className="w-8 h-8 text-[#111111]" strokeWidth={1.75} />
         </div>
 

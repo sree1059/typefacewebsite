@@ -3,11 +3,12 @@ import { HeaderNav } from './components/HeaderNav';
 import { BannerHero } from './components/BannerHero';
 import { DashboardCards } from './components/DashboardCards';
 import { ServicesTicker } from './components/ServicesTicker';
-import { StatementSection } from './components/StatementSection';
-import { WhatWeCreateSection } from './components/WhatWeCreateSection';
+import { FeaturedClientsTicker } from './components/FeaturedClientsTicker';
 import { HowWeWorkSection } from './components/HowWeWorkSection';
-import { IdeaToInterfaceShowcase } from './components/IdeaToInterfaceShowcase';
+import { TeamSection } from './components/TeamSection';
+import { TestimonialSection } from './components/TestimonialSection';
 import { FaqSection } from './components/FaqSection';
+import { FinalCtaSection } from './components/FinalCtaSection';
 import { useLenis } from './hooks/useLenis';
 import { NavigationProvider, useNavigation } from './context/NavigationContext';
 import { AboutPage } from './pages/AboutPage';
@@ -28,7 +29,6 @@ function MainAppContent() {
   // Heading font size & Caslon typography
   const [headingFontSize] = useState<number>(96);
   const [useCaslonFont] = useState<boolean>(true);
-  const [showFullPage] = useState<boolean>(true);
 
   // Initialize Lenis smooth scroll
   useLenis({
@@ -103,30 +103,33 @@ function MainAppContent() {
 
   return (
     <main
-      className={`min-h-screen w-full flex flex-col font-sans relative overflow-x-hidden ${
-        isGradientPage || isLegalPage
-          ? 'text-[#111111] selection:bg-black selection:text-white'
-          : 'bg-black text-white selection:bg-white selection:text-black'
-      }`}
-      style={
-        isGradientPage || isLegalPage
-          ? { background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)' }
-          : undefined
-      }
+      className="min-h-screen w-full flex flex-col font-sans relative overflow-x-hidden bg-white text-[#111111] selection:bg-black selection:text-white"
+      style={{ background: '#ffffff' }}
     >
       {/* Dynamic Page Rendering */}
       {currentPage === 'home' && (
         <div
-          className="w-full text-[#111111] flex flex-col"
+          className="w-full text-[#111111] flex flex-col bg-white"
           style={{
-            background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+            background: '#ffffff',
           }}
         >
           {/* Hero Section Container with Inset White Navigation matching original design */}
           <div className="w-full px-0 sm:px-4 md:px-6 pt-0 sm:pt-4">
             <section
               id="home"
-              className="hero relative w-full overflow-hidden text-[#111111] flex flex-col justify-between pb-8"
+              className="hero relative w-full overflow-hidden text-black flex flex-col justify-between pb-8 sm:rounded-[36px] md:rounded-[44px] border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+              style={{
+                backgroundColor: '#FFF000',
+                backgroundImage: `
+                  radial-gradient(circle at 14% 88%, rgba(85, 220, 255, 0.95) 0%, rgba(105, 230, 255, 0.82) 20%, rgba(195, 248, 80, 0.65) 42%, transparent 68%),
+                  radial-gradient(circle at 88% 92%, rgba(115, 230, 255, 0.88) 0%, rgba(145, 240, 255, 0.70) 24%, rgba(205, 250, 110, 0.45) 48%, transparent 72%),
+                  radial-gradient(circle at 24% 65%, rgba(90, 225, 255, 0.82) 0%, rgba(165, 245, 95, 0.55) 30%, transparent 62%),
+                  radial-gradient(circle at 6% 96%, rgba(185, 175, 255, 0.75) 0%, rgba(120, 215, 255, 0.55) 26%, transparent 58%),
+                  radial-gradient(circle at 94% 6%, rgba(160, 252, 210, 0.55) 0%, rgba(220, 255, 130, 0.35) 25%, transparent 52%),
+                  radial-gradient(circle at 55% 38%, #FFF200 0%, #FFE600 48%, #FFDD00 100%)
+                `,
+              }}
             >
               {/* Inset White Navigation Bar - Attached to top edge */}
               <div className="hero-content w-full flex flex-col justify-between">
@@ -148,44 +151,34 @@ function MainAppContent() {
             </section>
           </div>
 
-          {/* Services Ticker Marquee Animated with GSAP */}
+          {/* 3. Service Overview (Movable infinite scroll track, kept as is) */}
           <ServicesTicker />
 
-          {/* Statement Section with GSAP Word-Split Reveal */}
-          <StatementSection useCaslonFont={useCaslonFont} />
+          {/* 4. Featured Clients (Movable small compact scroll track directly below service overview) */}
+          <FeaturedClientsTicker />
 
-          {/* Full Layout Matching Reference Image */}
-          {showFullPage && (
-            <>
-              {/* From Idea to Interface Showcase (sphoorthi interiors, thrill hikers, mr pottel) */}
-              <IdeaToInterfaceShowcase useCaslonFont={useCaslonFont} />
+          {/* 5. Work Process */}
+          <HowWeWorkSection />
 
-              {/* What We Create / Our Services Section (KERNING STROKE) */}
-              <WhatWeCreateSection useCaslonFont={useCaslonFont} />
+          {/* 6. Team Introduction */}
+          <TeamSection />
 
-              {/* How We Work Section (Clean White Container, 4-Step Process with GSAP Muted Green Line) */}
-              <HowWeWorkSection />
+          {/* 7. Testimonial */}
+          <TestimonialSection />
 
-              {/* FAQ Accordion Section */}
-              <FaqSection />
-            </>
-          )}
+          {/* 8. FAQ */}
+          <FaqSection />
+
+          {/* 9. Final CTA */}
+          <FinalCtaSection />
         </div>
       )}
 
-      {/* Other Pages: Render Navbar in standalone top container with matching page background */}
-      {currentPage !== 'home' && (
+      {/* Other Pages: Render Navbar in standalone top container with matching white page background */}
+      {currentPage !== 'home' && !isLegalPage && (
         <div
-          className={`w-full px-0 sm:px-4 md:px-6 pt-0 sm:pt-4 pb-0 relative z-40 ${
-            currentPage === 'about' || currentPage === 'services' || currentPage === 'work' || currentPage === 'projects' || currentPage === 'contact' || currentPage === 'thank-you' || currentPage === 'working-with-us' || isLegalPage
-              ? ''
-              : 'bg-[#050505]'
-          }`}
-          style={
-            currentPage === 'about' || currentPage === 'services' || currentPage === 'work' || currentPage === 'projects' || currentPage === 'contact' || currentPage === 'thank-you' || currentPage === 'working-with-us' || isLegalPage
-              ? { background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)' }
-              : undefined
-          }
+          className="w-full px-0 sm:px-4 md:px-6 pt-0 sm:pt-4 pb-0 relative z-40 bg-white"
+          style={{ background: '#ffffff' }}
         >
           <div className="relative w-full h-[94px]">
             <HeaderNav
@@ -228,8 +221,8 @@ function MainAppContent() {
         <TermsPage />
       )}
 
-      {/* "No spam. Just results." banner above footer in about page and home page */}
-      {(currentPage === 'home' || currentPage === 'about') && (
+      {/* "No spam. Just results." banner above footer on about page */}
+      {currentPage === 'about' && (
         <ResultsStatement />
       )}
 

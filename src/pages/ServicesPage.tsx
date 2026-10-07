@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import shortFormEditingImg from '../assets/images/short_form_editing_1790434742662.jpg';
 import { ArrowRight, Check, X, Send, Sparkles, MessageSquare, AlertCircle } from 'lucide-react';
+import { HERO_GRADIENT_STYLE } from '../utils/theme';
 
 interface ServiceItem {
   number: string;
@@ -195,30 +196,53 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
 
   return (
     <div
-      className="w-full text-[#111111] min-h-screen py-16 sm:py-24 md:py-28 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white"
+      className="w-full bg-white text-[#111111] min-h-screen py-10 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 selection:bg-black selection:text-white"
       style={{
-        background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+        background: '#ffffff',
         ...fontStyle,
       }}
     >
-      <div className="max-w-5xl mx-auto space-y-20 sm:space-y-28 md:space-y-36">
+      <div className="max-w-5xl mx-auto space-y-16 sm:space-y-24 md:space-y-28">
+        {/* Services Page Hero Header with Exact Hero Gradient */}
+        <div
+          className="w-full rounded-3xl sm:rounded-[40px] p-8 sm:p-12 md:p-16 border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)] text-black relative overflow-hidden select-none no-copy"
+          style={HERO_GRADIENT_STYLE}
+        >
+          <span className="text-[12px] uppercase tracking-widest font-semibold text-black/70 block mb-3 font-mono">
+            Our Services & Capabilities
+          </span>
+          <h1
+            style={{
+              fontFamily: "'Manrope', sans-serif",
+              fontWeight: 400,
+              color: '#000000',
+            }}
+            className="text-[34px] xs:text-[44px] sm:text-[54px] md:text-[62px] text-black tracking-tight leading-[1.08] mb-4"
+          >
+            Websites, social media, and reel editing<span className="text-[#E0343F]">.</span>
+          </h1>
+          <p className="text-[17px] sm:text-[21px] text-black/85 leading-relaxed max-w-3xl font-light">
+            Everything your brand needs to build authority, capture attention, and drive measurable revenue — engineered under one roof.
+          </p>
+        </div>
+
         {SERVICES_DATA.map((service) => (
           <article key={service.number} className="space-y-6 sm:space-y-8 no-copy">
-            {/* Heading: 44px, Manrope, font weight 300, white color */}
+            {/* Heading: 44px, Manrope, font weight 300, dark color */}
             <h2
               style={{
                 fontFamily: "'Manrope', sans-serif",
                 fontWeight: 300,
-                color: '#ffffff',
+                color: '#111111',
               }}
-              className="text-[28px] xs:text-[34px] sm:text-[40px] md:text-[44px] text-white tracking-tight leading-[1.2] drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+              className="text-[28px] xs:text-[34px] sm:text-[40px] md:text-[44px] text-[#111111] tracking-tight leading-[1.2]"
             >
               {service.number} — {service.title}
             </h2>
 
             {/* Visual preview image for Short-form Video Editing */}
             {service.number === '03' && (
-              <div className="w-full my-4 sm:my-6 rounded-2xl overflow-hidden border border-white shadow-[0_14px_36px_-6px_rgba(0,0,0,0.22)] bg-[#111111] ring-1 ring-white/50">
+              <div className="w-full my-4 sm:my-6 rounded-2xl overflow-hidden border border-black/10 shadow-[0_14px_36px_-6px_rgba(0,0,0,0.12)] bg-[#111111]">
                 <img
                   src={shortFormEditingImg || "/short-form-editing.jpg"}
                   onError={(e) => {
@@ -252,9 +276,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                 style={{
                   fontFamily: "'Manrope', sans-serif",
                   fontWeight: 300,
-                  color: '#ffffff',
+                  color: '#111111',
                 }}
-                className="text-[17px] sm:text-[20px] text-white leading-[1.6] drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+                className="text-[17px] sm:text-[20px] text-[#111111] leading-[1.6]"
               >
                 We deliver:
               </h3>
@@ -283,16 +307,16 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
           {!showDiscussForm ? (
             /* Small Callout Box */
             <div
-              className="w-full max-w-2xl mx-auto rounded-3xl p-8 sm:p-12 text-center backdrop-blur-xl bg-white/20 border border-white/50 shadow-[0_16px_40px_rgba(0,0,0,0.08)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] hover:border-white/70"
+              className="w-full max-w-2xl mx-auto rounded-3xl p-8 sm:p-12 text-center bg-[#F9FAFB] border border-black/10 shadow-[0_16px_40px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)]"
               style={fontStyle}
             >
               <h3
                 style={{
                   fontFamily: "'Manrope', sans-serif",
                   fontWeight: 300,
-                  color: '#ffffff',
+                  color: '#111111',
                 }}
-                className="text-[26px] xs:text-[30px] sm:text-[36px] text-white tracking-tight leading-[1.2] drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] mb-3"
+                className="text-[26px] xs:text-[30px] sm:text-[36px] text-[#111111] tracking-tight leading-[1.2] mb-3"
               >
                 Discuss with our team
               </h3>
@@ -302,7 +326,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                   fontFamily: "'Manrope', sans-serif",
                   fontWeight: 300,
                 }}
-                className="text-[16px] sm:text-[19px] text-[#111111] leading-[1.6] max-w-lg mx-auto mb-8"
+                className="text-[16px] sm:text-[19px] text-[#4B5563] leading-[1.6] max-w-lg mx-auto mb-8"
               >
                 Ready to bring your project to life? Let's talk through your ideas, goals, and timeline directly with our team.
               </p>
@@ -314,23 +338,23 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                   fontFamily: "'Manrope', sans-serif",
                   fontWeight: 300,
                 }}
-                className="inline-flex items-center gap-3 px-8 py-3.5 sm:py-4 rounded-full bg-white/90 hover:bg-white text-[#111111] shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.15)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-[16px] sm:text-[18px]"
+                className="inline-flex items-center gap-3 px-8 py-3.5 sm:py-4 rounded-full bg-[#111111] hover:bg-black text-white shadow-[0_6px_20px_rgba(0,0,0,0.12)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-[16px] sm:text-[18px]"
               >
                 <span>Discuss with our team</span>
-                <ArrowRight className="w-4 h-4 text-[#111111] transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 text-white transition-transform duration-200 group-hover:translate-x-1" />
               </button>
             </div>
           ) : (
-            /* Customized Glassmorphism Form */
+            /* Customized Form */
             <div
-              className="w-full max-w-2xl mx-auto rounded-3xl p-6 sm:p-10 sm:px-12 backdrop-blur-2xl bg-white/25 border border-white/60 shadow-[0_24px_60px_rgba(0,0,0,0.12)] transition-all duration-300 relative"
+              className="w-full max-w-2xl mx-auto rounded-3xl p-6 sm:p-10 sm:px-12 bg-white border border-black/10 shadow-[0_24px_60px_rgba(0,0,0,0.08)] transition-all duration-300 relative"
               style={fontStyle}
             >
               {/* Close Button */}
               <button
                 type="button"
                 onClick={() => setShowDiscussForm(false)}
-                className="absolute top-5 right-5 sm:top-6 sm:right-6 w-9 h-9 rounded-full bg-white/40 hover:bg-white/70 text-[#111111] flex items-center justify-center transition-colors cursor-pointer"
+                className="absolute top-5 right-5 sm:top-6 sm:right-6 w-9 h-9 rounded-full bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#111111] flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Close form"
               >
                 <X className="w-5 h-5" />
@@ -353,9 +377,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                       style={{
                         fontFamily: "'Manrope', sans-serif",
                         fontWeight: 300,
-                        color: '#ffffff',
+                        color: '#111111',
                       }}
-                      className="text-[26px] xs:text-[30px] sm:text-[36px] text-white tracking-tight leading-[1.2] drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] mb-2"
+                      className="text-[26px] xs:text-[30px] sm:text-[36px] text-[#111111] tracking-tight leading-[1.2] mb-2"
                     >
                       Discuss with our team
                     </h3>
@@ -364,7 +388,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                         fontFamily: "'Manrope', sans-serif",
                         fontWeight: 300,
                       }}
-                      className="text-[15px] sm:text-[18px] text-[#111111] leading-[1.5]"
+                      className="text-[15px] sm:text-[18px] text-[#6B7280] leading-[1.5]"
                     >
                       Share your details and project goals. We will reply within 24 hours.
                     </p>
@@ -401,7 +425,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                         fontFamily: "'Manrope', sans-serif",
                         fontWeight: 300,
                       }}
-                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white/35 hover:bg-white/45 focus:bg-white/60 border border-white/60 focus:border-white text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
+                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
                     />
                   </div>
 
@@ -429,7 +453,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                           fontFamily: "'Manrope', sans-serif",
                           fontWeight: 300,
                         }}
-                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white/35 hover:bg-white/45 focus:bg-white/60 border border-white/60 focus:border-white text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
+                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
                       />
                     </div>
 
@@ -455,7 +479,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                           fontFamily: "'Manrope', sans-serif",
                           fontWeight: 300,
                         }}
-                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white/35 hover:bg-white/45 focus:bg-white/60 border border-white/60 focus:border-white text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
+                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
                       />
                     </div>
                   </div>
@@ -477,7 +501,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                           fontFamily: "'Manrope', sans-serif",
                           fontWeight: 300,
                         }}
-                        className="text-[12px] sm:text-[13px] text-white/90 drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)]"
+                        className="text-[12px] sm:text-[13px] text-zinc-500"
                       >
                         Starting from ₹25,000
                       </span>
@@ -496,8 +520,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                             }}
                             className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-[13px] sm:text-[15px] transition-all duration-200 cursor-pointer border ${
                               isSelected
-                                ? 'bg-white text-black border-white shadow-sm font-normal'
-                                : 'bg-white/20 hover:bg-white/35 text-[#111111] border-white/40'
+                                ? 'bg-[#111111] text-white border-[#111111] shadow-xs font-normal'
+                                : 'bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#111111] border-black/5'
                             }`}
                           >
                             {tier}
@@ -532,8 +556,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                             }}
                             className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-[13px] sm:text-[15px] transition-all duration-200 cursor-pointer border ${
                               isSelected
-                                ? 'bg-white text-black border-white shadow-sm'
-                                : 'bg-white/20 hover:bg-white/35 text-[#111111] border-white/40'
+                                ? 'bg-[#111111] text-white border-[#111111] shadow-xs'
+                                : 'bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#111111] border-black/5'
                             }`}
                           >
                             {option}
@@ -566,7 +590,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                         fontFamily: "'Manrope', sans-serif",
                         fontWeight: 300,
                       }}
-                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white/35 hover:bg-white/45 focus:bg-white/60 border border-white/60 focus:border-white text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 resize-none text-[15px] sm:text-[17px]"
+                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 resize-none text-[15px] sm:text-[17px]"
                     />
                   </div>
 
@@ -579,14 +603,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                         fontFamily: "'Manrope', sans-serif",
                         fontWeight: 300,
                       }}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-white hover:bg-white/95 text-[#111111] shadow-[0_6px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.15)] transition-all duration-200 cursor-pointer text-[16px] sm:text-[18px] disabled:opacity-50"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-[#111111] hover:bg-black text-white shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-all duration-200 cursor-pointer text-[16px] sm:text-[18px] disabled:opacity-50"
                     >
                       {isSubmitting ? (
                         <span>Sending message...</span>
                       ) : (
                         <>
                           <span>Submit Inquiry</span>
-                          <Send className="w-4 h-4 text-[#111111]" />
+                          <Send className="w-4 h-4 text-white" />
                         </>
                       )}
                     </button>
@@ -607,16 +631,16 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
               ) : (
                 /* Success Message */
                 <div className="py-8 sm:py-12 text-center space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-white/60 text-emerald-800 flex items-center justify-center mx-auto shadow-md">
+                  <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-800 flex items-center justify-center mx-auto shadow-sm border border-emerald-200">
                     <Check className="w-7 h-7" />
                   </div>
                   <h4
                     style={{
                       fontFamily: "'Manrope', sans-serif",
                       fontWeight: 300,
-                      color: '#ffffff',
+                      color: '#111111',
                     }}
-                    className="text-[24px] sm:text-[30px] text-white tracking-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+                    className="text-[24px] sm:text-[30px] text-[#111111] tracking-tight"
                   >
                     Inquiry Received
                   </h4>
@@ -625,7 +649,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                       fontFamily: "'Manrope', sans-serif",
                       fontWeight: 300,
                     }}
-                    className="text-[16px] sm:text-[18px] text-[#111111] leading-relaxed max-w-md mx-auto"
+                    className="text-[16px] sm:text-[18px] text-[#4B5563] leading-relaxed max-w-md mx-auto"
                   >
                     Thank you, {formData.name || 'there'}! Our team has received your inquiry and will reach out to you within 24 hours.
                   </p>
@@ -637,7 +661,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                         fontFamily: "'Manrope', sans-serif",
                         fontWeight: 300,
                       }}
-                      className="px-6 py-2.5 rounded-full bg-white/70 hover:bg-white text-[#111111] transition-all cursor-pointer text-[14px] sm:text-[16px]"
+                      className="px-6 py-2.5 rounded-full bg-[#111111] hover:bg-black text-white transition-all cursor-pointer text-[14px] sm:text-[16px]"
                     >
                       Send another message
                     </button>

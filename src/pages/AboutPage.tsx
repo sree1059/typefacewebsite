@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
+import { HERO_GRADIENT_STYLE } from '../utils/theme';
 
 interface AboutPageProps {
   useCaslonFont?: boolean;
@@ -22,31 +23,34 @@ export const AboutPage: React.FC<AboutPageProps> = () => {
 
   return (
     <div
-      className="w-full text-[#111111] min-h-[70vh] py-16 sm:py-24 md:py-28 px-6 sm:px-12 md:px-20 selection:bg-black selection:text-white flex flex-col justify-start font-manrope"
+      className="w-full text-[#111111] min-h-[70vh] py-10 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 selection:bg-black selection:text-white flex flex-col justify-start font-manrope bg-white"
       style={{
-        background: 'linear-gradient(90deg, #A7EAF5 0%, #9FC8F5 50%, #879BF0 100%)',
+        background: '#ffffff',
         ...fontStyle,
       }}
     >
-      <div className="max-w-4xl mx-auto w-full space-y-12 sm:space-y-16">
-        {/* Page Hero */}
-        <div>
-          <span className="text-[12px] uppercase tracking-widest font-medium text-[#111111]/70 block mb-3">
+      <div className="max-w-4xl mx-auto w-full space-y-10 sm:space-y-14">
+        {/* Page Hero Container with Exact Hero Gradient */}
+        <div
+          className="w-full rounded-3xl sm:rounded-[40px] p-8 sm:p-12 md:p-16 border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)] text-black relative overflow-hidden select-none no-copy"
+          style={HERO_GRADIENT_STYLE}
+        >
+          <span className="text-[12px] uppercase tracking-widest font-semibold text-black/70 block mb-3 font-mono">
             About Typeface
           </span>
           <h1
             style={headingStyle}
-            className="text-[34px] xs:text-[44px] sm:text-[56px] md:text-[64px] text-[#111111] tracking-tight leading-[1.08] mb-6"
+            className="text-[34px] xs:text-[44px] sm:text-[54px] md:text-[62px] text-black tracking-tight leading-[1.08] mb-5"
           >
             We believe good work starts with understanding<span className="text-[#E0343F]">.</span>
           </h1>
-          <p className="text-[18px] sm:text-[22px] text-[#111111]/85 leading-relaxed font-light">
+          <p className="text-[17px] sm:text-[21px] text-black/85 leading-relaxed font-light max-w-3xl">
             Typeface is a creative studio helping businesses build a stronger online presence through websites, content, and social media.
           </p>
         </div>
 
         {/* Narrative Section 1 */}
-        <div className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
+        <div className="bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-6">
           <p className="text-[16px] sm:text-[19px] text-[#111111]/90 leading-relaxed font-light">
             We don't start with a template and try to fit your business into it. We start by understanding what you do, who you're trying to reach, and what you're actually trying to achieve.
           </p>
@@ -56,12 +60,12 @@ export const AboutPage: React.FC<AboutPageProps> = () => {
         </div>
 
         {/* The tools aren't the work */}
-        <div className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-5">
+        <div className="bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-5">
           <h2
             style={headingStyle}
             className="text-2xl sm:text-3xl text-[#111111]"
           >
-            The tools aren't the work<span className="text-[#4E89FF]">.</span>
+            The tools aren't the work<span className="text-[#E0343F]">.</span>
           </h2>
           <p className="text-[16px] sm:text-[18px] text-[#111111]/80 leading-relaxed font-light">
             AI can generate a website. Templates can make things cheaper. And there will always be someone offering a similar service for less.
@@ -87,7 +91,7 @@ export const AboutPage: React.FC<AboutPageProps> = () => {
 
         {/* We don't sell what you don't need & Your time matters */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-9 shadow-xs space-y-4 flex flex-col justify-between">
+          <div className="bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-9 shadow-xs space-y-4 flex flex-col justify-between">
             <div className="space-y-3">
               <h3
                 style={headingStyle}
@@ -110,7 +114,7 @@ export const AboutPage: React.FC<AboutPageProps> = () => {
             </p>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-9 shadow-xs space-y-4 flex flex-col justify-between">
+          <div className="bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-9 shadow-xs space-y-4 flex flex-col justify-between">
             <div className="space-y-3">
               <h3
                 style={headingStyle}
@@ -135,7 +139,7 @@ export const AboutPage: React.FC<AboutPageProps> = () => {
         </div>
 
         {/* We're not trying to work with everyone */}
-        <div className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-7 sm:p-10 shadow-xs space-y-4">
+        <div className="bg-[#F9FAFB] border border-black/10 rounded-3xl p-7 sm:p-10 shadow-xs space-y-4">
           <h2
             style={headingStyle}
             className="text-2xl sm:text-3xl text-[#111111]"

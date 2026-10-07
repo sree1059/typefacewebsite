@@ -864,7 +864,7 @@ export const WhatWeCreateSection: React.FC<WhatWeCreateSectionProps> = ({
       ref={sectionRef}
       id="services"
       aria-label="What We Create Services"
-      className="w-full text-[#111111] relative select-none py-12 sm:py-16 md:py-24 overflow-visible"
+      className="w-full bg-white text-[#111111] relative select-none py-12 sm:py-16 md:py-24 overflow-visible"
     >
       {/* Subtle Editorial Studio Canvas Texture */}
       <div
@@ -883,9 +883,9 @@ export const WhatWeCreateSection: React.FC<WhatWeCreateSectionProps> = ({
             style={{
               fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
               fontWeight: 300,
-              color: '#ffffff',
+              color: '#111111',
             }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[0.96] tracking-tight text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] mb-4 sm:mb-6"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[0.96] tracking-tight text-[#111111] mb-4 sm:mb-6"
           >
             What we create<span className="text-[#E0343F]">.</span>
           </h2>
