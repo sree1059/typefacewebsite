@@ -121,7 +121,7 @@ export const WorkingWithUsPage: React.FC = () => {
             ================================================== */}
         <section className="reveal-card space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F3F4F6] border border-black/10 text-[#111111] text-[11px] uppercase tracking-widest font-medium">
-            <span>WORKING WITH TYPEFACE</span>
+            <span>TYPEFACE · DEVELOPER HOUSE</span>
           </div>
 
           <h1

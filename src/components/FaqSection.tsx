@@ -15,14 +15,14 @@ const FAQ_ITEMS: FaqItem[] = [
     number: '01/',
     question: 'What services do you offer?',
     answer:
-      'We design and build websites, e-commerce stores, landing pages, and digital experiences, along with social media design and management.',
+      'We build high-performance websites, custom web applications, e-commerce stores, and digital experiences, along with technical design systems and ongoing engineering support.',
   },
   {
     id: 'faq-2',
     number: '02/',
     question: 'What makes your websites different?',
     answer:
-      "We don't rely on templates. Every website is designed around your brand, audience, and goals combining thoughtful design, performance, and functionality.",
+      "We don't rely on templates. As a developer house, every digital product is custom-engineered around your brand, architecture, and business goals — combining thoughtful design, performance, and functionality.",
   },
   {
     id: 'faq-3',

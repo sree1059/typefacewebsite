@@ -241,7 +241,7 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
               </div>
 
               <div style={manropeFont} className="flex items-center justify-between pt-4 text-xs text-black/70">
-                <span>Typeface · Digital Creative Studio</span>
+                <span>Typeface · Developer House</span>
                 <button
                   onClick={scrollToTop}
                   style={manropeFont}

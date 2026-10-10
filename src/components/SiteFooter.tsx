@@ -43,7 +43,7 @@ export const SiteFooter: React.FC = () => {
                 </span>
               </div>
               <p className="text-sm text-black/75 leading-relaxed font-normal max-w-sm">
-                Digital creative studio delivering bespoke web development, Shopify architecture, motion video, personal branding, and email systems.
+                Developer house building high-performance websites, web applications, and digital experiences for ambitious businesses.
               </p>
               <div className="text-xs text-black/80 font-mono font-medium">
                 Geneva · London · New York · Singapore

@@ -6,7 +6,7 @@ import { ServicesTicker } from './components/ServicesTicker';
 import { FeaturedClientsTicker } from './components/FeaturedClientsTicker';
 import { HowWeWorkSection } from './components/HowWeWorkSection';
 import { TeamSection } from './components/TeamSection';
-import { TestimonialSection } from './components/TestimonialSection';
+import { BeforeAfterShowcase } from './components/BeforeAfterShowcase';
 import { FaqSection } from './components/FaqSection';
 import { FinalCtaSection } from './components/FinalCtaSection';
 import { useLenis } from './hooks/useLenis';
@@ -22,6 +22,8 @@ import { WorkingWithUsPage } from './pages/WorkingWithUsPage';
 import { ResultsStatement } from './components/ResultsStatement';
 import { MinimalFooter } from './components/MinimalFooter';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
+import { HERO_GRADIENT_STYLE } from './utils/theme';
+import { PageSeo } from './components/PageSeo';
 
 function MainAppContent() {
   const { currentPage } = useNavigation();
@@ -106,6 +108,9 @@ function MainAppContent() {
       className="min-h-screen w-full flex flex-col font-sans relative overflow-x-hidden bg-white text-[#111111] selection:bg-black selection:text-white"
       style={{ background: '#ffffff' }}
     >
+      {/* Route-Specific SEO Head Synchronizer */}
+      <PageSeo />
+
       {/* Dynamic Page Rendering */}
       {currentPage === 'home' && (
         <div
@@ -157,28 +162,28 @@ function MainAppContent() {
           {/* 4. Featured Clients (Movable small compact scroll track directly below service overview) */}
           <FeaturedClientsTicker />
 
-          {/* 5. Work Process */}
+          {/* 5. Work Section: Work Process (5 Boxes Bento Grid) & Before / After Redesign Showcase */}
           <HowWeWorkSection />
+          <BeforeAfterShowcase />
 
           {/* 6. Team Introduction */}
           <TeamSection />
 
-          {/* 7. Testimonial */}
-          <TestimonialSection />
-
-          {/* 8. FAQ */}
+          {/* 7. FAQ */}
           <FaqSection />
 
-          {/* 9. Final CTA */}
+          {/* 8. Final CTA */}
           <FinalCtaSection />
         </div>
       )}
 
-      {/* Other Pages: Render Navbar in standalone top container with matching white page background */}
+      {/* Other Pages: Render Navbar in standalone top container with matching page background */}
       {currentPage !== 'home' && !isLegalPage && (
         <div
-          className="w-full px-0 sm:px-4 md:px-6 pt-0 sm:pt-4 pb-0 relative z-40 bg-white"
-          style={{ background: '#ffffff' }}
+          className={`w-full px-0 sm:px-4 md:px-6 pt-0 sm:pt-4 pb-0 relative z-40 ${
+            currentPage === 'contact' ? '' : 'bg-white'
+          }`}
+          style={currentPage === 'contact' ? HERO_GRADIENT_STYLE : { background: '#ffffff' }}
         >
           <div className="relative w-full h-[94px]">
             <HeaderNav

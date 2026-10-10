@@ -2,17 +2,12 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
 
-import founderImg from '../assets/images/man_glasses_portrait_1791036930295.jpg';
-import designLeadImg from '../assets/images/brunette_woman_portrait_1791036961013.jpg';
-import videoLeadImg from '../assets/images/video_editor_portrait_1791307799562.jpg';
-
 interface TeamMember {
   name: string;
   role: string;
   focus: string;
   bio: string;
   experience: string;
-  image: string;
 }
 
 const TEAM_MEMBERS: TeamMember[] = [
@@ -22,7 +17,6 @@ const TEAM_MEMBERS: TeamMember[] = [
     focus: 'Websites & Shopify Architecture',
     bio: 'Specializes in custom React & Shopify builds engineered for speed, clean semantics, and commercial conversions.',
     experience: '8+ yrs in digital engineering',
-    image: founderImg,
   },
   {
     name: 'Maya Sen',
@@ -30,15 +24,13 @@ const TEAM_MEMBERS: TeamMember[] = [
     focus: 'Brand Systems & Interface Design',
     bio: 'Designs high-converting digital interfaces, editorial design systems, and identity frameworks that make brands unforgettable.',
     experience: '6+ yrs in brand & product design',
-    image: designLeadImg,
   },
   {
     name: 'Arjun Verma',
-    role: 'Lead Video & Motion Editor',
-    focus: 'Reels, Shorts & Social Pacing',
-    bio: 'Edits retention-focused short-form video content, viral reels, and motion typography built to scale brand attention.',
-    experience: '5+ yrs in short-form storytelling',
-    image: videoLeadImg,
+    role: 'Creative Technologist & Frontend Lead',
+    focus: 'Interactive Motion & Web Performance',
+    bio: 'Engineers fluid interactions, high-performance web applications, and digital experiences with sub-second response times.',
+    experience: '6+ yrs in creative development',
   },
 ];
 
@@ -87,23 +79,14 @@ export const TeamSection: React.FC = () => {
               key={member.name}
               className="group rounded-3xl bg-[#FBFBFA] border border-black/10 overflow-hidden flex flex-col justify-between transition-all duration-200 hover:border-black/25 hover:shadow-[0_12px_36px_rgba(0,0,0,0.06)]"
             >
-              {/* Member Portrait */}
-              <div className="relative w-full aspect-square overflow-hidden bg-neutral-100">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-103"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
-                  <span>{member.focus}</span>
-                </div>
-              </div>
-
               {/* Member Details */}
               <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between gap-4">
                 <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="text-[11px] font-mono text-black/70 px-2.5 py-1 rounded-full bg-black/5 font-medium">
+                      {member.focus}
+                    </span>
+                  </div>
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="text-xl font-semibold text-[#111111] tracking-tight font-manrope">
                       {member.name}

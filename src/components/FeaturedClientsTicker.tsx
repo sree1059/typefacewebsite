@@ -11,11 +11,12 @@ interface ClientItem {
 const CLIENTS: ClientItem[] = [
   { name: 'Sphoorthi Interiors', category: 'Luxury Architecture', symbol: '✦' },
   { name: 'Thrill Hikers', category: 'Shopify Outdoor Gear', symbol: '▲' },
+  { name: 'Wellness Hospitals', category: 'Healthcare Platform', symbol: '✦' },
   { name: 'Mr. Pottel', category: 'Artisanal Hospitality', symbol: '◆' },
   { name: 'Mantequilla', category: 'Specialty Retail', symbol: '●' },
-  { name: 'Kumo Studios', category: 'Motion & Visual Arts', symbol: '✦' },
+  { name: 'EmitMinds', category: 'Digital Solutions', symbol: '✦' },
+  { name: 'Aranyam Amogham', category: 'Eco Living', symbol: '▲' },
   { name: 'Veloce Dynamics', category: 'Mobility & Tech', symbol: '▲' },
-  { name: 'Prism Digital', category: 'B2B Analytics', symbol: '◆' },
   { name: 'Aether Living', category: 'Modern Furniture', symbol: '●' },
 ];
 

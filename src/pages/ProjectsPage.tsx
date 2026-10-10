@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { HERO_GRADIENT_STYLE } from '../utils/theme';
+import { BeforeAfterShowcase } from '../components/BeforeAfterShowcase';
 
 interface ProjectItem {
   id: string;
@@ -18,6 +19,11 @@ const PROJECTS: ProjectItem[] = [
     id: 'thrill-hikers',
     name: 'thrill hikers',
     url: 'https://www.thrillhikers.com/',
+  },
+  {
+    id: 'wellness-hospitals',
+    name: 'wellness hospitals nizamabad',
+    url: 'https://wellnesshospitals.in/hospitals/nizamabad/',
   },
   {
     id: 'mr-pottel',
@@ -54,20 +60,20 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = () => {
 
   return (
     <div
-      className="w-full bg-white text-[#111111] min-h-screen py-10 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 selection:bg-black selection:text-white"
+      className="w-full bg-white text-[#111111] min-h-screen py-10 sm:py-16 md:py-20 selection:bg-black selection:text-white"
       style={{
         background: '#ffffff',
         ...fontStyle,
       }}
     >
-      <div className="max-w-5xl mx-auto space-y-10 sm:space-y-14">
+      <div className="max-w-5xl mx-auto px-4 sm:px-8 md:px-12 space-y-10 sm:space-y-14">
         {/* Work Page Hero Header with Exact Hero Gradient */}
         <div
           className="w-full rounded-3xl sm:rounded-[40px] p-8 sm:p-12 md:p-16 border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)] text-black relative overflow-hidden select-none no-copy"
           style={HERO_GRADIENT_STYLE}
         >
           <span className="text-[12px] uppercase tracking-widest font-semibold text-black/70 block mb-3 font-mono">
-            Portfolio & Case Studies
+            Typeface · Developer House
           </span>
           <h1
             style={{
@@ -80,7 +86,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = () => {
             Work<span className="text-[#E0343F]">.</span>
           </h1>
           <p className="text-[17px] sm:text-[21px] text-black/85 leading-relaxed max-w-2xl font-light">
-            Selected client flagships, digital products, and web platforms.
+            Selected client flagships, custom web applications, and high-performance digital platforms.
           </p>
         </div>
 
@@ -110,6 +116,11 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = () => {
             </a>
           ))}
         </div>
+      </div>
+
+      {/* Before / After Website Redesign Comparison Showcase */}
+      <div className="mt-12 sm:mt-16">
+        <BeforeAfterShowcase />
       </div>
     </div>
   );

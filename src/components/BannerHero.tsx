@@ -25,9 +25,9 @@ export const BannerHero: React.FC<BannerHeroProps> = ({
 
   return (
     <div className="relative w-full text-center px-4 pt-[130px] xs:pt-[140px] sm:pt-36 md:pt-40 lg:pt-44 xl:pt-46 pb-4 sm:pb-6 max-w-5xl mx-auto">
-      {/* 1. Hero Eyebrow Badge: Built With Conviction. */}
+      {/* 1. Hero Eyebrow Badge: Developer House · Built With Conviction. */}
       <div className="inline-flex items-center px-3.5 sm:px-4 py-1.5 rounded-full border border-black/15 bg-black/[0.04] text-[10.5px] sm:text-xs font-semibold tracking-wider text-black mb-3 sm:mb-4 select-none no-copy shadow-xs">
-        <span className="text-black">Built With Conviction<span className="text-[#E0343F]">.</span></span>
+        <span className="text-black">Developer House<span className="text-[#E0343F]"> · </span>Built With Conviction<span className="text-[#E0343F]">.</span></span>
       </div>
 
       {/* 2. Editorial Headline */}
@@ -62,7 +62,7 @@ export const BannerHero: React.FC<BannerHeroProps> = ({
         </div>
       </h1>
 
-      {/* 3. Subheading: Websites, social media, and reel editing, all under one roof. */}
+      {/* 3. Subheading: Suggested positioning */}
       <p
         style={{
           fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
@@ -71,11 +71,11 @@ export const BannerHero: React.FC<BannerHeroProps> = ({
         }}
         className="mt-4 sm:mt-5 md:mt-6 text-black text-sm sm:text-base md:text-[18px] max-w-2xl mx-auto leading-relaxed tracking-normal px-2 sm:px-4 no-copy flex items-center justify-center flex-wrap gap-y-1"
       >
-        <span className="text-black">Websites, social media, and&nbsp;</span>
+        <span className="text-black">We build high-performance websites and&nbsp;</span>
         <span className="inline-flex items-center px-2.5 sm:px-3 py-0.5 rounded-lg sm:rounded-xl bg-black text-white font-medium text-xs sm:text-sm md:text-base shadow-xs transition-transform duration-150 hover:scale-105">
-          reel editing
+          digital experiences
         </span>
-        <span className="text-black">,&nbsp;all under one roof</span>
+        <span className="text-black">&nbsp;for ambitious businesses</span>
         <span className="text-[#E0343F] font-medium">.</span>
       </p>
 

@@ -39,9 +39,9 @@ export const PrivacyPolicyPage: React.FC = () => {
       tableOfContents={tableOfContents}
       intro={
         <p className="leading-relaxed">
-          Typeface (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is a digital creative studio
-          providing web development, Shopify development, short-form video editing, LinkedIn personal
-          branding and email marketing services.
+          Typeface (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is a developer house
+          building high-performance websites, web applications, and digital experiences for
+          ambitious businesses.
           <br /><br />
           This Privacy Policy explains how we collect, use, disclose and protect personal information
           when you visit our website, contact us, submit an enquiry, or otherwise interact with our

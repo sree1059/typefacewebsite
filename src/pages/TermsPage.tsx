@@ -75,8 +75,8 @@ export const TermsPage: React.FC = () => {
         </div>
         <div className="text-sm sm:text-base text-[#333333] leading-relaxed space-y-3">
           <p>
-            Typeface is a digital creative studio offering specialized professional design, engineering,
-            and media services, including:
+            Typeface is a premium developer house offering specialized professional engineering,
+            web development, custom digital solutions, and high-performance digital experiences, including:
           </p>
           <ul className="list-disc pl-5 space-y-1.5 text-sm text-[#444444]">
             <li><strong>Web Development:</strong> Custom responsive web platforms, single-page architectures, and headless frontend experiences.</li>

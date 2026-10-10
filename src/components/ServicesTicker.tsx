@@ -3,14 +3,14 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 const SERVICES = [
-  'Web Development',
-  'Shopify Development',
-  'Short-form Video Editing',
-  'LinkedIn Personal Branding',
-  'Email Marketing',
-  'Content Creation',
-  'Lead Generation',
-  'UI/UX Design',
+  'High-Performance Websites',
+  'Custom Web Applications',
+  'Shopify & E-Commerce Engineering',
+  'Digital Experiences',
+  'Full-Stack Architecture',
+  'UI/UX & Design Systems',
+  'API & Cloud Integrations',
+  'Performance Optimization',
 ];
 
 export const ServicesTicker: React.FC = () => {

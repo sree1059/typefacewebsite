@@ -31,7 +31,7 @@ export const FinalCtaSection: React.FC = () => {
             }}
             className="text-base sm:text-lg md:text-xl text-black/75 max-w-2xl mx-auto leading-relaxed"
           >
-            Websites, social media, and reel editing engineered under one roof to turn passive visitors into paying clients.
+            We build high-performance websites and digital experiences for ambitious businesses.
           </p>
         </div>
 

@@ -75,7 +75,7 @@ export const MinimalFooter: React.FC = () => {
                 |
               </span>
               <span className="hidden sm:inline-block text-xs uppercase tracking-widest font-semibold text-black/75">
-                Digital Creative Studio
+                Developer House
               </span>
             </div>
 

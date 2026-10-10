@@ -108,7 +108,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
     name: '',
     email: '',
     phone: '',
-    budget: '₹25,000 – ₹50,000',
+    budget: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -122,19 +122,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
 
   const availableServiceOptions = [
     'Web Development',
-    'Shopify Development',
-    'Short-form Video Editing',
-    'LinkedIn Branding',
-    'Email Marketing',
-    'Custom Project',
-  ];
-
-  const budgetOptions = [
-    '₹25,000 – ₹50,000',
-    '₹50,000 – ₹1,00,000',
-    '₹1,00,000 – ₹2,50,000',
-    '₹2,50,000 – ₹5,00,000',
-    '₹5,00,000+',
+    'Custom Shopify Development',
+    'Landing Page Design',
+    'Social Media Services',
   ];
 
   const toggleServiceOption = (serviceName: string) => {
@@ -145,9 +135,51 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
     );
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmitting) return;
+
+    const formElement = e.currentTarget;
+    const formPayload = new FormData(formElement);
+
+    // Honeypot check: if filled, abort submission silently
+    const honey = formPayload.get('_honey');
+    if (honey && typeof honey === 'string' && honey.trim().length > 0) {
+      setIsSubmitted(true);
+      return;
+    }
+
+    // Required fields check
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim() ||
+      !formData.budget.trim() ||
+      !formData.message.trim()
+    ) {
+      setErrorMessage('Please fill in all mandatory fields (Name, Email, Mobile Number, Pricing/Budget, and Project Details).');
+      return;
+    }
+
+    // Blacklist filter
+    const spamTerms = [
+      'casino',
+      'crypto',
+      'bitcoin',
+      'forex',
+      'viagra',
+      'sex dating',
+      'adult dating',
+      'buy followers',
+      'loan offer',
+      'telegram @',
+      'whatsapp +',
+    ];
+    const combinedContent = `${formData.name} ${formData.message}`.toLowerCase();
+    if (spamTerms.some((term) => combinedContent.includes(term))) {
+      setErrorMessage('Your enquiry could not be submitted because it was flagged as promotional spam.');
+      return;
+    }
 
     setIsSubmitting(true);
     setErrorMessage(null);
@@ -160,9 +192,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          _subject: 'New Typeface Project Enquiry',
+          _subject: 'New Typeface Website Enquiry',
           _template: 'table',
-          _captcha: 'false',
+          _blacklist: 'casino, crypto, bitcoin, forex, viagra, sex dating, adult dating, loan offers, buy followers, telegram @',
           name: formData.name.trim(),
           email: formData.email.trim(),
           phone: formData.phone.trim(),
@@ -209,7 +241,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
           style={HERO_GRADIENT_STYLE}
         >
           <span className="text-[12px] uppercase tracking-widest font-semibold text-black/70 block mb-3 font-mono">
-            Our Services & Capabilities
+            Typeface · Developer House Capabilities
           </span>
           <h1
             style={{
@@ -219,10 +251,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
             }}
             className="text-[34px] xs:text-[44px] sm:text-[54px] md:text-[62px] text-black tracking-tight leading-[1.08] mb-4"
           >
-            Websites, social media, and reel editing<span className="text-[#E0343F]">.</span>
+            Websites, web applications, and digital experiences<span className="text-[#E0343F]">.</span>
           </h1>
           <p className="text-[17px] sm:text-[21px] text-black/85 leading-relaxed max-w-3xl font-light">
-            Everything your brand needs to build authority, capture attention, and drive measurable revenue — engineered under one roof.
+            We build high-performance websites and digital experiences for ambitious businesses — combining technical rigor, distinctive design, and commercial outcomes.
           </p>
         </div>
 
@@ -368,9 +400,22 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                   className="space-y-6 sm:space-y-7"
                 >
                   {/* FormSubmit Configuration Options */}
-                  <input type="hidden" name="_subject" value="New Typeface Project Enquiry" />
+                  <input type="hidden" name="_subject" value="New Typeface Website Enquiry" />
                   <input type="hidden" name="_template" value="table" />
-                  <input type="hidden" name="_captcha" value="false" />
+                  <input
+                    type="hidden"
+                    name="_blacklist"
+                    value="casino, crypto, bitcoin, forex, viagra, sex dating, adult dating, loan offers, buy followers, telegram @"
+                  />
+
+                  {/* Spam Protection Honeypot Field */}
+                  <input
+                    type="text"
+                    name="_honey"
+                    style={{ display: "none" }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
 
                   <div className="text-left pr-8">
                     <h3
@@ -484,51 +529,32 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                     </div>
                   </div>
 
-                  {/* Estimated Budget (INR) Starting from 25,000 */}
-                  <div className="space-y-2 text-left">
-                    <div className="flex items-baseline justify-between">
-                      <label
-                        style={{
-                          fontFamily: "'Manrope', sans-serif",
-                          fontWeight: 300,
-                        }}
-                        className="block text-[14px] sm:text-[16px] text-[#111111]"
-                      >
-                        Estimated Budget (INR) *
-                      </label>
-                      <span
-                        style={{
-                          fontFamily: "'Manrope', sans-serif",
-                          fontWeight: 300,
-                        }}
-                        className="text-[12px] sm:text-[13px] text-zinc-500"
-                      >
-                        Starting from ₹25,000
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {budgetOptions.map((tier) => {
-                        const isSelected = formData.budget === tier;
-                        return (
-                          <button
-                            key={tier}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, budget: tier })}
-                            style={{
-                              fontFamily: "'Manrope', sans-serif",
-                              fontWeight: 300,
-                            }}
-                            className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-[13px] sm:text-[15px] transition-all duration-200 cursor-pointer border ${
-                              isSelected
-                                ? 'bg-[#111111] text-white border-[#111111] shadow-xs font-normal'
-                                : 'bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#111111] border-black/5'
-                            }`}
-                          >
-                            {tier}
-                          </button>
-                        );
-                      })}
-                    </div>
+                  {/* Estimated Budget / Pricing (Mandatory Text Input) */}
+                  <div className="space-y-1.5 text-left">
+                    <label
+                      htmlFor="discuss-budget"
+                      style={{
+                        fontFamily: "'Manrope', sans-serif",
+                        fontWeight: 300,
+                      }}
+                      className="block text-[14px] sm:text-[16px] text-[#111111]"
+                    >
+                      Estimated Budget / Pricing *
+                    </label>
+                    <input
+                      id="discuss-budget"
+                      name="budget"
+                      type="text"
+                      required
+                      placeholder="e.g. ₹75,000 or $1,500 / your budget"
+                      value={formData.budget}
+                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                      style={{
+                        fontFamily: "'Manrope', sans-serif",
+                        fontWeight: 300,
+                      }}
+                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
+                    />
                   </div>
 
                   {/* Services Selection Pills */}
