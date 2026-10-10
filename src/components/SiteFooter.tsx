@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigation } from '../context/NavigationContext';
+import { openCookieSettings } from '../utils/cookieConsent';
 
 export const SiteFooter: React.FC = () => {
   const { navigate, currentPage } = useNavigation();
@@ -128,12 +129,19 @@ export const SiteFooter: React.FC = () => {
           {/* Bottom bar */}
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-black/70">
             <p>© {new Date().getFullYear()} Typeface. All rights reserved.</p>
-            <div className="flex items-center gap-4 sm:gap-6 font-medium">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-5 font-medium">
               <button
                 onClick={() => navigate('privacy-policy')}
                 className="hover:text-black transition-colors cursor-pointer"
               >
                 Privacy Policy
+              </button>
+              <span>·</span>
+              <button
+                onClick={() => navigate('cookie-policy')}
+                className="hover:text-black transition-colors cursor-pointer"
+              >
+                Cookie Policy
               </button>
               <span>·</span>
               <button
@@ -143,7 +151,13 @@ export const SiteFooter: React.FC = () => {
                 Terms &amp; Conditions
               </button>
               <span>·</span>
-              <span className="hover:text-black transition-colors">Governance &amp; Standards</span>
+              <button
+                type="button"
+                onClick={() => openCookieSettings()}
+                className="hover:text-black transition-colors cursor-pointer"
+              >
+                Cookie Settings
+              </button>
             </div>
           </div>
         </div>

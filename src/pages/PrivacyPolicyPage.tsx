@@ -191,14 +191,38 @@ export const PrivacyPolicyPage: React.FC = () => {
         </div>
         <div className="text-sm sm:text-base text-[#333333] leading-relaxed space-y-3">
           <p>
-            Our website utilizes only strictly necessary functional storage mechanisms (such as basic
-            browser session storage) required to maintain core site navigation, client-side routing, and
-            accessibility states.
+            Our website uses strictly necessary functional cookies and storage tokens required to maintain
+            core site navigation, client-side routing, spam protection, and your cookie consent preferences.
           </p>
           <p>
-            We do not currently deploy third-party advertising tracking pixels or retargeting cookies.
-            If analytics or measurement instrumentation is introduced in future iterations of the website,
-            this Privacy Policy and our cookie notifications will be updated accordingly.
+            With your explicit permission, we may also utilize privacy-conscious analytics cookies to
+            understand aggregated site traffic and performance. You have full control over these cookies
+            and can grant, reject, or modify your preferences at any time.
+          </p>
+          <p>
+            For complete details regarding our use of cookies, storage lifecycles, and to update your consent,
+            please review our dedicated{' '}
+            <button
+              type="button"
+              onClick={() => {
+                const navEvent = new CustomEvent('navigate-to-cookie-policy');
+                window.dispatchEvent(navEvent);
+                window.location.hash = 'cookie-policy';
+              }}
+              className="font-medium text-black underline underline-offset-2 hover:text-[#E0343F] cursor-pointer"
+            >
+              Cookie Policy
+            </button>
+            {' '}or adjust your{' '}
+            <button
+              type="button"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('open-cookie-settings'));
+              }}
+              className="font-medium text-black underline underline-offset-2 hover:text-[#E0343F] cursor-pointer"
+            >
+              Cookie Settings
+            </button>.
           </p>
         </div>
       </section>

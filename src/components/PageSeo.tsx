@@ -55,6 +55,11 @@ const PAGE_META: Record<PageRoute, PageMeta> = {
     description: 'Privacy Policy and data protection terms for Typeface Developer House.',
     path: '/privacy-policy',
   },
+  'cookie-policy': {
+    title: 'Cookie Policy — Typeface Developer House',
+    description: 'Cookie Policy and consent preferences for Typeface Developer House.',
+    path: '/cookie-policy',
+  },
   terms: {
     title: 'Terms of Service — Typeface Developer House',
     description: 'Terms of Service and legal agreements for Typeface Developer House.',
@@ -121,6 +126,19 @@ export const PageSeo: React.FC = () => {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', canonicalUrl);
+
+    // 8. Track SPA page navigation with Google Tag
+    if (typeof (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag === 'function') {
+      try {
+        (window as unknown as { gtag: (...args: unknown[]) => void }).gtag('event', 'page_view', {
+          page_title: meta.title,
+          page_location: canonicalUrl,
+          page_path: meta.path,
+        });
+      } catch {
+        // fail-safe
+      }
+    }
   }, [currentPage]);
 
   return null;

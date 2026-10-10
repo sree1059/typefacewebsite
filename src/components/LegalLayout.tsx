@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowUp, FileText, Shield } from 'lucide-react';
+import { ArrowLeft, ArrowUp, FileText, Shield, Cookie } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
 
 interface TableOfContentItem {
@@ -15,7 +15,7 @@ interface LegalLayoutProps {
   lastUpdated?: string;
   tableOfContents: TableOfContentItem[];
   children: React.ReactNode;
-  currentLegalRoute: 'privacy-policy' | 'terms';
+  currentLegalRoute: 'privacy-policy' | 'terms' | 'cookie-policy';
 }
 
 export const LegalLayout: React.FC<LegalLayoutProps> = ({
@@ -107,6 +107,18 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
             >
               <Shield className="w-3.5 h-3.5" />
               <span>Privacy Policy</span>
+            </button>
+            <button
+              onClick={() => navigate('cookie-policy')}
+              style={manropeFont}
+              className={`px-3 py-1.5 rounded-lg text-xs transition-all cursor-pointer flex items-center gap-1.5 ${
+                currentLegalRoute === 'cookie-policy'
+                  ? 'bg-white text-black font-normal shadow-xs border border-black/10'
+                  : 'text-black/60 hover:text-black'
+              }`}
+            >
+              <Cookie className="w-3.5 h-3.5" />
+              <span>Cookie Policy</span>
             </button>
             <button
               onClick={() => navigate('terms')}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Twitter, Linkedin, Instagram, Github, Dribbble } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
+import { openCookieSettings } from '../utils/cookieConsent';
 
 interface SocialLink {
   name: string;
@@ -141,6 +142,17 @@ export const MinimalFooter: React.FC = () => {
               <span className="text-black/30">·</span>
               <button
                 onClick={() => {
+                  navigate('cookie-policy');
+                  window.history.pushState({}, '', '/cookie-policy');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="hover:text-black underline-offset-2 hover:underline transition-colors cursor-pointer"
+              >
+                Cookie Policy
+              </button>
+              <span className="text-black/30">·</span>
+              <button
+                onClick={() => {
                   navigate('terms');
                   window.history.pushState({}, '', '/terms');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -148,6 +160,14 @@ export const MinimalFooter: React.FC = () => {
                 className="hover:text-black underline-offset-2 hover:underline transition-colors cursor-pointer"
               >
                 Terms &amp; Conditions
+              </button>
+              <span className="text-black/30">·</span>
+              <button
+                type="button"
+                onClick={() => openCookieSettings()}
+                className="hover:text-black underline-offset-2 hover:underline transition-colors cursor-pointer text-black/75 hover:text-black"
+              >
+                Cookie Settings
               </button>
             </div>
           </div>

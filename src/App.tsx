@@ -16,11 +16,13 @@ import { ProjectsPage } from './pages/ProjectsPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { CookiePolicyPage } from './pages/CookiePolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { ThankYouPage } from './pages/ThankYouPage';
 import { WorkingWithUsPage } from './pages/WorkingWithUsPage';
 import { ResultsStatement } from './components/ResultsStatement';
 import { MinimalFooter } from './components/MinimalFooter';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
 import { HERO_GRADIENT_STYLE } from './utils/theme';
 import { PageSeo } from './components/PageSeo';
@@ -101,7 +103,7 @@ function MainAppContent() {
     currentPage === 'contact' ||
     currentPage === 'thank-you' ||
     currentPage === 'working-with-us';
-  const isLegalPage = currentPage === 'privacy-policy' || currentPage === 'terms';
+  const isLegalPage = currentPage === 'privacy-policy' || currentPage === 'terms' || currentPage === 'cookie-policy';
 
   return (
     <main
@@ -222,6 +224,10 @@ function MainAppContent() {
         <PrivacyPolicyPage />
       )}
 
+      {currentPage === 'cookie-policy' && (
+        <CookiePolicyPage />
+      )}
+
       {currentPage === 'terms' && (
         <TermsPage />
       )}
@@ -233,6 +239,9 @@ function MainAppContent() {
 
       {/* Minimalist Brand Footer */}
       <MinimalFooter />
+
+      {/* Production-Ready Cookie Consent Banner & Preferences Modal */}
+      <CookieConsentBanner />
     </main>
   );
 }
