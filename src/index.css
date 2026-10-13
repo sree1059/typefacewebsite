@@ -540,27 +540,23 @@ a[href*="wa.me"] {
   will-change: transform;
 }
 
-.panel.red {
-  background: radial-gradient(circle at 85% 15%, rgba(255, 69, 91, 0.15) 0%, transparent 60%),
-              radial-gradient(circle at 15% 85%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
-              #0D0F12;
+.panel.red,
+.panel.panel-gradient-1 {
+  background: linear-gradient(110deg, #79D0E8 0%, #69F9B0 100%);
 }
 
-.panel.orange {
-  background: radial-gradient(circle at 85% 15%, rgba(255, 138, 0, 0.15) 0%, transparent 60%),
-              radial-gradient(circle at 15% 85%, rgba(234, 88, 12, 0.08) 0%, transparent 50%),
-              #100D0A;
+.panel.orange,
+.panel.panel-gradient-2 {
+  background: linear-gradient(135deg, #9AF5B2, #B8F7E5);
 }
 
-.panel.purple {
-  background: radial-gradient(circle at 85% 15%, rgba(168, 85, 247, 0.15) 0%, transparent 60%),
-              radial-gradient(circle at 15% 85%, rgba(126, 34, 206, 0.08) 0%, transparent 50%),
-              #0E0B14;
+.panel.purple,
+.panel.panel-gradient-3 {
+  background: linear-gradient(135deg, #E7FF36, #B7F56B);
 }
 
-.panel.green {
-  background: radial-gradient(circle at 85% 15%, rgba(16, 185, 129, 0.15) 0%, transparent 60%),
-              radial-gradient(circle at 15% 85%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
-              #07120C;
+.panel.green,
+.panel.panel-gradient-4 {
+  background: linear-gradient(135deg, #D7F78B, #FFF4B8);
 }
 
