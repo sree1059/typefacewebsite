@@ -51,6 +51,7 @@ export function useLenis({ lerp = 0.08, wheelMultiplier = 1 }: UseLenisOptions =
     });
 
     lenisRef.current = lenis;
+    (window as any).__lenis = lenis;
 
     // Synchronize Lenis scroll updates with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
@@ -66,6 +67,7 @@ export function useLenis({ lerp = 0.08, wheelMultiplier = 1 }: UseLenisOptions =
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
       lenisRef.current = null;
+      (window as any).__lenis = null;
       mediaQuery.removeEventListener('change', checkMotion);
     };
   }, [currentLerp, wheelMultiplier]);

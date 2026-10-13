@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, ArrowUpRight } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
 import { openCalendlyPopup } from '../utils/calendly';
 
@@ -48,7 +48,6 @@ export const FinalCtaSection: React.FC = () => {
           >
             <Calendar className="w-4 h-4 text-white/90" />
             <span>Book a Consultation</span>
-            <ArrowUpRight className="w-4 h-4 text-white/80 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
 
           {/* Secondary Action: Contact Form */}

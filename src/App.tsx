@@ -5,8 +5,7 @@ import { DashboardCards } from './components/DashboardCards';
 import { ServicesTicker } from './components/ServicesTicker';
 import { FeaturedClientsTicker } from './components/FeaturedClientsTicker';
 import { HowWeWorkSection } from './components/HowWeWorkSection';
-import { TeamSection } from './components/TeamSection';
-import { BeforeAfterShowcase } from './components/BeforeAfterShowcase';
+import { ServicesStackedSection } from './components/ServicesStackedSection';
 import { FaqSection } from './components/FaqSection';
 import { FinalCtaSection } from './components/FinalCtaSection';
 import { useLenis } from './hooks/useLenis';
@@ -22,6 +21,7 @@ import { ThankYouPage } from './pages/ThankYouPage';
 import { WorkingWithUsPage } from './pages/WorkingWithUsPage';
 import { ResultsStatement } from './components/ResultsStatement';
 import { MinimalFooter } from './components/MinimalFooter';
+import { OversizedMarqueeSection } from './components/OversizedMarqueeSection';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
 import { HERO_GRADIENT_STYLE } from './utils/theme';
@@ -164,14 +164,15 @@ function MainAppContent() {
           {/* 4. Featured Clients (Movable small compact scroll track directly below service overview) */}
           <FeaturedClientsTicker />
 
-          {/* 5. Work Section: Work Process (5 Boxes Bento Grid) & Before / After Redesign Showcase */}
+          {/* 5. Work Section: Work Process (5 Boxes Bento Grid) */}
           <HowWeWorkSection />
-          <BeforeAfterShowcase />
 
-          {/* 6. Team Introduction */}
-          <TeamSection />
+          {/* GSAP ScrollTrigger Stacked Panels Services Section */}
+          <ServicesStackedSection />
 
-          {/* 7. FAQ */}
+
+
+          {/* 6. FAQ */}
           <FaqSection />
 
           {/* 8. Final CTA */}
@@ -235,6 +236,11 @@ function MainAppContent() {
       {/* "No spam. Just results." banner above footer on about page */}
       {currentPage === 'about' && (
         <ResultsStatement />
+      )}
+
+      {/* Premium Oversized Continuously Animated Typography Section */}
+      {!isLegalPage && (
+        <OversizedMarqueeSection />
       )}
 
       {/* Minimalist Brand Footer */}

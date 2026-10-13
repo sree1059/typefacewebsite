@@ -266,7 +266,7 @@ export const HowWeWorkSection: React.FC = () => {
                 className="text-[11.5px] sm:text-xs text-[#A1A1AA] leading-relaxed max-w-md font-manrope"
               >
                 Design, build, deploy, and maintain — all from{' '}
-                <strong className="text-white font-normal">one senior team</strong>.
+                <strong className="text-white font-normal">one team</strong>.
               </p>
             </div>
           </div>
@@ -425,7 +425,7 @@ export const HowWeWorkSection: React.FC = () => {
                 style={{ fontFamily: MANROPE_FONT, fontWeight: 300 }}
                 className="text-[11px] sm:text-[11.5px] text-[#6B7280] leading-snug mb-2 font-manrope"
               >
-                Cut overhead, not quality. Pay for the work, not the org chart between you and the engineer.
+                Cut overhead, not quality. Pay for the work.
               </p>
             </div>
 
