@@ -1,518 +1,323 @@
-import React, { useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { useGSAP } from '@gsap/react';
-import { 
-  Check, 
-  ArrowRight, 
-  Code2, 
-  Sparkles, 
-  ShoppingBag, 
-  Cpu, 
-  Laptop, 
-  Smartphone, 
-  Zap, 
-  TrendingUp, 
-  ShieldCheck, 
-  Layers
-} from 'lucide-react';
+import React from 'react';
+import { Check, ArrowRight, Sparkles } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-const MANROPE_FONT =
-  "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
-
-interface ServicePanelData {
-  id: string; // 'one' | 'two' | 'three' | 'four'
-  number: string;
-  colorClass: string;
-  gradientBackground: string;
+export interface ServiceCardData {
+  id: string;
   title: string;
-  badge: string;
+  isPopular?: boolean;
+  timeline?: string;
   description: string;
   features: string[];
-  ctaText: string;
-  accentColor: string;
 }
 
-const SERVICE_PANELS: ServicePanelData[] = [
+export const SERVICES_CATALOG: ServiceCardData[] = [
   {
-    id: 'one',
-    number: '01',
-    colorClass: 'panel-gradient-1 red',
-    gradientBackground: 'linear-gradient(110deg, #79D0E8 0%, #69F9B0 100%)',
+    id: 'web-development',
     title: 'Web Development',
-    badge: 'Custom Architecture',
+    isPopular: true,
+    timeline: '3–8 weeks',
     description:
-      'From concept to launch, we design and build websites that reflect the true quality of your brand. Premium aesthetics, seamless experience, and a final product that works as hard as it looks good.',
+      'Conversion-focused websites on Next.js for local businesses and B2B SaaS. Fast, accessible, SEO-ready, and easy to edit.',
     features: [
-      'Custom website experiences',
-      'Responsive development',
-      'Performance and SEO foundations',
+      'Custom design (no templates)',
+      'Next.js + headless CMS',
+      'Core Web Vitals 95+',
+      'Conversion tracking & GA4',
+      'Blog / resources module',
+      'Stripe / CRM integrations',
     ],
-    ctaText: 'Explore Web Development →',
-    accentColor: '#0A7080',
   },
   {
-    id: 'two',
-    number: '02',
-    colorClass: 'panel-gradient-2 orange',
-    gradientBackground: 'linear-gradient(135deg, #9AF5B2, #B8F7E5)',
-    title: 'Landing Page Design',
-    badge: 'Fresh Mint · Conversion',
+    id: 'social-media',
+    title: 'Social Media Management',
     description:
-      'First impressions convert. We design landing pages that are sharp, focused, and built around one goal — turning your traffic into leads, sales, and walk-ins.',
+      'Reels-first content, UGC campaigns, community management, and paid ads across Instagram, TikTok, Facebook, and LinkedIn.',
     features: [
-      'Conversion-focused layouts',
-      'Clear messaging and CTAs',
-      'Responsive, fast-loading pages',
+      'Weekly content calendar',
+      'Short-form video production',
+      'Paid creative + ad management',
+      'UGC partnerships',
+      'Community & DM management',
+      'Monthly performance reports',
     ],
-    ctaText: 'Design My Landing Page →',
-    accentColor: '#0E7A55',
   },
   {
-    id: 'three',
-    number: '03',
-    colorClass: 'panel-gradient-3 purple',
-    gradientBackground: 'linear-gradient(135deg, #E7FF36, #B7F56B)',
-    title: 'Shopify Development',
-    badge: 'High Contrast · E-Commerce',
+    id: 'ai-chatbots',
+    title: 'AI Chatbots & Automations',
+    isPopular: true,
     description:
-      'We build online stores that are as beautiful as they are profitable. Fast, reliable, and designed to turn browsers into buyers — backed by a platform built to scale.',
+      'Custom chatbots trained on your business that answer FAQs, qualify leads, book calls, and take orders — with human handoff.',
     features: [
-      'Custom Shopify stores',
-      'High-converting product & checkout pages',
-      'App integrations & speed optimization',
+      'FAQ + knowledge base training',
+      'Lead qualification flows',
+      'Calendar + CRM integration',
+      'Live agent handoff',
+      'Deploy on site, IG DMs, WhatsApp',
+      'Weekly intent tuning',
     ],
-    ctaText: 'Launch on Shopify →',
-    accentColor: '#456100',
   },
   {
-    id: 'four',
-    number: '04',
-    colorClass: 'panel-gradient-4 green',
-    gradientBackground: 'linear-gradient(135deg, #D7F78B, #FFF4B8)',
-    title: 'AI & Workflow Automation',
-    badge: 'Citrus Cream · Systems',
+    id: 'seo-local-search',
+    title: 'SEO & Local Search',
     description:
-      'We build intelligent automations and custom AI integrations that remove friction, cut repetitive work, and give your team hours back every week.',
+      'Rank higher on Google and Google Maps with technical SEO, local citations, review generation, and intent-focused content.',
     features: [
-      'Custom AI workflow integration',
-      'Lead capture and customer routing',
-      'Internal tooling and automated pipelines',
+      'Technical SEO audit',
+      'Google Business optimization',
+      'Review generation flow',
+      'Neighborhood / city landing pages',
+      'Content calendar',
+      'Link building outreach',
     ],
-    ctaText: 'Automate My Business →',
-    accentColor: '#4C6010',
+  },
+  {
+    id: 'paid-ads',
+    title: 'Paid Ads',
+    description:
+      'Meta (Facebook/Instagram), Google Search, and LinkedIn ads managed for measurable lead-gen and revenue, not vanity clicks.',
+    features: [
+      'Creative strategy + testing',
+      'Pixel + conversion API setup',
+      'Audience building & lookalikes',
+      'Weekly optimization',
+      'Transparent ROAS dashboards',
+      'Landing page recommendations',
+    ],
+  },
+  {
+    id: 'branding-design',
+    title: 'Branding & Design',
+    description:
+      'Identity, logo, typography, and brand guidelines for founders who want to look as good as their product is.',
+    features: [
+      'Logo + lockups',
+      'Color & type system',
+      'Brand guidelines PDF',
+      'Social templates',
+      'Pitch deck / sales materials',
+      'Figma source files',
+    ],
   },
 ];
 
 export const ServicesStackedSection: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activePanelIndex, setActivePanelIndex] = useState<number>(0);
-  const [isSectionInView, setIsSectionInView] = useState<boolean>(false);
   const { navigate } = useNavigation();
 
-  useGSAP(
-    () => {
-      const container = containerRef.current;
-      if (!container) return;
-
-      const prefersReducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches;
-
-      // Track whether whole section is active for dock visibility
-      ScrollTrigger.create({
-        trigger: container,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        onEnter: () => setIsSectionInView(true),
-        onLeave: () => setIsSectionInView(false),
-        onEnterBack: () => setIsSectionInView(true),
-        onLeaveBack: () => setIsSectionInView(false),
-      });
-
-      if (prefersReducedMotion) {
-        // Reduced motion: do not pin, allow natural flowing document
-        return;
-      }
-
-      // Query all panel elements and navigation links
-      const panels = gsap.utils.toArray<HTMLElement>('.panel', container);
-      const navLinks = gsap.utils.toArray<HTMLAnchorElement>('nav a', container);
-
-      // Array to hold references to individual triggers
-      const triggers: ScrollTrigger[] = [];
-
-      panels.forEach((panel, i) => {
-        const isLast = i === panels.length - 1;
-
-        // Create the ScrollTrigger pinned instance matching the GSAP reference
-        // Panels 1..3 pin with pinSpacing: false so subsequent panels slide directly over them.
-        // Panel 4 (last panel) pins with pinSpacing: true and end: "+=100%" to provide
-        // a full 100vh reading distance so content is never hidden prematurely.
-        const trigger = ScrollTrigger.create({
-          trigger: panel,
-          start: 'top top',
-          end: isLast ? '+=100%' : undefined,
-          pin: true,
-          pinSpacing: isLast,
-          onEnter: () => setActivePanelIndex(i),
-          onEnterBack: () => setActivePanelIndex(i),
-        });
-
-        triggers.push(trigger);
-
-        // Bind navigation click event matching reference behavior
-        const nav = navLinks[i];
-        if (nav) {
-          const handleClick = (e: MouseEvent) => {
-            e.preventDefault();
-            const targetY = trigger.start;
-
-            // Coordinate with Lenis smooth scroll if active, otherwise use GSAP ScrollToPlugin
-            const lenisInstance = (window as any).__lenis;
-            if (lenisInstance && typeof lenisInstance.scrollTo === 'function') {
-              lenisInstance.scrollTo(targetY, { duration: 1 });
-            } else {
-              gsap.to(window, {
-                duration: 1,
-                scrollTo: targetY,
-                ease: 'power2.inOut',
-              });
-            }
-          };
-
-          nav.addEventListener('click', handleClick);
-
-          // Store cleanup on element
-          (nav as any).__clickHandler = handleClick;
-        }
-      });
-
-      return () => {
-        triggers.forEach((t) => t.kill());
-        navLinks.forEach((nav) => {
-          const handler = (nav as any).__clickHandler;
-          if (handler) {
-            nav.removeEventListener('click', handler);
-          }
-        });
-      };
-    },
-    { scope: containerRef }
-  );
-
-  const handleCtaClick = () => {
+  const handleQuoteClick = () => {
     navigate('contact');
     window.history.pushState({}, '', '/contact');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="services-stacked-container relative w-full bg-white select-none"
-      style={{ fontFamily: MANROPE_FONT }}
+    <section
+      id="services"
+      aria-label="Services Catalog"
+      className="w-full bg-white text-[#111111] py-20 sm:py-24 md:py-28 px-4 sm:px-8 md:px-12 select-none border-b border-black/10"
     >
-      {/* SECTION INTRO / HEADER */}
-      <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/10">
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-black animate-pulse" />
-            <span className="text-xs uppercase tracking-widest font-semibold text-black/70">
-              Core Capabilities
-            </span>
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="max-w-4xl mx-auto text-center mb-14 sm:mb-16 md:mb-20 flex flex-col items-center">
+          <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-mono font-medium text-[#155EEF] bg-[#EFF6FF] border border-[#BFDBFE] mb-5 shadow-xs">
+            Services
           </div>
+
           <h2
-            style={{ fontWeight: 500, letterSpacing: '-0.04em' }}
-            className="text-4xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]"
+            style={{
+              fontFamily:
+                "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
+            }}
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#0B132B] tracking-tight leading-[1.12] mb-5"
           >
-            SERVICES WE ENGINEER
+            Everything you need to grow,<br />
+            <span className="bg-gradient-to-r from-[#155EEF] via-[#06B6D4] to-[#10B981] bg-clip-text text-transparent">
+              under one roof
+            </span>
+            <span className="text-[#E0343F]">.</span>
           </h2>
+
+          <p
+            style={{
+              fontFamily:
+                "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontWeight: 300,
+            }}
+            className="text-base sm:text-lg md:text-xl text-[#475569] font-light leading-relaxed max-w-2xl mx-auto"
+          >
+            Pick one service or let us build an integrated plan across web, social, ads, and AI. Every engagement has clear deliverables, transparent pricing, and one accountable strategist.
+          </p>
         </div>
-        <p
-          style={{ fontWeight: 300 }}
-          className="max-w-md text-base sm:text-lg text-black/60 leading-relaxed"
-        >
-          Explore our four dedicated service specializations designed to turn digital presence into an unfair competitive advantage.
-        </p>
-      </div>
 
-      {/* FLOATING IN-SECTION PANEL NAV DOCK
-          Preserves existing Typeface design system & colors.
-          Provides required navigation links (a[href="#one"], a[href="#two"], etc.)
-          without cluttering the main top navigation. */}
-      <div
-        className={`fixed bottom-6 right-6 z-40 transition-all duration-300 pointer-events-none ${
-          isSectionInView ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4'
-        }`}
-      >
-        <nav
-          aria-label="Services Panel Navigation"
-          className="flex items-center gap-1.5 p-1.5 bg-black/85 backdrop-blur-xl border border-white/20 rounded-full shadow-2xl"
-        >
-          {SERVICE_PANELS.map((item, index) => {
-            const isActive = activePanelIndex === index;
-            return (
-              <div key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  aria-current={isActive ? 'true' : undefined}
-                  className={`text-xs px-3 py-1.5 rounded-full transition-all duration-200 block text-center whitespace-nowrap cursor-pointer ${
-                    isActive
-                      ? 'bg-white text-black font-semibold shadow-sm'
-                      : 'text-white/70 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  <span className="font-mono text-[10px] mr-1 opacity-60">0{index + 1}</span>
-                  <span className="hidden sm:inline">{item.title.split(' ')[0]}</span>
-                </a>
-              </div>
-            );
-          })}
-        </nav>
-      </div>
-
-      {/* FOUR STACKED PANELS */}
-      {SERVICE_PANELS.map((panel, index) => (
-        <section
-          key={panel.id}
-          id={panel.id}
-          className={`panel ${panel.colorClass} w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 rounded-t-[36px] sm:rounded-t-[44px] md:rounded-t-[52px] border-t border-x border-black/10 shadow-[0_-25px_60px_rgba(0,0,0,0.18)]`}
-          style={{
-            zIndex: (index + 1) * 10,
-            background: panel.gradientBackground,
-          }}
-        >
-          {/* Subtle Ambient Radial Highlight */}
-          <div
-            className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-[100px] pointer-events-none opacity-25"
-            style={{ backgroundColor: '#ffffff' }}
-          />
-
-          <div className="max-w-6xl w-full mx-auto relative z-10 flex flex-col justify-between h-full">
-            {/* Top Bar: Card Number & Reference .line */}
-            <div className="w-full mb-8 sm:mb-12">
-              <div className="flex items-center justify-between mb-4">
-                <span
-                  className="font-mono text-sm sm:text-base font-semibold px-2.5 py-1 rounded-md bg-black/10 text-black/90 border border-black/15 shadow-sm"
-                >
-                  {panel.number} / 04
-                </span>
-              </div>
-
-              {/* Exact reference .line element with matching styling */}
+        {/* 6 Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {SERVICES_CATALOG.map((service) =>
+            service.isPopular ? (
+              /* Most Popular Card with Radiant Hero Section Gradient Outline */
               <div
-                className="line"
-                style={{
-                  background: `linear-gradient(90deg, #111111 0%, rgba(17, 17, 17, 0.75) 45%, rgba(17, 17, 17, 0.15) 100%)`,
-                }}
-              />
-            </div>
-
-            {/* Main Content Layout: 2-Column Responsive Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
-              {/* Left Column: Title, Description, Bullet Points & CTA */}
-              <div className="lg:col-span-7 flex flex-col justify-center">
-                <h3
-                  style={{ fontWeight: 500, letterSpacing: '-0.04em' }}
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#111111] tracking-tight leading-[1.08] mb-5 uppercase"
-                >
-                  {panel.title}
-                </h3>
-
-                <p
-                  style={{ fontWeight: 300 }}
-                  className="text-base sm:text-lg md:text-xl text-black/80 font-light leading-relaxed mb-8 max-w-xl"
-                >
-                  {panel.description}
-                </p>
-
-                {/* Feature Points */}
-                <div className="space-y-3 mb-8 sm:mb-10">
-                  {panel.features.map((feature) => (
-                    <div key={feature} className="flex items-center gap-3">
-                      <div
-                        className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 border border-black/25 bg-black/10"
+                key={service.id}
+                className="p-[2.5px] rounded-[24px] sm:rounded-[32px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_14px_40px_rgba(105,249,176,0.22)] hover:shadow-[0_20px_50px_rgba(85,220,255,0.32)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col group"
+              >
+                <div className="w-full h-full bg-white rounded-[22px] sm:rounded-[30px] p-6 sm:p-8 flex flex-col justify-between">
+                  <div>
+                    {/* Header: Badge & Timeline */}
+                    <div className="flex items-center justify-between gap-2 mb-4 min-h-[26px]">
+                      <span
+                        style={{
+                          background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                          color: '#000000',
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10.5px] font-mono tracking-wider uppercase font-bold shadow-xs"
                       >
-                        <Check
-                          className="w-3 h-3 stroke-[2.5] text-black"
-                        />
-                      </div>
-                      <span className="text-sm sm:text-base text-black/90 font-normal">
-                        {feature}
+                        <Sparkles className="w-3 h-3 text-black fill-black" />
+                        Most popular
                       </span>
+
+                      {service.timeline && (
+                        <span className="px-2.5 py-0.5 rounded-full bg-black/5 border border-black/10 text-black/75 text-[11px] font-mono font-medium">
+                          {service.timeline}
+                        </span>
+                      )}
                     </div>
-                  ))}
+
+                    {/* Service Title */}
+                    <h3
+                      style={{
+                        fontFamily:
+                          "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                        fontWeight: 600,
+                        letterSpacing: '-0.025em',
+                      }}
+                      className="text-2xl sm:text-[26px] text-[#0B132B] tracking-tight leading-snug mb-3"
+                    >
+                      {service.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p
+                      style={{
+                        fontFamily:
+                          "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                        fontWeight: 300,
+                      }}
+                      className="text-xs sm:text-sm text-black/70 font-light leading-relaxed mb-6"
+                    >
+                      {service.description}
+                    </p>
+
+                    {/* Deliverables / Features List */}
+                    <div className="pt-4 border-t border-black/10 space-y-2.5">
+                      {service.features.map((feat, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-2.5 text-xs sm:text-[13px] text-black/80 font-normal leading-relaxed"
+                        >
+                          <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Button: Get a custom quote (Redirects to contact page) */}
+                  <div className="pt-8 mt-auto">
+                    <button
+                      onClick={handleQuoteClick}
+                      style={{
+                        background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                        color: '#000000',
+                        fontFamily:
+                          "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                        fontWeight: 600,
+                      }}
+                      className="w-full py-3.5 px-6 rounded-full text-xs sm:text-sm tracking-normal transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.98]"
+                    >
+                      <span>Get a custom quote</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Standard Service Card */
+              <div
+                key={service.id}
+                className="bg-[#F9FAFB] border border-black/10 hover:border-black/25 hover:shadow-md hover:-translate-y-1 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative group"
+              >
+                <div>
+                  {/* Header: Spacer & Timeline */}
+                  <div className="flex items-center justify-between gap-2 mb-4 min-h-[26px]">
+                    <span />
+                    {service.timeline && (
+                      <span className="px-2.5 py-0.5 rounded-full bg-black/5 border border-black/10 text-black/75 text-[11px] font-mono font-medium">
+                        {service.timeline}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Service Title */}
+                  <h3
+                    style={{
+                      fontFamily:
+                        "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                      fontWeight: 600,
+                      letterSpacing: '-0.025em',
+                    }}
+                    className="text-2xl sm:text-[26px] text-[#0B132B] tracking-tight leading-snug mb-3"
+                  >
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    style={{
+                      fontFamily:
+                        "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                      fontWeight: 300,
+                    }}
+                    className="text-xs sm:text-sm text-black/70 font-light leading-relaxed mb-6"
+                  >
+                    {service.description}
+                  </p>
+
+                  {/* Deliverables / Features List */}
+                  <div className="pt-4 border-t border-black/10 space-y-2.5">
+                    {service.features.map((feat, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-start gap-2.5 text-xs sm:text-[13px] text-black/80 font-normal leading-relaxed"
+                      >
+                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Action CTA Button */}
-                <div>
+                {/* Action Button: Get a custom quote (Redirects to contact page) */}
+                <div className="pt-8 mt-auto">
                   <button
-                    onClick={handleCtaClick}
+                    onClick={handleQuoteClick}
                     style={{
-                      fontFamily: MANROPE_FONT,
-                      fontWeight: 600,
+                      fontFamily:
+                        "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                      fontWeight: 500,
                     }}
-                    className="group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#111111] text-white hover:bg-black/85 text-sm sm:text-base font-semibold shadow-xl hover:shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="w-full py-3 sm:py-3.5 px-6 rounded-full text-xs sm:text-sm tracking-normal transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] bg-white hover:bg-black hover:text-white text-black border border-black/20 shadow-xs"
                   >
-                    <span>{panel.ctaText}</span>
+                    <span>Get a custom quote</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                   </button>
                 </div>
               </div>
-
-              {/* Right Column: Custom Interactive / Visual Card Preview */}
-              <div className="lg:col-span-5 flex justify-center">
-                <div className="w-full max-w-md bg-black/[0.07] backdrop-blur-md rounded-3xl border border-black/15 p-6 sm:p-7 shadow-xl relative overflow-hidden">
-                  {/* Subtle top indicator bar */}
-                  <div className="flex items-center justify-between pb-4 mb-5 border-b border-black/15 text-black/60 text-xs font-mono">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    </div>
-                    <span>SPECIFICATION // {panel.number}</span>
-                  </div>
-
-                  {/* Panel-Specific Graphic Mockup */}
-                  {panel.id === 'one' && (
-                    <div className="space-y-4">
-                      <div className="p-4 rounded-2xl bg-black/[0.08] border border-black/15">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs text-black/70 font-mono font-medium">Lighthouse Performance</span>
-                          <span className="text-xs font-bold text-black bg-black/15 px-2 py-0.5 rounded-md">99 / 100</span>
-                        </div>
-                        <div className="w-full bg-black/15 h-2 rounded-full overflow-hidden">
-                          <div className="bg-[#111111] h-full w-[99%]" />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div className="p-3 rounded-xl bg-black/[0.06] border border-black/10 flex items-center gap-2 text-black/90 font-medium">
-                          <Code2 className="w-4 h-4 text-black" />
-                          <span>React & Vite</span>
-                        </div>
-                        <div className="p-3 rounded-xl bg-black/[0.06] border border-black/10 flex items-center gap-2 text-black/90 font-medium">
-                          <Zap className="w-4 h-4 text-black" />
-                          <span>Sub-second LCP</span>
-                        </div>
-                      </div>
-
-                      <div className="p-3.5 rounded-xl bg-[#0D0F12] border border-black/20 text-[11px] font-mono text-white/80 shadow-inner">
-                        <span className="text-blue-400">export default</span> <span className="text-yellow-400">function</span> <span className="text-emerald-400">ModernExperience</span>() &#123;
-                        <br />
-                        &nbsp;&nbsp;<span className="text-white/40">// Zero compromises. Production ready.</span>
-                        <br />
-                        &#125;
-                      </div>
-                    </div>
-                  )}
-
-                  {panel.id === 'two' && (
-                    <div className="space-y-4">
-                      <div className="p-4 rounded-2xl bg-black/[0.08] border border-black/15">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs text-black/70 font-mono font-medium">Conversion Lift</span>
-                          <span className="text-xs font-bold text-black bg-black/15 px-2 py-0.5 rounded-md">+340% Target</span>
-                        </div>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-2xl font-bold text-black">4.82%</span>
-                          <span className="text-xs text-black/75 flex items-center gap-0.5 font-medium">
-                            <TrendingUp className="w-3 h-3 text-black" /> Average Baseline: 1.1%
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2 text-xs">
-                        <div className="p-2.5 rounded-lg bg-black/[0.06] border border-black/10 flex items-center justify-between text-black/90">
-                          <span>Above-the-Fold Hook</span>
-                          <span className="text-black font-mono font-bold">Optimized</span>
-                        </div>
-                        <div className="p-2.5 rounded-lg bg-black/[0.06] border border-black/10 flex items-center justify-between text-black/90">
-                          <span>Single-Focus CTA</span>
-                          <span className="text-black font-mono font-bold">Frictionless</span>
-                        </div>
-                        <div className="p-2.5 rounded-lg bg-black/[0.06] border border-black/10 flex items-center justify-between text-black/90">
-                          <span>Mobile Viewport First</span>
-                          <span className="text-black font-mono font-bold">100% Native</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {panel.id === 'three' && (
-                    <div className="space-y-4">
-                      <div className="p-4 rounded-2xl bg-black/[0.08] border border-black/15">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs text-black/70 font-mono font-medium">Shopify Store Metrics</span>
-                          <span className="text-xs font-bold text-black bg-black/15 px-2 py-0.5 rounded-md">Scale-Ready</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-black/10 border border-black/15 flex items-center justify-center text-black">
-                            <ShoppingBag className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <div className="text-sm font-semibold text-black">Custom Cart & Checkout</div>
-                            <div className="text-xs text-black/65">Apple Pay · Shop Pay · Klarna</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div className="p-3 rounded-xl bg-black/[0.06] border border-black/10 text-center">
-                          <div className="text-black/60 text-[10px] uppercase font-mono">Checkout Speed</div>
-                          <div className="text-sm font-bold text-black mt-1">0.48s</div>
-                        </div>
-                        <div className="p-3 rounded-xl bg-black/[0.06] border border-black/10 text-center">
-                          <div className="text-black/60 text-[10px] uppercase font-mono">Drop-off Rate</div>
-                          <div className="text-sm font-bold text-black mt-1">-42%</div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {panel.id === 'four' && (
-                    <div className="space-y-4">
-                      <div className="p-4 rounded-2xl bg-black/[0.08] border border-black/15">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs text-black/70 font-mono font-medium">Autonomous Pipeline</span>
-                          <span className="text-xs font-bold text-black bg-black/15 px-2 py-0.5 rounded-md">Realtime</span>
-                        </div>
-                        <div className="space-y-2 text-xs">
-                          <div className="flex items-center gap-2 text-black/85">
-                            <span className="w-2 h-2 rounded-full bg-black" />
-                            <span>1. Inbound Lead Captured</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-black/85">
-                            <span className="w-2 h-2 rounded-full bg-black" />
-                            <span>2. AI Qualification & Routing</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-black/85">
-                            <span className="w-2 h-2 rounded-full bg-black" />
-                            <span>3. Automated CRM Sync & Alert</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="p-3 rounded-xl bg-black/[0.06] border border-black/10 flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-2 text-black/85">
-                          <Cpu className="w-4 h-4 text-black" />
-                          <span>Weekly Time Reclaimed</span>
-                        </div>
-                        <span className="font-bold text-black font-mono">18+ Hours</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-      ))}
-    </div>
+            )
+          )}
+        </div>
+      </div>
+    </section>
   );
 };
+
+export default ServicesStackedSection;

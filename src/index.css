@@ -119,19 +119,18 @@ html.lenis, html.lenis body {
   display: flex;
   align-items: center;
 
-  padding: 0 10px;
+  padding: 0 16px 0 20px;
 
   z-index: 1000;
   box-sizing: border-box;
 }
 
 .navbar-logo {
-  width: 70px;
-  height: 70px;
+  width: auto;
+  height: auto;
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .navbar-links {
@@ -207,24 +206,24 @@ html.lenis, html.lenis body {
   }
 
   .navbar-logo {
-    width: 60px;
-    height: 60px;
+    width: auto;
+    height: auto;
   }
 
   .navbar-links {
-    gap: 24px;
+    gap: 18px;
   }
 
   .navbar-links a {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .navbar-cta {
-    min-width: 155px;
+    min-width: 145px;
     width: auto;
-    padding: 0 18px;
-    height: 50px;
-    font-size: 14px;
+    padding: 0 16px;
+    height: 48px;
+    font-size: 13.5px;
   }
 }
 
@@ -252,8 +251,8 @@ html.lenis, html.lenis body {
   }
 
   .navbar-logo {
-    width: 52px;
-    height: 52px;
+    width: auto;
+    height: auto;
   }
 
   .navbar-links {

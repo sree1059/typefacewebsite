@@ -444,17 +444,26 @@ export const DashboardCards: React.FC = () => {
       mm.add('(min-width: 768px)', () => {
         gsap.set(container, { perspective: 1200 });
 
-        gsap.set(centerCard, {
-          opacity: 0,
-          y: 35,
-          scale: 0.94,
-        });
+        const rect = container.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.95) {
+          gsap.set([centerCard, leftCard, rightCard], {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+          });
+        } else {
+          gsap.set(centerCard, {
+            opacity: 0,
+            y: 35,
+            scale: 0.94,
+          });
 
-        gsap.set([leftCard, rightCard], {
-          opacity: 0,
-          y: 30,
-          scale: 0.94,
-        });
+          gsap.set([leftCard, rightCard], {
+            opacity: 0,
+            y: 30,
+            scale: 0.94,
+          });
+        }
 
         const tl = gsap.timeline({
           scrollTrigger: {

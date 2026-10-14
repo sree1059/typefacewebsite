@@ -4,6 +4,8 @@ import { BannerHero } from './components/BannerHero';
 import { DashboardCards } from './components/DashboardCards';
 import { ServicesTicker } from './components/ServicesTicker';
 import { FeaturedClientsTicker } from './components/FeaturedClientsTicker';
+import { StatsNumbersSection } from './components/StatsNumbersSection';
+import { WhyTypefaceSection } from './components/WhyTypefaceSection';
 import { HowWeWorkSection } from './components/HowWeWorkSection';
 import { ServicesStackedSection } from './components/ServicesStackedSection';
 import { FaqSection } from './components/FaqSection';
@@ -164,7 +166,13 @@ function MainAppContent() {
           {/* 4. Featured Clients (Movable small compact scroll track directly below service overview) */}
           <FeaturedClientsTicker />
 
-          {/* 5. Work Section: Work Process (5 Boxes Bento Grid) */}
+          {/* Key Metrics / Shipped Projects Strip */}
+          <StatsNumbersSection />
+
+          {/* Why Typeface Section */}
+          <WhyTypefaceSection />
+
+          {/* 5. Work Section: Work Process (5 Boxes Bento Grid Cards) */}
           <HowWeWorkSection />
 
           {/* GSAP ScrollTrigger Stacked Panels Services Section */}

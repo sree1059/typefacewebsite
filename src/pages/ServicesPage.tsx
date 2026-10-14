@@ -1,98 +1,109 @@
 import React, { useState } from 'react';
-import shortFormEditingImg from '../assets/images/short_form_editing_1790434742662.jpg';
-import { ArrowRight, Check, X, Send, Sparkles, MessageSquare, AlertCircle } from 'lucide-react';
-import { HERO_GRADIENT_STYLE } from '../utils/theme';
+import { ArrowRight, Check, Sparkles, Send, AlertCircle, MessageSquare } from 'lucide-react';
+import { useNavigation } from '../context/NavigationContext';
 
-interface ServiceItem {
+export interface ServiceItem {
+  id: string;
   number: string;
   title: string;
+  isPopular?: boolean;
+  timeline?: string;
   description: string;
   deliverables: string[];
-  image?: string;
 }
 
-const SERVICES_DATA: ServiceItem[] = [
+export const SERVICES_CATALOG: ServiceItem[] = [
   {
+    id: 'web-development',
     number: '01',
     title: 'Web Development',
+    isPopular: true,
+    timeline: '3–8 weeks',
     description:
-      'We design and build modern, responsive websites for businesses, brands, creators and professionals — from landing pages and portfolios to business, restaurant, healthcare and custom websites.',
+      'Conversion-focused websites on Next.js for local businesses and B2B SaaS. Fast, accessible, SEO-ready, and easy to edit.',
     deliverables: [
-      'UI/UX design',
-      'Responsive development',
-      'Mobile optimization',
-      'CMS integration',
-      'Forms & WhatsApp integration',
-      'SEO-ready structure',
-      'Performance optimization',
-      'Deployment & launch',
+      'Custom design (no templates)',
+      'Next.js + headless CMS',
+      'Core Web Vitals 95+',
+      'Conversion tracking & GA4',
+      'Blog / resources module',
+      'Stripe / CRM integrations',
     ],
   },
   {
+    id: 'social-media',
     number: '02',
-    title: 'Shopify Development',
+    title: 'Social Media Management',
     description:
-      'We build and customize Shopify stores for brands that want to sell online — from store setup and custom design to products, payments, integrations and launch.',
+      'Reels-first content, UGC campaigns, community management, and paid ads across Instagram, TikTok, Facebook, and LinkedIn.',
     deliverables: [
-      'Shopify store setup',
-      'Custom storefront design',
-      'Theme customization',
-      'Product & collection setup',
-      'Payment & shipping setup',
-      'Apps & integrations',
-      'Mobile optimization',
-      'SEO basics',
-      'Analytics setup',
-      'Store launch',
+      'Weekly content calendar',
+      'Short-form video production',
+      'Paid creative + ad management',
+      'UGC partnerships',
+      'Community & DM management',
+      'Monthly performance reports',
     ],
   },
   {
+    id: 'ai-chatbots',
     number: '03',
-    title: 'Short-form Video Editing',
+    title: 'AI Chatbots & Automations',
+    isPopular: true,
     description:
-      'We turn raw footage and ideas into engaging short-form videos for Instagram Reels, YouTube Shorts and other social platforms, designed to capture attention and communicate quickly.',
+      'Custom chatbots trained on your business that answer FAQs, qualify leads, book calls, and take orders — with human handoff.',
     deliverables: [
-      'Reels & Shorts',
-      'Strong hooks & pacing',
-      'Captions & subtitles',
-      'Motion graphics',
-      'Transitions & effects',
-      'Music & sound design',
-      'Color correction',
-      'Brand-focused editing',
+      'FAQ + knowledge base training',
+      'Lead qualification flows',
+      'Calendar + CRM integration',
+      'Live agent handoff',
+      'Deploy on site, IG DMs, WhatsApp',
+      'Weekly intent tuning',
     ],
   },
   {
+    id: 'seo-local-search',
     number: '04',
-    title: 'LinkedIn Personal Branding',
+    title: 'SEO & Local Search',
     description:
-      'We help founders, professionals and creators build a strong LinkedIn presence through strategic content, thoughtful writing and consistent visual communication.',
+      'Rank higher on Google and Google Maps with technical SEO, local citations, review generation, and intent-focused content.',
     deliverables: [
-      'Profile positioning',
-      'Content strategy',
-      'LinkedIn post writing',
-      'Carousels & visual content',
-      'Personal brand voice',
+      'Technical SEO audit',
+      'Google Business optimization',
+      'Review generation flow',
+      'Neighborhood / city landing pages',
       'Content calendar',
-      'Thought-leadership content',
-      'Scheduling & publishing support',
+      'Link building outreach',
     ],
   },
   {
+    id: 'paid-ads',
     number: '05',
-    title: 'Email Marketing',
+    title: 'Paid Ads',
     description:
-      'We create email campaigns that help businesses communicate with their audience, nurture leads and turn attention into action.',
+      'Meta (Facebook/Instagram), Google Search, and LinkedIn ads managed for measurable lead-gen and revenue, not vanity clicks.',
     deliverables: [
-      'Email strategy',
-      'Campaign planning',
-      'Email copywriting',
-      'Newsletter design',
-      'Promotional campaigns',
-      'Welcome sequences',
-      'Lead-nurture sequences',
-      'CTA & conversion optimization',
-      'Performance tracking',
+      'Creative strategy + testing',
+      'Pixel + conversion API setup',
+      'Audience building & lookalikes',
+      'Weekly optimization',
+      'Transparent ROAS dashboards',
+      'Landing page recommendations',
+    ],
+  },
+  {
+    id: 'branding-design',
+    number: '06',
+    title: 'Branding & Design',
+    description:
+      'Identity, logo, typography, and brand guidelines for founders who want to look as good as their product is.',
+    deliverables: [
+      'Logo + lockups',
+      'Color & type system',
+      'Brand guidelines PDF',
+      'Social templates',
+      'Pitch deck / sales materials',
+      'Figma source files',
     ],
   },
 ];
@@ -102,29 +113,27 @@ interface ServicesPageProps {
 }
 
 export const ServicesPage: React.FC<ServicesPageProps> = () => {
+  const { navigate } = useNavigation();
   const [showDiscussForm, setShowDiscussForm] = useState<boolean>(false);
   const [selectedServices, setSelectedServices] = useState<string[]>(['Web Development']);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    budget: '',
+    budget: '₹25,000 – ₹50,000',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const fontStyle: React.CSSProperties = {
-    fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    fontWeight: 300,
-  };
-
   const availableServiceOptions = [
     'Web Development',
-    'Custom Shopify Development',
-    'Landing Page Design',
-    'Social Media Services',
+    'Social Media Management',
+    'AI Chatbots & Automations',
+    'SEO & Local Search',
+    'Paid Ads',
+    'Branding & Design',
   ];
 
   const toggleServiceOption = (serviceName: string) => {
@@ -135,6 +144,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
     );
   };
 
+  const handleCardQuoteClick = (serviceTitle: string) => {
+    setSelectedServices([serviceTitle]);
+    setShowDiscussForm(true);
+    setTimeout(() => {
+      document.getElementById('discuss-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 80);
+  };
+
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmitting) return;
@@ -142,7 +159,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
     const formElement = e.currentTarget;
     const formPayload = new FormData(formElement);
 
-    // Honeypot check: if filled, abort submission silently
+    // Honeypot check
     const honey = formPayload.get('_honey');
     if (honey && typeof honey === 'string' && honey.trim().length > 0) {
       setIsSubmitted(true);
@@ -157,27 +174,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
       !formData.budget.trim() ||
       !formData.message.trim()
     ) {
-      setErrorMessage('Please fill in all mandatory fields (Name, Email, Mobile Number, Pricing/Budget, and Project Details).');
-      return;
-    }
-
-    // Blacklist filter
-    const spamTerms = [
-      'casino',
-      'crypto',
-      'bitcoin',
-      'forex',
-      'viagra',
-      'sex dating',
-      'adult dating',
-      'buy followers',
-      'loan offer',
-      'telegram @',
-      'whatsapp +',
-    ];
-    const combinedContent = `${formData.name} ${formData.message}`.toLowerCase();
-    if (spamTerms.some((term) => combinedContent.includes(term))) {
-      setErrorMessage('Your enquiry could not be submitted because it was flagged as promotional spam.');
+      setErrorMessage('Please fill in all mandatory fields.');
       return;
     }
 
@@ -192,9 +189,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          _subject: 'New Typeface Website Enquiry',
+          _subject: 'New Typeface Service Enquiry',
           _template: 'table',
-          _blacklist: 'casino, crypto, bitcoin, forex, viagra, sex dating, adult dating, loan offers, buy followers, telegram @',
           name: formData.name.trim(),
           email: formData.email.trim(),
           phone: formData.phone.trim(),
@@ -206,11 +202,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
 
       const result = await response.json();
 
-      if (response.ok && (result.success === 'true' || result.success === true || (result.message && result.message.toLowerCase().includes('activation')))) {
+      if (response.ok && (result.success === 'true' || result.success === true)) {
         setIsSubmitted(true);
         setFormData({ name: '', email: '', phone: '', budget: '₹25,000 – ₹50,000', message: '' });
       } else {
-        setErrorMessage(result.message || 'Something went wrong while submitting your enquiry. Please try again.');
+        setErrorMessage(result.message || 'Something went wrong. Please try again.');
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Network error. Please try again later.';
@@ -220,495 +216,426 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
     }
   };
 
-  const resetForm = () => {
-    setIsSubmitted(false);
-    setErrorMessage(null);
-    setFormData({ name: '', email: '', phone: '', budget: '₹25,000 – ₹50,000', message: '' });
-  };
-
   return (
     <div
-      className="w-full bg-white text-[#111111] min-h-screen py-10 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 selection:bg-black selection:text-white"
       style={{
-        background: '#ffffff',
-        ...fontStyle,
+        fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       }}
+      className="w-full bg-[#FFFFFF] text-[#0B132B] min-h-screen py-10 sm:py-16 md:py-24 px-4 sm:px-8 md:px-12 selection:bg-black selection:text-white"
     >
-      <div className="max-w-5xl mx-auto space-y-16 sm:space-y-24 md:space-y-28">
-        {/* Services Page Hero Header with Exact Hero Gradient */}
-        <div
-          className="w-full rounded-3xl sm:rounded-[40px] p-8 sm:p-12 md:p-16 border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)] text-black relative overflow-hidden select-none no-copy"
-          style={HERO_GRADIENT_STYLE}
-        >
-          <span className="text-[12px] uppercase tracking-widest font-semibold text-black/70 block mb-3 font-mono">
-            Typeface · Developer House Capabilities
-          </span>
-          <h1
+      <div className="max-w-7xl mx-auto space-y-16 sm:space-y-24 md:space-y-28">
+        
+        {/* =========================================================
+            1. HERO SECTION (Exact style matching user reference image)
+            - Technical subtle blueprint grid background
+            - Services centered pill badge
+            - Hero section color palette & gradient on "under one roof."
+            - Manrope font typography
+            ========================================================= */}
+        <div className="relative w-full rounded-3xl sm:rounded-[44px] py-16 sm:py-20 md:py-24 px-6 sm:px-12 md:px-16 text-center overflow-hidden border border-black/[0.08] bg-[#FAFCFF] shadow-[0_12px_40px_rgba(0,0,0,0.03)] select-none">
+          {/* Subtle blueprint grid pattern */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-45"
             style={{
-              fontFamily: "'Manrope', sans-serif",
-              fontWeight: 400,
-              color: '#000000',
+              backgroundImage: `
+                linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px)
+              `,
+              backgroundSize: '44px 44px',
             }}
-            className="text-[34px] xs:text-[44px] sm:text-[54px] md:text-[62px] text-black tracking-tight leading-[1.08] mb-4"
-          >
-            Websites, web applications, and digital experiences<span className="text-[#E0343F]">.</span>
-          </h1>
-          <p className="text-[17px] sm:text-[21px] text-black/85 leading-relaxed max-w-3xl font-light">
-            We build high-performance websites and digital experiences for ambitious businesses — combining technical rigor, distinctive design, and commercial outcomes.
-          </p>
+          />
+
+          {/* Ambient radial glow subtle highlights inspired by hero palette */}
+          <div
+            className="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full pointer-events-none blur-3xl opacity-30"
+            style={{
+              background: 'radial-gradient(circle, #79D0E8 0%, #69F9B0 50%, transparent 80%)',
+            }}
+          />
+
+          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-mono font-medium text-[#155EEF] bg-[#EFF6FF] border border-[#BFDBFE] mb-6 shadow-xs">
+              Services
+            </div>
+
+            {/* Title with Hero Palette Gradient */}
+            <h1 className="text-[36px] xs:text-[46px] sm:text-[56px] md:text-[68px] lg:text-[76px] font-bold text-[#0B132B] tracking-tight leading-[1.08] mb-6">
+              Everything you need to grow,<br />
+              <span className="bg-gradient-to-r from-[#155EEF] via-[#06B6D4] to-[#10B981] bg-clip-text text-transparent">
+                under one roof
+              </span>
+              <span className="text-[#E0343F]">.</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg md:text-xl text-[#475569] font-light leading-relaxed max-w-2xl mx-auto">
+              Pick one service or let us build an integrated plan across web, social, ads, and AI. Every engagement has clear deliverables, transparent pricing, and one accountable strategist.
+            </p>
+          </div>
         </div>
 
-        {SERVICES_DATA.map((service) => (
-          <article key={service.number} className="space-y-6 sm:space-y-8 no-copy">
-            {/* Heading: 44px, Manrope, font weight 300, dark color */}
-            <h2
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 300,
-                color: '#111111',
-              }}
-              className="text-[28px] xs:text-[34px] sm:text-[40px] md:text-[44px] text-[#111111] tracking-tight leading-[1.2]"
-            >
-              {service.number} — {service.title}
-            </h2>
+        {/* =========================================================
+            2. SERVICES 6-CARD GRID (Manrope font & Hero Palette accents)
+            ========================================================= */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {SERVICES_CATALOG.map((service) =>
+            service.isPopular ? (
+              /* Most Popular Card with Radiant Hero Section Gradient Outline */
+              <div
+                key={service.id}
+                className="p-[2.5px] rounded-[24px] sm:rounded-[32px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_14px_40px_rgba(105,249,176,0.22)] hover:shadow-[0_20px_50px_rgba(85,220,255,0.32)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col group"
+              >
+                <div className="w-full h-full bg-white rounded-[22px] sm:rounded-[30px] p-6 sm:p-8 flex flex-col justify-between">
+                  <div>
+                    {/* Header: Most Popular Badge & Timeline */}
+                    <div className="flex items-center justify-between gap-2 mb-4 min-h-[26px]">
+                      <span
+                        style={{
+                          background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                          color: '#000000',
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10.5px] font-mono tracking-wider uppercase font-bold shadow-xs"
+                      >
+                        <Sparkles className="w-3 h-3 text-black fill-black" />
+                        Most popular
+                      </span>
 
-            {/* Visual preview image for Short-form Video Editing */}
-            {service.number === '03' && (
-              <div className="w-full my-4 sm:my-6 rounded-2xl overflow-hidden border border-black/10 shadow-[0_14px_36px_-6px_rgba(0,0,0,0.12)] bg-[#111111]">
-                <img
-                  src={shortFormEditingImg || "/short-form-editing.jpg"}
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    if (target.src !== `${window.location.origin}/short-form-editing.jpg`) {
-                      target.src = '/short-form-editing.jpg';
-                    }
-                  }}
-                  alt="Short-form video editing timeline with audio waveforms, cuts, transitions and sound effect annotations"
-                  className="w-full h-auto object-cover max-h-[520px] rounded-2xl transition-transform duration-300 hover:scale-[1.01]"
-                  loading="eager"
-                  referrerPolicy="no-referrer"
-                />
+                      {service.timeline && (
+                        <span className="px-2.5 py-0.5 rounded-full bg-black/5 border border-black/10 text-black/75 text-[11px] font-mono font-medium">
+                          {service.timeline}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Service Title */}
+                    <h2 className="text-2xl sm:text-[26px] font-semibold text-[#0B132B] tracking-tight leading-snug mb-3">
+                      {service.title}
+                    </h2>
+
+                    {/* Description */}
+                    <p className="text-xs sm:text-sm text-black/70 font-light leading-relaxed mb-6 min-h-[44px]">
+                      {service.description}
+                    </p>
+
+                    {/* Deliverables / Features List */}
+                    <div className="pt-4 border-t border-black/10 space-y-2.5">
+                      {service.deliverables.map((feat, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-2.5 text-xs sm:text-[13px] text-black/85 font-normal leading-relaxed"
+                        >
+                          <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Most Popular Action Button with Hero Gradient */}
+                  <div className="pt-8 mt-auto">
+                    <button
+                      onClick={() => handleCardQuoteClick(service.title)}
+                      style={{
+                        background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                        color: '#000000',
+                        fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                        fontWeight: 600,
+                      }}
+                      className="w-full py-3.5 px-6 rounded-full text-xs sm:text-sm tracking-normal transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.98]"
+                    >
+                      <span>Get a custom quote</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                    </button>
+                  </div>
+                </div>
               </div>
-            )}
-
-            {/* Description: 20px, Manrope, font weight 300 */}
-            <p
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 300,
-              }}
-              className="text-[17px] sm:text-[20px] text-[#111111] leading-[1.6] max-w-4xl"
-            >
-              {service.description}
-            </p>
-
-            {/* Deliverables Subhead & List: 20px, Manrope, font weight 300 */}
-            <div className="pt-2 sm:pt-4 space-y-3 sm:space-y-4">
-              <h3
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontWeight: 300,
-                  color: '#111111',
-                }}
-                className="text-[17px] sm:text-[20px] text-[#111111] leading-[1.6]"
+            ) : (
+              /* Standard Service Card */
+              <div
+                key={service.id}
+                className="bg-[#F9FAFB] border border-black/10 hover:border-black/25 hover:shadow-md hover:-translate-y-1 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative group"
               >
-                We deliver:
-              </h3>
+                <div>
+                  {/* Header: Spacer & Timeline */}
+                  <div className="flex items-center justify-between gap-2 mb-4 min-h-[26px]">
+                    <span />
+                    {service.timeline && (
+                      <span className="px-2.5 py-0.5 rounded-full bg-black/5 border border-black/10 text-black/75 text-[11px] font-mono font-medium">
+                        {service.timeline}
+                      </span>
+                    )}
+                  </div>
 
-              <ul className="space-y-1.5 sm:space-y-2">
-                {service.deliverables.map((item, idx) => (
-                  <li
-                    key={idx}
-                    style={{
-                      fontFamily: "'Manrope', sans-serif",
-                      fontWeight: 300,
-                    }}
-                    className="text-[17px] sm:text-[20px] text-[#111111] leading-[1.6] flex items-start gap-2.5 sm:gap-3"
+                  {/* Service Title */}
+                  <h2 className="text-2xl sm:text-[26px] font-semibold text-[#0B132B] tracking-tight leading-snug mb-3">
+                    {service.title}
+                  </h2>
+
+                  {/* Description */}
+                  <p className="text-xs sm:text-sm text-black/70 font-light leading-relaxed mb-6 min-h-[44px]">
+                    {service.description}
+                  </p>
+
+                  {/* Deliverables / Features List */}
+                  <div className="pt-4 border-t border-black/10 space-y-2.5">
+                    {service.deliverables.map((feat, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-start gap-2.5 text-xs sm:text-[13px] text-black/85 font-normal leading-relaxed"
+                      >
+                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Standard Action Button */}
+                <div className="pt-8 mt-auto">
+                  <button
+                    onClick={() => handleCardQuoteClick(service.title)}
+                    className="w-full py-3 sm:py-3.5 px-6 rounded-full text-xs sm:text-sm font-medium tracking-normal transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] bg-white hover:bg-black hover:text-white text-black border border-black/20 shadow-xs"
                   >
-                    <span className="select-none text-[#111111] leading-[1.6] shrink-0">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </article>
-        ))}
+                    <span>Get a custom quote</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </button>
+                </div>
+              </div>
+            )
+          )}
+        </div>
 
-        {/* Small Box to Discuss with our Team & Customized Glass Morph Form */}
-        <section className="pt-10 sm:pt-14 pb-8">
+        {/* =========================================================
+            3. DISCUSS WITH OUR TEAM / CUSTOM QUOTE FORM
+            ========================================================= */}
+        <section id="discuss-section" className="pt-6 sm:pt-10 pb-8">
           {!showDiscussForm ? (
-            /* Small Callout Box */
-            <div
-              className="w-full max-w-2xl mx-auto rounded-3xl p-8 sm:p-12 text-center bg-[#F9FAFB] border border-black/10 shadow-[0_16px_40px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)]"
-              style={fontStyle}
-            >
-              <h3
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontWeight: 300,
-                  color: '#111111',
-                }}
-                className="text-[26px] xs:text-[30px] sm:text-[36px] text-[#111111] tracking-tight leading-[1.2] mb-3"
-              >
-                Discuss with our team
-              </h3>
+            /* Discuss With Our Team Card with Radiant Hero Section Gradient Outline */
+            <div className="w-full max-w-2xl mx-auto p-[2.5px] rounded-[28px] sm:rounded-[36px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_16px_45px_rgba(105,249,176,0.25)] hover:shadow-[0_20px_60px_rgba(85,220,255,0.35)] transition-all duration-300">
+              <div className="w-full h-full rounded-[26px] sm:rounded-[34px] p-8 sm:p-12 text-center bg-white">
+                <h3 className="text-[26px] xs:text-[30px] sm:text-[36px] text-[#0B132B] tracking-tight leading-[1.2] mb-3 font-semibold">
+                  Discuss with our team<span className="text-[#E0343F]">.</span>
+                </h3>
 
-              <p
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontWeight: 300,
-                }}
-                className="text-[16px] sm:text-[19px] text-[#4B5563] leading-[1.6] max-w-lg mx-auto mb-8"
-              >
-                Ready to bring your project to life? Let's talk through your ideas, goals, and timeline directly with our team.
-              </p>
+                <p className="text-[15px] sm:text-[17px] text-black/75 leading-relaxed max-w-lg mx-auto font-light mb-8">
+                  Ready to take your online presence forward? Tell us about your goals and we'll reply within 24 hours.
+                </p>
 
-              <button
-                type="button"
-                onClick={() => setShowDiscussForm(true)}
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontWeight: 300,
-                }}
-                className="inline-flex items-center gap-3 px-8 py-3.5 sm:py-4 rounded-full bg-[#111111] hover:bg-black text-white shadow-[0_6px_20px_rgba(0,0,0,0.12)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-[16px] sm:text-[18px]"
-              >
-                <span>Discuss with our team</span>
-                <ArrowRight className="w-4 h-4 text-white transition-transform duration-200 group-hover:translate-x-1" />
-              </button>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  {/* Action button with Hero Section Gradient */}
+                  <button
+                    type="button"
+                    onClick={() => setShowDiscussForm(true)}
+                    style={{
+                      background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                      color: '#000000',
+                      fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                      fontWeight: 600,
+                    }}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full text-sm sm:text-base font-semibold shadow-sm hover:shadow-md hover:brightness-105 transition-all duration-200 cursor-pointer active:scale-[0.98] group"
+                  >
+                    <span>Start a Conversation</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigate('contact');
+                      window.history.pushState({}, '', '/contact');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-black border border-black/20 text-sm sm:text-base font-medium shadow-xs hover:bg-black/5 transition-all duration-200 cursor-pointer"
+                  >
+                    <span>Visit Contact Page</span>
+                  </button>
+                </div>
+              </div>
             </div>
           ) : (
-            /* Customized Form */
-            <div
-              className="w-full max-w-2xl mx-auto rounded-3xl p-6 sm:p-10 sm:px-12 bg-white border border-black/10 shadow-[0_24px_60px_rgba(0,0,0,0.08)] transition-all duration-300 relative"
-              style={fontStyle}
-            >
-              {/* Close Button */}
-              <button
-                type="button"
-                onClick={() => setShowDiscussForm(false)}
-                className="absolute top-5 right-5 sm:top-6 sm:right-6 w-9 h-9 rounded-full bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#111111] flex items-center justify-center transition-colors cursor-pointer"
-                aria-label="Close form"
-              >
-                <X className="w-5 h-5" />
-              </button>
+            <div className="w-full max-w-3xl mx-auto p-[2.5px] rounded-[28px] sm:rounded-[36px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_20px_60px_rgba(85,220,255,0.25)] transition-all duration-300">
+              <div className="w-full h-full rounded-[26px] sm:rounded-[34px] p-8 sm:p-12 bg-white">
+              <div className="text-center max-w-xl mx-auto mb-10">
+                <span className="text-xs uppercase tracking-widest font-semibold text-[#155EEF] block mb-2 font-mono">
+                  Get a Custom Quote
+                </span>
+                <h3 className="text-3xl sm:text-4xl font-semibold text-[#0B132B] tracking-tight">
+                  Tell us about your project<span className="text-[#E0343F]">.</span>
+                </h3>
+                <p className="text-sm sm:text-base text-black/70 font-light mt-2">
+                  Select your desired services and share brief details. We'll review and get back within 24 hours.
+                </p>
+              </div>
 
-              {!isSubmitted ? (
-                <form
-                  action="https://formsubmit.co/infotypeface1411@gmail.com"
-                  method="POST"
-                  onSubmit={handleFormSubmit}
-                  className="space-y-6 sm:space-y-7"
-                >
-                  {/* FormSubmit Configuration Options */}
-                  <input type="hidden" name="_subject" value="New Typeface Website Enquiry" />
-                  <input type="hidden" name="_template" value="table" />
-                  <input
-                    type="hidden"
-                    name="_blacklist"
-                    value="casino, crypto, bitcoin, forex, viagra, sex dating, adult dating, loan offers, buy followers, telegram @"
-                  />
-
-                  {/* Spam Protection Honeypot Field */}
-                  <input
-                    type="text"
-                    name="_honey"
-                    style={{ display: "none" }}
-                    tabIndex={-1}
-                    autoComplete="off"
-                  />
-
-                  <div className="text-left pr-8">
-                    <h3
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                        color: '#111111',
-                      }}
-                      className="text-[26px] xs:text-[30px] sm:text-[36px] text-[#111111] tracking-tight leading-[1.2] mb-2"
-                    >
-                      Discuss with our team
-                    </h3>
-                    <p
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="text-[15px] sm:text-[18px] text-[#6B7280] leading-[1.5]"
-                    >
-                      Share your details and project goals. We will reply within 24 hours.
-                    </p>
+              {isSubmitted ? (
+                <div className="text-center py-12 space-y-4">
+                  <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                    <Check className="w-7 h-7" />
                   </div>
+                  <h4 className="text-2xl font-semibold text-black">Thank you!</h4>
+                  <p className="text-sm sm:text-base text-black/70 max-w-md mx-auto">
+                    We've received your request and will reach out with a personalized quote shortly.
+                  </p>
+                  <button
+                    onClick={() => setIsSubmitted(false)}
+                    className="mt-4 px-6 py-2.5 rounded-full bg-black text-white text-sm font-medium"
+                  >
+                    Send another inquiry
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-6">
+                  <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
 
-                  {/* Submission Error Alert */}
-                  {errorMessage && (
-                    <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-900 text-xs sm:text-sm flex items-center gap-2.5">
-                      <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
-                      <span>{errorMessage}</span>
-                    </div>
-                  )}
-
-                  {/* Name field */}
-                  <div className="space-y-1.5 text-left">
-                    <label
-                      htmlFor="discuss-name"
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="block text-[14px] sm:text-[16px] text-[#111111]"
-                    >
-                      Your Name *
+                  {/* Service selector pills */}
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-black/60 mb-2.5">
+                      Select Services:
                     </label>
-                    <input
-                      id="discuss-name"
-                      type="text"
-                      required
-                      placeholder="e.g. Alex Morgan"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
-                    />
-                  </div>
-
-                  {/* Email & Phone Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 text-left">
-                    <div className="space-y-1.5">
-                      <label
-                        htmlFor="discuss-email"
-                        style={{
-                          fontFamily: "'Manrope', sans-serif",
-                          fontWeight: 300,
-                        }}
-                        className="block text-[14px] sm:text-[16px] text-[#111111]"
-                      >
-                        Email Address *
-                      </label>
-                      <input
-                        id="discuss-email"
-                        type="email"
-                        required
-                        placeholder="alex@company.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        style={{
-                          fontFamily: "'Manrope', sans-serif",
-                          fontWeight: 300,
-                        }}
-                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label
-                        htmlFor="discuss-phone"
-                        style={{
-                          fontFamily: "'Manrope', sans-serif",
-                          fontWeight: 300,
-                        }}
-                        className="block text-[14px] sm:text-[16px] text-[#111111]"
-                      >
-                        Mobile Number *
-                      </label>
-                      <input
-                        id="discuss-phone"
-                        type="tel"
-                        required
-                        placeholder="+91 98765 43210"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        style={{
-                          fontFamily: "'Manrope', sans-serif",
-                          fontWeight: 300,
-                        }}
-                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Estimated Budget / Pricing (Mandatory Text Input) */}
-                  <div className="space-y-1.5 text-left">
-                    <label
-                      htmlFor="discuss-budget"
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="block text-[14px] sm:text-[16px] text-[#111111]"
-                    >
-                      Estimated Budget / Pricing *
-                    </label>
-                    <input
-                      id="discuss-budget"
-                      name="budget"
-                      type="text"
-                      required
-                      placeholder="e.g. ₹75,000 or $1,500 / your budget"
-                      value={formData.budget}
-                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 text-[15px] sm:text-[17px]"
-                    />
-                  </div>
-
-                  {/* Services Selection Pills */}
-                  <div className="space-y-2 text-left">
-                    <label
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="block text-[14px] sm:text-[16px] text-[#111111]"
-                    >
-                      Services of Interest
-                    </label>
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {availableServiceOptions.map((option) => {
-                        const isSelected = selectedServices.includes(option);
+                    <div className="flex flex-wrap gap-2">
+                      {availableServiceOptions.map((opt) => {
+                        const isSelected = selectedServices.includes(opt);
                         return (
                           <button
-                            key={option}
                             type="button"
-                            onClick={() => toggleServiceOption(option)}
-                            style={{
-                              fontFamily: "'Manrope', sans-serif",
-                              fontWeight: 300,
-                            }}
-                            className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-[13px] sm:text-[15px] transition-all duration-200 cursor-pointer border ${
+                            key={opt}
+                            onClick={() => toggleServiceOption(opt)}
+                            className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
                               isSelected
-                                ? 'bg-[#111111] text-white border-[#111111] shadow-xs'
-                                : 'bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#111111] border-black/5'
+                                ? 'bg-black text-white'
+                                : 'bg-black/5 hover:bg-black/10 text-black/80'
                             }`}
                           >
-                            {option}
+                            {isSelected ? '✓ ' : '+ '}
+                            {opt}
                           </button>
                         );
                       })}
                     </div>
                   </div>
 
-                  {/* Message field */}
-                  <div className="space-y-1.5 text-left">
-                    <label
-                      htmlFor="discuss-message"
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="block text-[14px] sm:text-[16px] text-[#111111]"
-                    >
-                      Project Details / Message *
+                  {/* Form fields */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-mono uppercase tracking-wider text-black/60 mb-1">
+                        Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Your full name"
+                        className="w-full px-4 py-2.5 rounded-xl border border-black/15 focus:outline-none focus:border-black text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-mono uppercase tracking-wider text-black/60 mb-1">
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="you@company.com"
+                        className="w-full px-4 py-2.5 rounded-xl border border-black/15 focus:outline-none focus:border-black text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-mono uppercase tracking-wider text-black/60 mb-1">
+                        Phone / WhatsApp *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="+91 98765 43210"
+                        className="w-full px-4 py-2.5 rounded-xl border border-black/15 focus:outline-none focus:border-black text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-mono uppercase tracking-wider text-black/60 mb-1">
+                        Expected Budget *
+                      </label>
+                      <select
+                        value={formData.budget}
+                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl border border-black/15 focus:outline-none focus:border-black text-sm bg-white"
+                      >
+                        <option value="₹25,000 – ₹50,000">₹25,000 – ₹50,000</option>
+                        <option value="₹50,000 – ₹1,00,000">₹50,000 – ₹1,00,000</option>
+                        <option value="₹1,00,000 – ₹2,50,000">₹1,00,000 – ₹2,50,000</option>
+                        <option value="₹2,50,000+">₹2,50,000+</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-black/60 mb-1">
+                      Project Details *
                     </label>
                     <textarea
-                      id="discuss-message"
-                      rows={4}
                       required
-                      placeholder="Tell us about your brand, what you need built, and your expected timeline..."
+                      rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#F9FAFB] hover:bg-white focus:bg-white border border-black/15 focus:border-black text-[#111111] placeholder:text-black/35 outline-none transition-all duration-200 resize-none text-[15px] sm:text-[17px]"
+                      placeholder="Briefly describe what you're looking to build or achieve..."
+                      className="w-full px-4 py-2.5 rounded-xl border border-black/15 focus:outline-none focus:border-black text-sm resize-none"
                     />
                   </div>
 
-                  {/* Submit Button */}
-                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  {errorMessage && (
+                    <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-between pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowDiscussForm(false)}
+                      className="text-xs text-black/60 hover:text-black underline font-mono"
+                    >
+                      Cancel
+                    </button>
                     <button
                       type="submit"
                       disabled={isSubmitting}
                       style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
+                        background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                        color: '#000000',
+                        fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                        fontWeight: 600,
                       }}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-[#111111] hover:bg-black text-white shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-all duration-200 cursor-pointer text-[16px] sm:text-[18px] disabled:opacity-50"
+                      className="px-8 py-3 rounded-full text-sm font-semibold tracking-normal shadow-sm hover:shadow-md hover:brightness-105 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
                     >
                       {isSubmitting ? (
-                        <span>Sending message...</span>
+                        <span>Sending...</span>
                       ) : (
                         <>
-                          <span>Submit Inquiry</span>
-                          <Send className="w-4 h-4 text-white" />
+                          <span>Submit Request</span>
+                          <Send className="w-3.5 h-3.5" />
                         </>
                       )}
                     </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setShowDiscussForm(false)}
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="text-[14px] sm:text-[15px] text-[#111111]/70 hover:text-black transition-colors cursor-pointer"
-                    >
-                      Cancel
-                    </button>
                   </div>
                 </form>
-              ) : (
-                /* Success Message */
-                <div className="py-8 sm:py-12 text-center space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-800 flex items-center justify-center mx-auto shadow-sm border border-emerald-200">
-                    <Check className="w-7 h-7" />
-                  </div>
-                  <h4
-                    style={{
-                      fontFamily: "'Manrope', sans-serif",
-                      fontWeight: 300,
-                      color: '#111111',
-                    }}
-                    className="text-[24px] sm:text-[30px] text-[#111111] tracking-tight"
-                  >
-                    Inquiry Received
-                  </h4>
-                  <p
-                    style={{
-                      fontFamily: "'Manrope', sans-serif",
-                      fontWeight: 300,
-                    }}
-                    className="text-[16px] sm:text-[18px] text-[#4B5563] leading-relaxed max-w-md mx-auto"
-                  >
-                    Thank you, {formData.name || 'there'}! Our team has received your inquiry and will reach out to you within 24 hours.
-                  </p>
-                  <div className="pt-4 flex items-center justify-center gap-4">
-                    <button
-                      type="button"
-                      onClick={resetForm}
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="px-6 py-2.5 rounded-full bg-[#111111] hover:bg-black text-white transition-all cursor-pointer text-[14px] sm:text-[16px]"
-                    >
-                      Send another message
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setShowDiscussForm(false)}
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontWeight: 300,
-                      }}
-                      className="px-6 py-2.5 rounded-full bg-black/10 hover:bg-black/15 text-[#111111] transition-all cursor-pointer text-[14px] sm:text-[16px]"
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
               )}
+              </div>
             </div>
           )}
         </section>
+
       </div>
     </div>
   );
 };
+
+export default ServicesPage;

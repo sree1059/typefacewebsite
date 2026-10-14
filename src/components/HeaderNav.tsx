@@ -74,15 +74,15 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
         <div className="navbar-logo">
           <button
             onClick={() => handleNavClick('home')}
-            className="group flex items-center justify-center focus:outline-none w-full h-full cursor-pointer"
+            className="group flex items-center gap-2.5 sm:gap-3 md:gap-3.5 focus:outline-none cursor-pointer select-none"
             aria-label="Typeface Home"
           >
-            <div className="w-[52px] h-[52px] md:w-[60px] md:h-[60px] lg:w-[70px] lg:h-[70px] rounded-full bg-[#111111] flex items-center justify-center transition-transform duration-200 group-hover:scale-105 active:scale-95 shadow-sm">
+            <div className="w-[42px] h-[42px] sm:w-[46px] sm:h-[46px] md:w-[50px] md:h-[50px] lg:w-[54px] lg:h-[54px] rounded-full bg-[#111111] flex items-center justify-center transition-transform duration-200 group-hover:scale-105 active:scale-95 shadow-sm shrink-0">
               <svg
                 viewBox="0 0 520 420"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white transition-transform duration-300 group-hover:scale-110"
+                className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-5.5 lg:h-5.5 text-white transition-transform duration-300 group-hover:scale-110"
               >
                 {/* Top horizontal bar of T */}
                 <rect x="0" y="0" width="360" height="130" fill="currentColor" />
@@ -92,6 +92,12 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
                 <circle cx="445" cy="345" r="65" fill="currentColor" />
               </svg>
             </div>
+            <span
+              className="font-peace-sans text-[20px] sm:text-[22px] md:text-[24px] lg:text-[26px] font-normal text-[#111111] tracking-tight transition-colors duration-150 group-hover:text-black whitespace-nowrap shrink-0"
+              style={{ fontFamily: "'Peace Sans', sans-serif", letterSpacing: '-0.06em', lineHeight: 1 }}
+            >
+              Typeface
+            </span>
           </button>
         </div>
 

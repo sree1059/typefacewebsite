@@ -25,9 +25,9 @@ export const BannerHero: React.FC<BannerHeroProps> = ({
 
   return (
     <div className="relative w-full text-center px-4 pt-[130px] xs:pt-[140px] sm:pt-36 md:pt-40 lg:pt-44 xl:pt-46 pb-4 sm:pb-6 max-w-5xl mx-auto">
-      {/* 1. Hero Eyebrow Badge: Developer House · Built With Conviction. */}
-      <div className="inline-flex items-center px-3.5 sm:px-4 py-1.5 rounded-full border border-black/15 bg-black/[0.04] text-[10.5px] sm:text-xs font-semibold tracking-wider text-black mb-3 sm:mb-4 select-none no-copy shadow-xs">
-        <span className="text-black">Developer House<span className="text-[#E0343F]"> · </span>Built With Conviction<span className="text-[#E0343F]">.</span></span>
+      {/* 1. Hero Eyebrow Badge: Developer House */}
+      <div className="inline-flex items-center px-3.5 sm:px-4 py-1.5 rounded-full border border-black/10 bg-white text-[10.5px] sm:text-xs font-semibold tracking-wider text-black mb-3 sm:mb-4 select-none no-copy shadow-xs">
+        <span className="text-black">Developer House</span>
       </div>
 
       {/* 2. Editorial Headline */}
@@ -42,41 +42,34 @@ export const BannerHero: React.FC<BannerHeroProps> = ({
         }}
         className="text-black max-w-4xl mx-auto transition-colors duration-200 select-none no-copy"
       >
-        {/* Line 1: You don't need just a page online. */}
+        {/* Line 1: Turn website */}
         <div className="flex items-center justify-center flex-wrap gap-y-1.5 my-1">
-          <span className="text-black mr-[0.24em]">You don't need just a page</span>
-          <span className="inline-flex items-center px-2.5 sm:px-3.5 py-0.5 rounded-xl sm:rounded-2xl bg-black text-white font-medium shadow-xs transition-transform duration-150 hover:scale-105">
-            online
-          </span>
-          <span className="text-[#E0343F] ml-[0.06em] font-medium">.</span>
-        </div>
-
-        {/* Line 2: You need a website that sells for your business. */}
-        <div className="flex items-center justify-center flex-wrap gap-y-1.5 my-1 sm:mt-2">
-          <span className="text-black mr-[0.24em]">You need a</span>
+          <span className="text-black mr-[0.24em]">Turn</span>
           <span className="inline-flex items-center px-2.5 sm:px-3.5 py-0.5 rounded-xl sm:rounded-2xl bg-black text-white font-medium shadow-xs transition-transform duration-150 hover:scale-105">
             website
           </span>
-          <span className="text-black ml-[0.24em]">that sells for your business</span>
+        </div>
+
+        {/* Line 2: visitors into customers. */}
+        <div className="flex items-center justify-center flex-wrap gap-y-1.5 my-1 sm:mt-2">
+          <span className="text-black mr-[0.24em]">visitors into</span>
+          <span className="inline-flex items-center px-2.5 sm:px-3.5 py-0.5 rounded-xl sm:rounded-2xl bg-black text-white font-medium shadow-xs transition-transform duration-150 hover:scale-105">
+            customers
+          </span>
           <span className="text-[#E0343F] ml-[0.06em] font-medium">.</span>
         </div>
       </h1>
 
-      {/* 3. Subheading: Suggested positioning */}
+      {/* 3. Subheading */}
       <p
         style={{
           fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           fontWeight: 400,
           color: '#000000',
         }}
-        className="mt-4 sm:mt-5 md:mt-6 text-black text-sm sm:text-base md:text-[18px] max-w-2xl mx-auto leading-relaxed tracking-normal px-2 sm:px-4 no-copy flex items-center justify-center flex-wrap gap-y-1"
+        className="mt-4 sm:mt-5 md:mt-6 text-black text-sm sm:text-base md:text-[17px] max-w-2xl sm:max-w-3xl mx-auto leading-relaxed tracking-normal px-2 sm:px-4 no-copy text-center"
       >
-        <span className="text-black">We build high-performance websites and&nbsp;</span>
-        <span className="inline-flex items-center px-2.5 sm:px-3 py-0.5 rounded-lg sm:rounded-xl bg-black text-white font-medium text-xs sm:text-sm md:text-base shadow-xs transition-transform duration-150 hover:scale-105">
-          digital experiences
-        </span>
-        <span className="text-black">&nbsp;for ambitious businesses</span>
-        <span className="text-[#E0343F] font-medium">.</span>
+        We build conversion-focused websites, run social engines, and ship automations for local businesses and growing B2B SaaS — so every click turns into revenue, not a bounce.
       </p>
 
       {/* 4. Action Buttons */}
