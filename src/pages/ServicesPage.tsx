@@ -281,12 +281,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {SERVICES_CATALOG.map((service) =>
             service.isPopular ? (
-              /* Most Popular Card with Radiant Hero Section Gradient Outline */
+              /* Most Popular Card with Radiant Thin Hero Section Gradient Outline */
               <div
                 key={service.id}
-                className="p-[2.5px] rounded-[24px] sm:rounded-[32px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_14px_40px_rgba(105,249,176,0.22)] hover:shadow-[0_20px_50px_rgba(85,220,255,0.32)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col group"
+                className="p-[1px] rounded-[24px] sm:rounded-[32px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_12px_36px_rgba(105,249,176,0.18)] hover:shadow-[0_18px_45px_rgba(85,220,255,0.26)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col group"
               >
-                <div className="w-full h-full bg-white rounded-[22px] sm:rounded-[30px] p-6 sm:p-8 flex flex-col justify-between">
+                <div className="w-full h-full bg-white rounded-[23px] sm:rounded-[31px] p-6 sm:p-8 flex flex-col justify-between">
                   <div>
                     {/* Header: Most Popular Badge & Timeline */}
                     <div className="flex items-center justify-between gap-2 mb-4 min-h-[26px]">

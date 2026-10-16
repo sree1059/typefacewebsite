@@ -37,16 +37,18 @@ export const FinalCtaSection: React.FC = () => {
 
         {/* Action Controls */}
         <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap pt-2">
-          {/* Primary Action: Book Call */}
+          {/* Primary Action: Book Call with Hero Section Gradient */}
           <button
             onClick={() => openCalendlyPopup()}
             style={{
+              background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+              color: '#000000',
               fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-              fontWeight: 400,
+              fontWeight: 600,
             }}
-            className="group px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-black hover:bg-neutral-800 text-white text-sm sm:text-base font-medium transition-all duration-200 shadow-[0_4px_16px_rgba(0,0,0,0.18)] active:scale-95 cursor-pointer inline-flex items-center gap-2.5 whitespace-nowrap"
+            className="group px-7 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold transition-all duration-200 shadow-[0_4px_20px_rgba(85,220,255,0.3)] hover:shadow-[0_6px_24px_rgba(105,249,176,0.4)] hover:brightness-105 active:scale-95 cursor-pointer inline-flex items-center gap-2.5 whitespace-nowrap"
           >
-            <Calendar className="w-4 h-4 text-white/90" />
+            <Calendar className="w-4 h-4 text-black" />
             <span>Book a Consultation</span>
           </button>
 
