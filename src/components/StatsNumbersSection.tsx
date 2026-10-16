@@ -90,18 +90,27 @@ export const StatsNumbersSection: React.FC = () => {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Heading above numbers */}
+        {/* Heading above numbers with Hero Section Gradient */}
         <div className="mb-8 sm:mb-10 md:mb-12">
           <h3
             style={{
               fontFamily:
                 "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-              fontWeight: 300,
               letterSpacing: '-0.02em',
             }}
-            className="text-xl sm:text-2xl md:text-[28px] text-[#0A1128] leading-snug"
+            className="text-xl sm:text-2xl md:text-[28px] leading-snug"
           >
-            Trusted by 12+ local &amp; B2B brands
+            <span
+              style={{
+                background:
+                  'linear-gradient(110deg, #155EEF 0%, #06B6D4 40%, #10B981 75%, #D97706 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+              className="font-medium inline-block"
+            >
+              Trusted by 12+ local &amp; B2B brands
+            </span>
           </h3>
         </div>
 
