@@ -23,7 +23,6 @@ import { ThankYouPage } from './pages/ThankYouPage';
 import { WorkingWithUsPage } from './pages/WorkingWithUsPage';
 import { ResultsStatement } from './components/ResultsStatement';
 import { MinimalFooter } from './components/MinimalFooter';
-import { OversizedMarqueeSection } from './components/OversizedMarqueeSection';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
 import { HERO_GRADIENT_STYLE } from './utils/theme';
@@ -244,11 +243,6 @@ function MainAppContent() {
       {/* "No spam. Just results." banner above footer on about page */}
       {currentPage === 'about' && (
         <ResultsStatement />
-      )}
-
-      {/* Premium Oversized Continuously Animated Typography Section */}
-      {!isLegalPage && (
-        <OversizedMarqueeSection />
       )}
 
       {/* Minimalist Brand Footer */}
