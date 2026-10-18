@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Check, Sparkles, Send, AlertCircle, MessageSquare } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
+import Hero from '../components/Hero';
 
 export interface ServiceItem {
   id: string;
@@ -221,16 +222,15 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
       style={{
         fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       }}
-      className="w-full bg-[#FFFFFF] text-[#0B132B] min-h-screen py-10 sm:py-16 md:py-24 px-4 sm:px-8 md:px-12 selection:bg-black selection:text-white"
+      className="w-full bg-[#FFFFFF] text-[#0B132B] min-h-screen py-6 sm:py-10 md:py-14 px-4 sm:px-8 md:px-12 selection:bg-black selection:text-white"
     >
       <div className="max-w-7xl mx-auto space-y-16 sm:space-y-24 md:space-y-28">
         
+        {/* Growth Systems Hero Section with TextReveal Animation */}
+        <Hero />
+
         {/* =========================================================
-            1. HERO SECTION (Exact style matching user reference image)
-            - Technical subtle blueprint grid background
-            - Services centered pill badge
-            - Hero section color palette & gradient on "under one roof."
-            - Manrope font typography
+            SERVICES WE PROVIDE SECTION
             ========================================================= */}
         <div className="relative w-full rounded-3xl sm:rounded-[44px] py-16 sm:py-20 md:py-24 px-6 sm:px-12 md:px-16 text-center overflow-hidden border border-black/[0.08] bg-[#FAFCFF] shadow-[0_12px_40px_rgba(0,0,0,0.03)] select-none">
           {/* Subtle blueprint grid pattern */}
@@ -255,22 +255,22 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
 
           <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-mono font-medium text-[#155EEF] bg-[#EFF6FF] border border-[#BFDBFE] mb-6 shadow-xs">
-              Services
+            <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-mono font-medium text-[#155EEF] bg-[#EFF6FF] border border-[#BFDBFE] mb-6 shadow-xs uppercase tracking-wider">
+              SERVICES WE PROVIDE
             </div>
 
             {/* Title with Hero Palette Gradient */}
-            <h1 className="text-[36px] xs:text-[46px] sm:text-[56px] md:text-[68px] lg:text-[76px] font-bold text-[#0B132B] tracking-tight leading-[1.08] mb-6">
-              Everything you need to grow,<br />
+            <h2 className="text-[36px] xs:text-[46px] sm:text-[56px] md:text-[68px] lg:text-[76px] font-bold text-[#0B132B] tracking-tight leading-[1.08] mb-6">
+              Your buyers ask everywhere.<br />
               <span className="bg-gradient-to-r from-[#155EEF] via-[#06B6D4] to-[#10B981] bg-clip-text text-transparent">
-                under one roof
+                Be the answer they find
               </span>
               <span className="text-[#E0343F]">.</span>
-            </h1>
+            </h2>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg md:text-xl text-[#475569] font-light leading-relaxed max-w-2xl mx-auto">
-              Pick one service or let us build an integrated plan across web, social, ads, and AI. Every engagement has clear deliverables, transparent pricing, and one accountable strategist.
+            <p className="text-base sm:text-lg md:text-xl text-[#475569] font-light leading-relaxed max-w-3xl mx-auto">
+              Typeface is the founder-led growth partner that gets businesses found and cited in Google, ChatGPT, Reddit and Maps, and builds the AI systems that turn that attention into revenue.
             </p>
           </div>
         </div>
@@ -411,9 +411,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
             ========================================================= */}
         <section id="discuss-section" className="pt-6 sm:pt-10 pb-8">
           {!showDiscussForm ? (
-            /* Discuss With Our Team Card with Radiant Hero Section Gradient Outline */
-            <div className="w-full max-w-2xl mx-auto p-[2.5px] rounded-[28px] sm:rounded-[36px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_16px_45px_rgba(105,249,176,0.25)] hover:shadow-[0_20px_60px_rgba(85,220,255,0.35)] transition-all duration-300">
-              <div className="w-full h-full rounded-[26px] sm:rounded-[34px] p-8 sm:p-12 text-center bg-white">
+            /* Discuss With Our Team Card with Radiant Thin Hero Section Gradient Outline */
+            <div className="w-full max-w-2xl mx-auto p-[1px] rounded-[28px] sm:rounded-[36px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_12px_40px_rgba(105,249,176,0.18)] hover:shadow-[0_18px_50px_rgba(85,220,255,0.28)] transition-all duration-300">
+              <div className="w-full h-full rounded-[27px] sm:rounded-[35px] p-8 sm:p-12 text-center bg-white">
                 <h3 className="text-[26px] xs:text-[30px] sm:text-[36px] text-[#0B132B] tracking-tight leading-[1.2] mb-3 font-semibold">
                   Discuss with our team<span className="text-[#E0343F]">.</span>
                 </h3>
@@ -454,8 +454,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
               </div>
             </div>
           ) : (
-            <div className="w-full max-w-3xl mx-auto p-[2.5px] rounded-[28px] sm:rounded-[36px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_20px_60px_rgba(85,220,255,0.25)] transition-all duration-300">
-              <div className="w-full h-full rounded-[26px] sm:rounded-[34px] p-8 sm:p-12 bg-white">
+            <div className="w-full max-w-3xl mx-auto p-[1px] rounded-[28px] sm:rounded-[36px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_16px_50px_rgba(85,220,255,0.2)] transition-all duration-300">
+              <div className="w-full h-full rounded-[27px] sm:rounded-[35px] p-8 sm:p-12 bg-white">
               <div className="text-center max-w-xl mx-auto mb-10">
                 <span className="text-xs uppercase tracking-widest font-semibold text-[#155EEF] block mb-2 font-mono">
                   Get a Custom Quote

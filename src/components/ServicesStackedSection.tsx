@@ -119,8 +119,8 @@ export const ServicesStackedSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="max-w-4xl mx-auto text-center mb-14 sm:mb-16 md:mb-20 flex flex-col items-center">
-          <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-mono font-medium text-[#155EEF] bg-[#EFF6FF] border border-[#BFDBFE] mb-5 shadow-xs">
-            Services
+          <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-mono font-medium text-[#155EEF] bg-[#EFF6FF] border border-[#BFDBFE] mb-5 shadow-xs uppercase tracking-wider">
+            SERVICES WE PROVIDE
           </div>
 
           <h2
@@ -132,9 +132,9 @@ export const ServicesStackedSection: React.FC = () => {
             }}
             className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#0B132B] tracking-tight leading-[1.12] mb-5"
           >
-            Everything you need to grow,<br />
+            Your buyers ask everywhere.<br />
             <span className="bg-gradient-to-r from-[#155EEF] via-[#06B6D4] to-[#10B981] bg-clip-text text-transparent">
-              under one roof
+              Be the answer they find
             </span>
             <span className="text-[#E0343F]">.</span>
           </h2>
@@ -145,9 +145,9 @@ export const ServicesStackedSection: React.FC = () => {
                 "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
               fontWeight: 300,
             }}
-            className="text-base sm:text-lg md:text-xl text-[#475569] font-light leading-relaxed max-w-2xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-[#475569] font-light leading-relaxed max-w-3xl mx-auto"
           >
-            Pick one service or let us build an integrated plan across web, social, ads, and AI. Every engagement has clear deliverables, transparent pricing, and one accountable strategist.
+            Typeface is the founder-led growth partner that gets businesses found and cited in Google, ChatGPT, Reddit and Maps, and builds the AI systems that turn that attention into revenue.
           </p>
         </div>
 
