@@ -14,7 +14,8 @@ interface StatItem {
 
 const STATS: StatItem[] = [
   {
-    target: 12,
+    target: 20,
+    suffix: '+',
     label: 'Projects shipped',
   },
   {
@@ -112,7 +113,7 @@ export const StatsNumbersSection: React.FC = () => {
               }}
               className="font-medium inline-block"
             >
-              Trusted by 12+ local &amp; B2B brands
+              Trusted by 20+ clients
             </span>
           </h3>
         </div>

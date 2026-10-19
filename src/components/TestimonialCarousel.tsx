@@ -116,8 +116,7 @@ export const TestimonialCarousel: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 md:px-12 mb-12 sm:mb-16">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
-          <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-mono font-medium text-[#155EEF] bg-[#EFF6FF] border border-[#BFDBFE] mb-5 shadow-xs uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-[#155EEF]" />
+          <div className="inline-flex items-center px-4 py-1 rounded-full text-xs font-mono font-medium text-[#155EEF] bg-[#EFF6FF] border border-[#BFDBFE] mb-5 shadow-xs uppercase tracking-wider">
             CLIENT FEEDBACK &amp; RESULTS
           </div>
 

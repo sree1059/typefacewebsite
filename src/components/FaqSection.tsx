@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, ArrowUpRight, HelpCircle, Calendar } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
-import { openCalendlyPopup } from '../utils/calendly';
 
 interface FaqItem {
   id: string;
@@ -230,7 +229,11 @@ export const FaqSection: React.FC = () => {
               {/* Book Consultation Button with Hero Gradient */}
               <button
                 type="button"
-                onClick={() => openCalendlyPopup()}
+                onClick={() => {
+                  navigate('contact');
+                  window.history.pushState({}, '', '/contact');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 style={{
                   background:
                     'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',

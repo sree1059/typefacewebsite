@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Star } from 'lucide-react';
 import { HeaderNav } from './components/HeaderNav';
 import { BannerHero } from './components/BannerHero';
 import { DashboardCards } from './components/DashboardCards';
@@ -157,6 +158,70 @@ function MainAppContent() {
 
                 {/* 3D Floating Dashboard Cards */}
                 <DashboardCards />
+
+                {/* 4.5 Star Review Badge Under Hero Cards */}
+                <div className="w-full flex justify-center items-center mt-2 sm:mt-4 pb-1 relative z-20">
+                  <div className="inline-flex items-center gap-2.5 sm:gap-3.5 px-3.5 sm:px-4.5 py-1.5 sm:py-2 rounded-full bg-white/90 backdrop-blur-md border border-black/10 shadow-[0_6px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_26px_rgba(0,0,0,0.1)] transition-all duration-200 select-none">
+                    {/* Avatars Stack */}
+                    <div className="flex -space-x-2">
+                      <div className="w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full bg-[#155EEF] text-white text-[9.5px] font-bold flex items-center justify-center ring-2 ring-white">
+                        SR
+                      </div>
+                      <div className="w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full bg-emerald-600 text-white text-[9.5px] font-bold flex items-center justify-center ring-2 ring-white">
+                        RR
+                      </div>
+                      <div className="w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full bg-amber-600 text-white text-[9.5px] font-bold flex items-center justify-center ring-2 ring-white">
+                        SV
+                      </div>
+                      <div className="w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full bg-indigo-600 text-white text-[9.5px] font-bold flex items-center justify-center ring-2 ring-white">
+                        VS
+                      </div>
+                    </div>
+
+                    {/* Star Rating & 4.5 Score */}
+                    <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-0.5">
+                        {[...Array(4)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]"
+                          />
+                        ))}
+                        {/* 0.5 Star */}
+                        <div className="relative w-3.5 h-3.5">
+                          <Star className="w-3.5 h-3.5 text-[#F59E0B]" />
+                          <div className="absolute inset-0 overflow-hidden w-[50%]">
+                            <Star className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]" />
+                          </div>
+                        </div>
+                      </div>
+                      <span
+                        style={{
+                          fontFamily:
+                            "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                          fontWeight: 700,
+                        }}
+                        className="text-xs sm:text-[13px] text-black"
+                      >
+                        4.5
+                      </span>
+                    </div>
+
+                    <span className="text-black/25 text-xs">|</span>
+
+                    {/* Review text */}
+                    <span
+                      style={{
+                        fontFamily:
+                          "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                        fontWeight: 500,
+                      }}
+                      className="text-[11.5px] sm:text-xs text-black/75 whitespace-nowrap"
+                    >
+                      Over 20+ clients
+                    </span>
+                  </div>
+                </div>
               </div>
             </section>
           </div>

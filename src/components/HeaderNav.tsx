@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation, PageRoute } from '../context/NavigationContext';
 import { X, Calendar } from 'lucide-react';
-import { openCalendlyPopup, CALENDLY_URL } from '../utils/calendly';
-import { CalendlyModal } from './CalendlyModal';
 
 interface HeaderNavProps {
   headingFontSize?: number;
   useCaslonFont?: boolean;
   onBookConsultation?: () => void;
-  calendlyUrl?: string;
 }
 
 export const HeaderNav: React.FC<HeaderNavProps> = ({
   onBookConsultation,
-  calendlyUrl = CALENDLY_URL,
 }) => {
   const { currentPage, navigate } = useNavigation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -46,7 +42,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
   };
 
   /**
-   * Invokes the Calendly scheduling popup without interfering with existing navigation logic.
+   * Redirects to the Contact page to discuss project and consultation requirements.
    */
   const handleBookConsultation = (e?: React.MouseEvent) => {
     if (e) {
@@ -63,8 +59,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
       return;
     }
 
-    // Trigger Calendly popup widget or fallback modal
-    openCalendlyPopup(calendlyUrl);
+    // Redirect directly to contact page
+    navigate('contact');
+    window.history.pushState({}, '', '/contact');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -268,9 +266,6 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
           </div>
         </div>
       )}
-
-      {/* In-app fallback scheduler modal if external widget script is blocked */}
-      <CalendlyModal />
     </>
   );
 };

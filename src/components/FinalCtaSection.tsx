@@ -1,7 +1,6 @@
 import React from 'react';
 import { Calendar } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
-import { openCalendlyPopup } from '../utils/calendly';
 
 export const FinalCtaSection: React.FC = () => {
   const { navigate } = useNavigation();
@@ -39,7 +38,11 @@ export const FinalCtaSection: React.FC = () => {
         <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap pt-2">
           {/* Primary Action: Book Call with Hero Section Gradient */}
           <button
-            onClick={() => openCalendlyPopup()}
+            onClick={() => {
+              navigate('contact');
+              window.history.pushState({}, '', '/contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             style={{
               background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
               color: '#000000',
