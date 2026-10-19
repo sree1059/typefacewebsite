@@ -7,6 +7,7 @@ import { FeaturedClientsTicker } from './components/FeaturedClientsTicker';
 import { StatsNumbersSection } from './components/StatsNumbersSection';
 import { WhyTypefaceSection } from './components/WhyTypefaceSection';
 import { HowWeWorkSection } from './components/HowWeWorkSection';
+import { TestimonialCarousel } from './components/TestimonialCarousel';
 import { ServicesStackedSection } from './components/ServicesStackedSection';
 import { FaqSection } from './components/FaqSection';
 import { FinalCtaSection } from './components/FinalCtaSection';
@@ -15,6 +16,7 @@ import { NavigationProvider, useNavigation } from './context/NavigationContext';
 import { AboutPage } from './pages/AboutPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ServicesPage } from './pages/ServicesPage';
+import { CoursesPage } from './pages/CoursesPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { CookiePolicyPage } from './pages/CookiePolicyPage';
@@ -174,10 +176,11 @@ function MainAppContent() {
           {/* 5. Work Section: Work Process (5 Boxes Bento Grid Cards) */}
           <HowWeWorkSection />
 
+          {/* Client Testimonials Ticker Carousel */}
+          <TestimonialCarousel />
+
           {/* GSAP ScrollTrigger Stacked Panels Services Section */}
           <ServicesStackedSection />
-
-
 
           {/* 6. FAQ */}
           <FaqSection />
@@ -214,6 +217,10 @@ function MainAppContent() {
 
       {currentPage === 'services' && (
         <ServicesPage useCaslonFont={useCaslonFont} />
+      )}
+
+      {currentPage === 'courses' && (
+        <CoursesPage />
       )}
 
       {currentPage === 'contact' && (

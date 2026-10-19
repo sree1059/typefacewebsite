@@ -20,6 +20,12 @@ const PAGE_META: Record<PageRoute, PageMeta> = {
       'High-performance web development, custom web applications, e-commerce engineering, and technical design systems built for ambitious businesses.',
     path: '/services',
   },
+  courses: {
+    title: 'Paid Courses & Growth Engineering — Typeface Academy',
+    description:
+      'Production-ready engineering masterclasses and growth cohorts with secure Razorpay checkout.',
+    path: '/courses',
+  },
   work: {
     title: 'Work — Typeface Developer House',
     description:

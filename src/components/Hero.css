@@ -30,8 +30,48 @@
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+.accent,
 .growth-hero-accent {
-  color: #8DCB52;
+  display: inline-block;
+  color: #155EEF;
+}
+
+.growth-hero-accent .reveal-word-inner {
+  display: inline-block;
+  background: linear-gradient(110deg, #155EEF 0%, #06B6D4 45%, #10B981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #155EEF;
+}
+
+.growth-hero-accent .reveal-word:nth-of-type(1) .reveal-word-inner {
+  background: linear-gradient(110deg, #155EEF 0%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.growth-hero-accent .reveal-word:nth-of-type(2) .reveal-word-inner {
+  background: linear-gradient(110deg, #0EA5E9 0%, #06B6D4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.growth-hero-accent .reveal-word:nth-of-type(3) .reveal-word-inner {
+  background: linear-gradient(110deg, #06B6D4 0%, #0D9488 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.growth-hero-accent .reveal-word:nth-of-type(4) .reveal-word-inner {
+  background: linear-gradient(110deg, #0D9488 0%, #10B981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.growth-hero-accent .reveal-word:nth-of-type(5) .reveal-word-inner {
+  background: linear-gradient(110deg, #10B981 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .growth-hero-description {

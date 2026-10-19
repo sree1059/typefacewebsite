@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type PageRoute = 'home' | 'about' | 'services' | 'work' | 'projects' | 'contact' | 'privacy-policy' | 'cookie-policy' | 'terms' | 'thank-you' | 'working-with-us';
+export type PageRoute = 'home' | 'about' | 'services' | 'courses' | 'work' | 'projects' | 'contact' | 'privacy-policy' | 'cookie-policy' | 'terms' | 'thank-you' | 'working-with-us';
 
 interface NavigationContextType {
   currentPage: PageRoute;
@@ -11,7 +11,7 @@ interface NavigationContextType {
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
 
 function resolveRouteFromUrl(): PageRoute {
-  // Check pathname first (e.g. /privacy-policy, /cookie-policy, /terms, /thank-you, /working-with-us)
+  // Check pathname first (e.g. /privacy-policy, /cookie-policy, /terms, /thank-you, /working-with-us, /courses)
   const pathname = window.location.pathname.replace(/^\//, '').toLowerCase();
   if (pathname === 'working-with-us' || pathname === 'workingwithus') return 'working-with-us';
   if (pathname === 'thank-you' || pathname === 'thankyou' || pathname === 'thanks') return 'thank-you';
@@ -20,10 +20,11 @@ function resolveRouteFromUrl(): PageRoute {
   if (pathname === 'terms' || pathname === 'terms-and-conditions') return 'terms';
   if (pathname === 'about') return 'about';
   if (pathname === 'services') return 'services';
+  if (pathname === 'courses' || pathname === 'academy') return 'courses';
   if (pathname === 'work' || pathname === 'projects') return 'work';
   if (pathname === 'contact') return 'contact';
 
-  // Check hash (e.g. #/thank-you, #thank-you, #/cookie-policy, #/working-with-us)
+  // Check hash (e.g. #/thank-you, #thank-you, #/cookie-policy, #/working-with-us, #/courses)
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
   if (hash === 'working-with-us' || hash === 'workingwithus') return 'working-with-us';
   if (hash === 'thank-you' || hash === 'thankyou' || hash === 'thanks') return 'thank-you';
@@ -32,6 +33,7 @@ function resolveRouteFromUrl(): PageRoute {
   if (hash === 'terms' || hash === 'terms-and-conditions') return 'terms';
   if (hash === 'about') return 'about';
   if (hash === 'services') return 'services';
+  if (hash === 'courses' || hash === 'academy') return 'courses';
   if (hash === 'work' || hash === 'projects') return 'work';
   if (hash === 'contact') return 'contact';
   if (hash === 'home') return 'home';

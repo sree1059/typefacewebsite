@@ -433,10 +433,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = () => {
                       fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
                       fontWeight: 600,
                     }}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full text-sm sm:text-base font-semibold shadow-sm hover:shadow-md hover:brightness-105 transition-all duration-200 cursor-pointer active:scale-[0.98] group"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full text-sm sm:text-base font-semibold shadow-sm hover:shadow-md hover:brightness-105 transition-all duration-200 cursor-pointer active:scale-[0.98]"
                   >
                     <span>Start a Conversation</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </button>
 
                   <button

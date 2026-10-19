@@ -7,9 +7,71 @@ import { defineConfig } from 'vite';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+function apiDevPlugin() {
+  return {
+    name: 'api-dev-server-plugin',
+    configureServer(server: any) {
+      server.middlewares.use(async (req: any, res: any, next: any) => {
+        const url = req.url?.split('?')[0];
+        if (url === '/api/create-order' || url === '/api/razorpay/create-order') {
+          try {
+            const { default: handler } = await import('./api/create-order.ts');
+            const enhancedRes = Object.assign(res, {
+              status(code: number) {
+                res.statusCode = code;
+                return enhancedRes;
+              },
+              json(data: any) {
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify(data));
+              },
+              send(data: any) {
+                res.end(data);
+              },
+            });
+            return handler(req, enhancedRes);
+          } catch (err) {
+            console.error('Error handling /api/create-order in dev:', err);
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify({ error: 'Internal dev server error', details: String(err) }));
+          }
+        }
+
+        if (url === '/api/verify-payment' || url === '/api/razorpay/verify-payment') {
+          try {
+            const { default: handler } = await import('./api/verify-payment.ts');
+            const enhancedRes = Object.assign(res, {
+              status(code: number) {
+                res.statusCode = code;
+                return enhancedRes;
+              },
+              json(data: any) {
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify(data));
+              },
+              send(data: any) {
+                res.end(data);
+              },
+            });
+            return handler(req, enhancedRes);
+          } catch (err) {
+            console.error('Error handling /api/verify-payment in dev:', err);
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify({ error: 'Internal dev server error', details: String(err) }));
+          }
+        }
+
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), apiDevPlugin()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
