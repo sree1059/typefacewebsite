@@ -6,6 +6,7 @@ import { DashboardCards } from './components/DashboardCards';
 import { ServicesTicker } from './components/ServicesTicker';
 import { FeaturedClientsTicker } from './components/FeaturedClientsTicker';
 import { StatsNumbersSection } from './components/StatsNumbersSection';
+import { SearchVisibilitySection } from './components/SearchVisibilitySection';
 import { WhyTypefaceSection } from './components/WhyTypefaceSection';
 import { HowWeWorkSection } from './components/HowWeWorkSection';
 import { TestimonialCarousel } from './components/TestimonialCarousel';
@@ -234,6 +235,9 @@ function MainAppContent() {
 
           {/* Key Metrics / Shipped Projects Strip */}
           <StatsNumbersSection />
+
+          {/* Google + AI Search Visibility Section */}
+          <SearchVisibilitySection />
 
           {/* Why Typeface Section */}
           <WhyTypefaceSection />

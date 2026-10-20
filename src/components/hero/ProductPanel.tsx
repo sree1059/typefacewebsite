@@ -13,7 +13,7 @@ import {
   ChevronRight,
   User,
 } from 'lucide-react';
-import { openCalendlyPopup } from '../../utils/calendly';
+import { useNavigation } from '../../context/NavigationContext';
 
 interface ProductPanelProps {
   activeProduct: ProductType;
@@ -21,6 +21,7 @@ interface ProductPanelProps {
 }
 
 export const ProductPanel: React.FC<ProductPanelProps> = ({ activeProduct, id }) => {
+  const { navigate } = useNavigation();
   // Scheduling demo interactive state
   const [selectedSlot, setSelectedSlot] = useState<string>('10:30 AM');
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
@@ -110,7 +111,11 @@ export const ProductPanel: React.FC<ProductPanelProps> = ({ activeProduct, id })
           <div className="pt-2 flex items-center gap-3 sm:gap-4 flex-wrap">
             <button
               type="button"
-              onClick={() => openCalendlyPopup()}
+              onClick={() => {
+                navigate('contact');
+                window.history.pushState({}, '', '/contact');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="px-6 sm:px-7 py-3 rounded-full bg-[#111111] hover:bg-black text-white text-sm sm:text-base font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.18)] hover:shadow-lg transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center gap-2 group"
             >
               <span>Book a Consultation</span>
@@ -119,7 +124,11 @@ export const ProductPanel: React.FC<ProductPanelProps> = ({ activeProduct, id })
 
             <button
               type="button"
-              onClick={() => openCalendlyPopup()}
+              onClick={() => {
+                navigate('contact');
+                window.history.pushState({}, '', '/contact');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="px-5 sm:px-6 py-3 rounded-full bg-white/80 hover:bg-white text-[#111111] text-sm sm:text-base font-semibold border border-black/10 shadow-xs hover:shadow-sm transition-all duration-200 active:scale-[0.98] cursor-pointer"
             >
               Explore {activeProduct === 'callie' ? 'AI Features' : activeProduct === 'notetaker' ? 'Transcripts' : activeProduct === 'payments' ? 'Stripe Checkout' : 'Workflows'}
@@ -198,7 +207,11 @@ export const ProductPanel: React.FC<ProductPanelProps> = ({ activeProduct, id })
                     type="button"
                     onClick={() => {
                       setBookingConfirmed(true);
-                      setTimeout(() => openCalendlyPopup(), 400);
+                      setTimeout(() => {
+                        navigate('contact');
+                        window.history.pushState({}, '', '/contact');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }, 500);
                     }}
                     className="w-full py-3.5 px-6 rounded-2xl bg-[#111111] hover:bg-black text-white text-sm font-bold tracking-tight shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
                   >
@@ -277,7 +290,11 @@ export const ProductPanel: React.FC<ProductPanelProps> = ({ activeProduct, id })
                             type="button"
                             onClick={() => {
                               setAiSlotBooked(slot);
-                              setTimeout(() => openCalendlyPopup(), 500);
+                              setTimeout(() => {
+                                navigate('contact');
+                                window.history.pushState({}, '', '/contact');
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                              }, 500);
                             }}
                             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                               isBooked
@@ -427,7 +444,11 @@ export const ProductPanel: React.FC<ProductPanelProps> = ({ activeProduct, id })
                     type="button"
                     onClick={() => {
                       setPaymentSuccess(true);
-                      setTimeout(() => openCalendlyPopup(), 500);
+                      setTimeout(() => {
+                        navigate('contact');
+                        window.history.pushState({}, '', '/contact');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }, 500);
                     }}
                     className={`w-full py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 ${
                       paymentSuccess

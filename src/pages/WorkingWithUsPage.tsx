@@ -518,54 +518,59 @@ export const WorkingWithUsPage: React.FC = () => {
         {/* ==================================================
             13 — IMPORTANT NOTICE
             ================================================== */}
-        <section className="reveal-card bg-white rounded-3xl p-7 sm:p-10 border border-black/15 shadow-sm space-y-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-2 h-2 rounded-full bg-[#E0343F]" />
-            <h2 style={HEADING_STYLE} className="text-xl sm:text-2xl text-[#111111]">
-              One important thing
-            </h2>
-          </div>
+        <div className="reveal-card p-[1px] rounded-3xl bg-gradient-to-r from-[#55DCFF]/60 via-[#69F9B0]/60 to-[#FFE600]/60 shadow-xs">
+          <section className="bg-white rounded-[23px] p-7 sm:p-10 space-y-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-2 h-2 rounded-full bg-[#E0343F]" />
+              <h2 style={HEADING_STYLE} className="text-xl sm:text-2xl text-[#111111]">
+                One important thing
+              </h2>
+            </div>
 
-          <div className="space-y-3 text-sm sm:text-base text-[#111111]/80 leading-relaxed font-light">
-            <p>
-              These guidelines explain how Typeface generally works with clients. They are not intended to replace the Project Agreement.
-            </p>
-            <p>
-              The Project Agreement provided for your specific project will contain the terms that apply to that engagement.
-            </p>
-            <p className="text-xs sm:text-sm text-[#111111]/70 pt-2 border-t border-black/10">
-              For significant projects, clients should review the agreement carefully and seek independent professional advice where appropriate.
-            </p>
-          </div>
-        </section>
+            <div className="space-y-3 text-sm sm:text-base text-[#111111]/80 leading-relaxed font-light">
+              <p>
+                These guidelines explain how Typeface generally works with clients. They are not intended to replace the Project Agreement.
+              </p>
+              <p>
+                The Project Agreement provided for your specific project will contain the terms that apply to that engagement.
+              </p>
+              <p className="text-xs sm:text-sm text-[#111111]/70 pt-2 border-t border-black/10">
+                For significant projects, clients should review the agreement carefully and seek independent professional advice where appropriate.
+              </p>
+            </div>
+          </section>
+        </div>
 
         {/* ==================================================
-            FINAL CTA
+            FINAL CTA with Thin Radiant Hero Gradient Outline
             ================================================== */}
-        <section className="reveal-card bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-black/10 text-center space-y-6">
-          <h2
-            style={HEADING_STYLE}
-            className="text-2xl sm:text-3xl md:text-4xl text-[#111111]"
-          >
-            Think we're a good fit?
-          </h2>
-          <p className="text-[16px] sm:text-[18px] text-[#111111]/80 max-w-xl mx-auto font-light leading-relaxed">
-            Tell us what you're trying to build. We'll look at what you need, be honest about what makes sense, and take it from there.
-          </p>
-          <div className="pt-2">
-            <button
-              onClick={handleStartProject}
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 500,
-              }}
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-[#111111] hover:bg-black text-white text-[15px] sm:text-[16px] tracking-tight shadow-md hover:shadow-xl transition-all duration-200 active:scale-[0.98] cursor-pointer group"
+        <div className="reveal-card p-[1px] rounded-3xl sm:rounded-[36px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_12px_36px_rgba(105,249,176,0.18)]">
+          <section className="bg-white rounded-[23px] sm:rounded-[35px] p-8 sm:p-12 text-center space-y-6">
+            <h2
+              style={HEADING_STYLE}
+              className="text-2xl sm:text-3xl md:text-4xl text-[#111111]"
             >
-              <span>Start a Project</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </button>
-          </div>
-        </section>
+              Think we're a good fit?
+            </h2>
+            <p className="text-[16px] sm:text-[18px] text-[#111111]/80 max-w-xl mx-auto font-light leading-relaxed">
+              Tell us what you're trying to build. We'll look at what you need, be honest about what makes sense, and take it from there.
+            </p>
+            <div className="pt-2">
+              <button
+                onClick={handleStartProject}
+                style={{
+                  background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                  color: '#000000',
+                  fontFamily: "'Manrope', sans-serif",
+                  fontWeight: 600,
+                }}
+                className="inline-flex items-center justify-center px-9 py-4 rounded-full text-[15px] sm:text-[16px] tracking-tight shadow-[0_4px_20px_rgba(85,220,255,0.3)] hover:shadow-[0_6px_24px_rgba(105,249,176,0.4)] hover:brightness-105 active:scale-[0.98] transition-all duration-200 cursor-pointer"
+              >
+                <span>Start a Project</span>
+              </button>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );

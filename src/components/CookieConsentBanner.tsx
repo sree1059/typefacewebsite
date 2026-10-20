@@ -122,12 +122,13 @@ export const CookieConsentBanner: React.FC = () => {
               : 'opacity-0 translate-y-6 pointer-events-none'
           }`}
         >
-          <div className="bg-white/95 backdrop-blur-md border border-black/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-5 sm:p-6 text-[#111111] space-y-4">
-            {/* Header & Title */}
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-xl bg-black/[0.05] border border-black/10 flex items-center justify-center shrink-0 mt-0.5 text-black">
-                <Shield className="w-4 h-4" />
-              </div>
+          <div className="p-[1px] rounded-2xl bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_20px_50px_rgba(105,249,176,0.18)]">
+            <div className="bg-white/95 backdrop-blur-md rounded-[15px] p-5 sm:p-6 text-[#111111] space-y-4">
+              {/* Header & Title */}
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-xl bg-black/[0.05] border border-black/10 flex items-center justify-center shrink-0 mt-0.5 text-black">
+                  <Shield className="w-4 h-4" />
+                </div>
               <div className="space-y-1">
                 <h2 className="text-base font-semibold tracking-tight text-[#111111]">
                   Your privacy matters
@@ -189,6 +190,7 @@ export const CookieConsentBanner: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
       )}
 
       {/* 2. Cookie Preferences Settings Modal */}

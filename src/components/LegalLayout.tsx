@@ -205,51 +205,73 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
             </div>
           </aside>
 
-          {/* Right Column: Legal Clauses Content */}
+          {/* Right Column: Legal Clauses Content with Thin Radiant Hero Gradient Outline */}
           <main className="lg:col-span-8 max-w-3xl">
-            <div className="bg-[#FAFAFA] rounded-[28px] border border-black/10 p-6 sm:p-10 md:p-12 shadow-sm space-y-12 sm:space-y-16">
-              {children}
+            <div className="p-[1px] rounded-[28px] sm:rounded-[32px] bg-gradient-to-r from-[#55DCFF] via-[#69F9B0] to-[#FFE600] shadow-[0_12px_36px_rgba(105,249,176,0.16)]">
+              <div className="bg-[#FAFAFA] rounded-[27px] sm:rounded-[31px] p-6 sm:p-10 md:p-12 space-y-12 sm:space-y-16">
+                {children}
+              </div>
             </div>
 
             {/* Bottom Cross Link & Agency Details */}
             <div className="mt-12 pt-8 border-t border-black/15 space-y-6">
-              <div className="bg-[#F9FAFB] rounded-2xl border border-black/10 p-6 sm:p-8 space-y-4 shadow-xs">
-                <div style={manropeFont} className="text-xs uppercase tracking-wider text-black/60">
-                  Related Legal Document
+              <div className="p-[1px] rounded-2xl bg-gradient-to-r from-[#55DCFF]/60 via-[#69F9B0]/60 to-[#FFE600]/60 shadow-xs">
+                <div className="bg-[#F9FAFB] rounded-[15px] p-6 sm:p-8 space-y-4">
+                  <div style={manropeFont} className="text-xs uppercase tracking-wider text-black/60 font-semibold">
+                    Related Legal Document
+                  </div>
+                  {currentLegalRoute === 'privacy-policy' ? (
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div>
+                        <h4 style={manropeFont} className="text-lg font-bold text-[#111111]">Terms &amp; Conditions</h4>
+                        <p style={manropeFont} className="text-xs text-black/65 mt-1">
+                          Read the terms governing use of the Typeface website and service agreements.
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          navigate('terms');
+                          window.history.pushState({}, '', '/terms');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        style={{
+                          background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                          color: '#000000',
+                          fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                          fontWeight: 600,
+                        }}
+                        className="px-5 py-2.5 text-black text-xs font-semibold rounded-full hover:brightness-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(85,220,255,0.25)] self-start sm:self-center cursor-pointer shrink-0"
+                      >
+                        View Terms &amp; Conditions →
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div>
+                        <h4 style={manropeFont} className="text-lg font-bold text-[#111111]">Privacy Policy</h4>
+                        <p style={manropeFont} className="text-xs text-black/65 mt-1">
+                          Learn how Typeface collects, uses, and safeguards personal data.
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          navigate('privacy-policy');
+                          window.history.pushState({}, '', '/privacy-policy');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        style={{
+                          background: 'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                          color: '#000000',
+                          fontFamily: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                          fontWeight: 600,
+                        }}
+                        className="px-5 py-2.5 text-black text-xs font-semibold rounded-full hover:brightness-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(85,220,255,0.25)] self-start sm:self-center cursor-pointer shrink-0"
+                      >
+                        View Privacy Policy →
+                      </button>
+                    </div>
+                  )}
                 </div>
-                {currentLegalRoute === 'privacy-policy' ? (
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                      <h4 style={manropeFont} className="text-lg text-[#111111]">Terms &amp; Conditions</h4>
-                      <p style={manropeFont} className="text-xs text-black/65 mt-1">
-                        Read the terms governing use of the Typeface website and service agreements.
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => navigate('terms')}
-                      style={manropeFont}
-                      className="px-4 py-2 bg-[#111111] text-white text-xs rounded-xl hover:bg-black transition-colors self-start sm:self-center cursor-pointer shrink-0"
-                    >
-                      View Terms &amp; Conditions →
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                      <h4 style={manropeFont} className="text-lg text-[#111111]">Privacy Policy</h4>
-                      <p style={manropeFont} className="text-xs text-black/65 mt-1">
-                        Learn how Typeface collects, uses, and safeguards personal data.
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => navigate('privacy-policy')}
-                      style={manropeFont}
-                      className="px-4 py-2 bg-[#111111] text-white text-xs rounded-xl hover:bg-black transition-colors self-start sm:self-center cursor-pointer shrink-0"
-                    >
-                      View Privacy Policy →
-                    </button>
-                  </div>
-                )}
               </div>
 
               <div style={manropeFont} className="flex items-center justify-between pt-4 text-xs text-black/70">
