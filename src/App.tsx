@@ -8,7 +8,7 @@ import { FeaturedClientsTicker } from './components/FeaturedClientsTicker';
 import { StatsNumbersSection } from './components/StatsNumbersSection';
 import { SearchVisibilitySection } from './components/SearchVisibilitySection';
 import { WhyTypefaceSection } from './components/WhyTypefaceSection';
-import { HowWeWorkSection } from './components/HowWeWorkSection';
+import { OurWorkSection } from './components/OurWorkSection';
 import { TestimonialCarousel } from './components/TestimonialCarousel';
 import { ServicesStackedSection } from './components/ServicesStackedSection';
 import { FaqSection } from './components/FaqSection';
@@ -242,8 +242,8 @@ function MainAppContent() {
           {/* Why Typeface Section */}
           <WhyTypefaceSection />
 
-          {/* 5. Work Section: Work Process (5 Boxes Bento Grid Cards) */}
-          <HowWeWorkSection />
+          {/* Our Work & Client Flagships Section */}
+          <OurWorkSection />
 
           {/* Client Testimonials Ticker Carousel */}
           <TestimonialCarousel />

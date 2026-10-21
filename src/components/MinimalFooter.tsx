@@ -62,7 +62,7 @@ const QUICK_LINKS_CORE: QuickLinkItem[] = [
 
 const QUICK_LINKS_DISCOVERY: QuickLinkItem[] = [
   { label: 'Google + AI Search Visibility', route: 'home', hash: '#search-visibility' },
-  { label: 'How We Work & Sprints', route: 'home', hash: '#how-we-work' },
+  { label: 'Our Work & Flagships', route: 'home', hash: '#work' },
   { label: 'Why Typeface', route: 'home', hash: '#why-typeface' },
   { label: 'Client Reviews & Proof', route: 'home', hash: '#testimonials' },
   { label: 'Frequently Asked Questions', route: 'home', hash: '#faq' },
