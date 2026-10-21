@@ -747,13 +747,6 @@ export const SearchVisibilitySection: React.FC = () => {
                     })}
                   </svg>
                 </div>
-
-                {/* Subtle footnote */}
-                <div className="pt-2 text-right">
-                  <span className="text-[11px] font-mono text-black/40">
-                    Illustrative growth dashboard · Sample brand visibility timeline
-                  </span>
-                </div>
               </div>
             </div>
 
