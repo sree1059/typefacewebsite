@@ -1,7 +1,6 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { HERO_GRADIENT_STYLE } from '../utils/theme';
-import { BeforeAfterShowcase } from '../components/BeforeAfterShowcase';
 
 interface ProjectItem {
   id: string;
@@ -110,17 +109,20 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = () => {
                 </span>
               </div>
 
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/5 group-hover:bg-black group-hover:text-white text-[#111111] flex items-center justify-center transition-all duration-200 shadow-xs cursor-pointer">
-                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <div
+                style={{
+                  background:
+                    'linear-gradient(110deg, #55DCFF 0%, #69F9B0 50%, #FFE600 100%)',
+                  color: '#000000',
+                }}
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-black font-mono font-bold text-xs sm:text-[13px] tracking-wider uppercase border border-black/10 shadow-xs hover:shadow-[0_8px_25px_rgba(105,249,176,0.35)] hover:scale-105 active:scale-95 transition-all duration-200 shrink-0 cursor-pointer"
+              >
+                <span>View Live Site</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </a>
           ))}
         </div>
-      </div>
-
-      {/* Before / After Website Redesign Comparison Showcase */}
-      <div className="mt-12 sm:mt-16">
-        <BeforeAfterShowcase />
       </div>
     </div>
   );

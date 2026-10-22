@@ -218,7 +218,7 @@ export const OurWorkSection: React.FC = () => {
                 }}
                 className="inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-black font-mono font-bold text-xs sm:text-[13px] tracking-wider uppercase border border-black/10 shadow-xs hover:shadow-[0_8px_25px_rgba(105,249,176,0.35)] hover:scale-105 active:scale-95 transition-all duration-200 shrink-0 self-start md:self-center cursor-pointer"
               >
-                <span>View Live Website</span>
+                <span>View Live Site</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
