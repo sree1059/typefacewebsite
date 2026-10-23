@@ -1,0 +1,6 @@
+{
+  "summary":  "Architectural blueprint and implementation plan for end-to-end Razorpay payments integrated with Supabase and Vercel Serverless Functions. Covers server-side order generation, cryptographic signature verification, idempotent webhooks, database schema with RLS, security boundaries, and test-mode verification.",
+  "updatedAt":  "2026-10-23T17:20:36.214526995Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}
